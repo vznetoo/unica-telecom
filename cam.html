@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Única CAM</title>
+
+    <link rel="stylesheet" href="cam.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+        <img src="assets/logo.png"
+             class="logo">
+
+        <img src="assets/mascote.png"
+             class="mascote">
+
+        <div class="cliente">
+
+            <small>Cliente</small>
+
+            <h2>Jose Carlos Clemente Da Silva Neto</h2>
+
+        </div>
+
+        <button
+            class="voltar"
+            onclick="window.location.href='servicos.html'">
+
+            ← Voltar aos serviços
+
+        </button>
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+
+    <main class="conteudo">
+
+        <!-- CABEÇALHO -->
+
+        <header class="topo">
+
+            <div>
+
+                <h1>📹 Única CAM</h1>
+
+                <p>Câmeras ao vivo</p>
+
+            </div>
+
+            <div class="perfil">
+
+                <div class="status-online"></div>
+
+                Online
+
+            </div>
+
+        </header>
+
+        <!-- BOTÕES -->
+
+        <section class="filtros">
+
+            <button
+                class="ativo"
+                onclick="mostrarTodas()">
+
+                Mosaico
+
+            </button>
+
+            <button
+                onclick="mostrarCamera('camera1')">
+
+                Entrada Principal
+
+            </button>
+
+            <button
+                onclick="mostrarCamera('camera2')">
+
+                Garagem
+
+            </button>
+
+        </section>
+
+        <!-- MOSAICO -->
+
+        <section
+            class="mosaico"
+            id="mosaico">
+
+            <div
+                class="camera-card"
+                onclick="mostrarCamera('camera1')">
+
+                <div class="ao-vivo">
+
+                    <span></span>
+
+                    AO VIVO
+
+                </div>
+
+                <img
+                    src="assets/camera1.jpg">
+
+                <div class="info-camera">
+
+                    <h3>Entrada Principal</h3>
+
+                    <p>Online agora</p>
+
+                </div>
+
+            </div>
+
+            <div
+                class="camera-card"
+                onclick="mostrarCamera('camera2')">
+
+                <div class="ao-vivo">
+
+                    <span></span>
+
+                    AO VIVO
+
+                </div>
+
+                <img
+                    src="assets/camera2.jpg">
+
+                <div class="info-camera">
+
+                    <h3>Garagem</h3>
+
+                    <p>Online agora</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- VISUALIZAÇÃO INDIVIDUAL -->
+
+        <section
+            class="camera-unica"
+            id="camera1">
+
+            <button
+                class="btn-voltar"
+                onclick="mostrarTodas()">
+
+                ← Voltar ao mosaico
+
+            </button>
+
+            <div class="camera-grande">
+
+                <div class="ao-vivo grande">
+
+                    <span></span>
+
+                    AO VIVO
+
+                </div>
+
+                <img
+                    src="assets/camera1.jpg">
+
+            </div>
+
+            <h2>Entrada Principal</h2>
+
+        </section>
+
+        <section
+            class="camera-unica"
+            id="camera2">
+
+            <button
+                class="btn-voltar"
+                onclick="mostrarTodas()">
+
+                ← Voltar ao mosaico
+
+            </button>
+
+            <div class="camera-grande">
+
+                <div class="ao-vivo grande">
+
+                    <span></span>
+
+                    AO VIVO
+
+                </div>
+
+                <img
+                    src="assets/camera2.jpg">
+
+            </div>
+
+            <h2>Garagem</h2>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="cam.js"></script>
+
+</body>
+<div class="mobile-header">
+
+    <button id="menuBtn">☰</button>
+
+    <img src="assets/logo.png" class="mobile-logo">
+
+</div>
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="servicos.html">🏠 Serviços</a>
+
+    <a href="dashboard.html">📱 Única Móvel</a>
+
+    <a href="cam.html">📷 Única CAM</a>
+
+    <a href="internet.html">🌐 Plano Fibra</a>
+
+</div>
+
+</html>

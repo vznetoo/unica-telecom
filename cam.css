@@ -1,0 +1,882 @@
+/* ===========================
+   RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:#eef3f7;
+    color:#1f2937;
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+    width:330px;
+    background:linear-gradient(180deg,#00b140,#008a34);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 30px;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    overflow:hidden;
+}
+
+/* círculo decorativo */
+
+.sidebar::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    top:150px;
+}
+
+.sidebar::after{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.05);
+    bottom:-380px;
+}
+
+/* ===========================
+   LOGO
+=========================== */
+
+.logo{
+    width:190px;
+    margin-bottom:40px;
+    position:relative;
+    z-index:2;
+}
+
+/* ===========================
+   MASCOTE
+=========================== */
+
+.mascote{
+    width:260px;
+    position:relative;
+    z-index:2;
+    margin-bottom:40px;
+}
+
+/* ===========================
+   CLIENTE
+=========================== */
+
+.cliente{
+    width:100%;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:30px;
+    position:relative;
+    z-index:2;
+}
+
+.cliente small{
+    display:block;
+    font-size:13px;
+    opacity:.8;
+    margin-bottom:8px;
+}
+
+.cliente h2{
+    font-size:22px;
+    font-weight:700;
+}
+
+/* ===========================
+   BOTÃO VOLTAR
+=========================== */
+
+.voltar{
+    width:100%;
+    border:none;
+    background:#fff;
+    color:#00993d;
+    font-size:16px;
+    font-weight:700;
+    border-radius:16px;
+    padding:16px;
+    cursor:pointer;
+    transition:.3s;
+    position:relative;
+    z-index:2;
+}
+
+.voltar:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(0,0,0,.18);
+}
+
+/* ===========================
+   CONTEÚDO
+=========================== */
+
+.conteudo{
+    flex:1;
+    margin-left:330px;
+    padding:45px;
+}
+
+/* ===========================
+   TOPO
+=========================== */
+
+.topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#fff;
+    border-radius:22px;
+    padding:25px 35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    margin-bottom:35px;
+}
+
+.topo h1{
+    color:#0f172a;
+    font-size:36px;
+    font-weight:800;
+}
+
+.topo p{
+    color:#64748b;
+    margin-top:8px;
+    font-size:17px;
+}
+
+/* ===========================
+   STATUS
+=========================== */
+
+.perfil{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:600;
+}
+
+.status-online{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:#22c55e;
+    animation:pulsar 1.2s infinite;
+}
+
+@keyframes pulsar{
+
+    0%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+    50%{
+        transform:scale(1.4);
+        opacity:.4;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+/* ===========================
+   BOTÕES
+=========================== */
+
+.filtros{
+    display:flex;
+    gap:15px;
+    margin-bottom:35px;
+}
+
+.filtros button{
+    border:none;
+    background:#fff;
+    padding:15px 28px;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.filtros button:hover{
+    transform:translateY(-3px);
+}
+
+.filtros button.ativo{
+    background:#00b140;
+    color:#fff;
+}
+/* ======================================
+   MOSAICO
+====================================== */
+
+.mosaico{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:30px;
+
+}
+
+/* ======================================
+   CARD DA CÂMERA
+====================================== */
+
+.camera-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.camera-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 45px rgba(0,177,64,.18);
+
+}
+
+/* ======================================
+   IMAGEM
+====================================== */
+
+.camera-card img{
+
+    width:100%;
+
+    height:320px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+/* ======================================
+   AO VIVO
+====================================== */
+
+.ao-vivo{
+
+    position:absolute;
+
+    margin:18px;
+
+    background:#e11d48;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    z-index:5;
+
+}
+
+.ao-vivo span{
+
+    width:10px;
+
+    height:10px;
+
+    background:white;
+
+    border-radius:50%;
+
+    transition:.3s;
+
+}
+
+.apagado{
+
+    opacity:.2;
+
+}
+
+/* ======================================
+   INFO DA CÂMERA
+====================================== */
+
+.info-camera{
+
+    padding:22px;
+
+}
+
+.info-camera h3{
+
+    color:#071c63;
+
+    font-size:24px;
+
+    margin-bottom:8px;
+
+}
+
+.info-camera p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+/* ======================================
+   CÂMERA ÚNICA
+====================================== */
+
+.camera-unica{
+
+    display:none;
+
+    animation:fade .4s;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ======================================
+   BOTÃO VOLTAR
+====================================== */
+
+.btn-voltar{
+
+    border:none;
+
+    background:#00b140;
+
+    color:white;
+
+    padding:14px 24px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    margin-bottom:25px;
+
+    transition:.3s;
+
+}
+
+.btn-voltar:hover{
+
+    background:#008a34;
+
+}
+
+/* ======================================
+   FOTO GRANDE
+====================================== */
+
+.camera-grande{
+
+    background:white;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.10);
+
+}
+
+.camera-grande img{
+
+    width:100%;
+
+    height:650px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+/* ======================================
+   TÍTULO
+====================================== */
+
+.camera-unica h2{
+
+    margin-top:25px;
+
+    color:#071c63;
+
+    font-size:34px;
+
+}
+
+/* ======================================
+   EFEITO NAS IMAGENS
+====================================== */
+
+.camera-card img,
+.camera-grande img{
+
+    transition:.4s;
+
+}
+
+.camera-card:hover img{
+
+    transform:scale(1.05);
+
+}
+/* ======================================
+   RESPONSIVIDADE
+====================================== */
+
+@media (max-width:1200px){
+
+    .sidebar{
+
+        width:280px;
+
+    }
+
+    .conteudo{
+
+        margin-left:280px;
+
+        padding:30px;
+
+    }
+
+    .mosaico{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (max-width:900px){
+
+    .container{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar{
+
+        position:relative;
+
+        width:100%;
+
+        height:auto;
+
+        padding:35px 25px;
+
+    }
+
+    .logo{
+
+        width:170px;
+
+    }
+
+    .mascote{
+
+        width:180px;
+
+        margin:20px 0;
+
+    }
+
+    .conteudo{
+
+        margin-left:0;
+
+        padding:20px;
+
+    }
+
+    .topo{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:20px;
+
+    }
+
+    .filtros{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+}
+
+@media (max-width:600px){
+
+    .topo h1{
+
+        font-size:28px;
+
+    }
+
+    .topo p{
+
+        font-size:15px;
+
+    }
+
+    .camera-card img{
+
+        height:220px;
+
+    }
+
+    .camera-grande img{
+
+        height:300px;
+
+    }
+
+    .info-camera h3{
+
+        font-size:20px;
+
+    }
+
+    .camera-unica h2{
+
+        font-size:24px;
+
+    }
+
+}
+
+/* ======================================
+   SCROLL
+====================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#00b140;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#edf2f7;
+
+}
+
+/* ======================================
+   ANIMAÇÕES
+====================================== */
+
+.camera-card{
+
+    animation:aparecer .5s ease;
+
+}
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ======================================
+   SOMBRAS
+====================================== */
+
+.camera-card,
+.camera-grande,
+.topo,
+.filtros button,
+.voltar{
+
+    transition:.30s;
+
+}
+
+.camera-grande:hover{
+
+    box-shadow:0 20px 50px rgba(0,177,64,.18);
+
+}
+
+/* ======================================
+   BOTÕES
+====================================== */
+
+button{
+
+    font-family:'Inter',sans-serif;
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+/* ======================================
+   EFEITO VIDRO
+====================================== */
+
+.cliente{
+
+    border:1px solid rgba(255,255,255,.18);
+
+}
+
+/* ======================================
+   FINAL
+====================================== */
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+img{
+
+    user-select:none;
+
+}
+
+button{
+
+    user-select:none;
+
+}
+
+h1,h2,h3{
+
+    user-select:none;
+
+}
+/*=========================
+MENU MOBILE
+==========================*/
+
+.mobile-header{
+
+    display:none;
+
+}
+
+.mobile-menu{
+
+    display:none;
+
+}
+
+@media(max-width:768px){
+
+.mobile-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 20px;
+
+    background:#00b140;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+}
+
+.mobile-logo{
+
+    width:120px;
+
+}
+
+#menuBtn{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:white;
+
+    color:#00b140;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+.mobile-menu{
+
+    position:fixed;
+
+    left:-260px;
+
+    top:0;
+
+    width:250px;
+
+    height:100vh;
+
+    background:white;
+
+    transition:.35s;
+
+    box-shadow:5px 0 20px rgba(0,0,0,.15);
+
+    z-index:999;
+
+    padding-top:80px;
+
+}
+
+.mobile-menu.active{
+
+    left:0;
+
+}
+
+.mobile-menu a{
+
+    display:block;
+
+    padding:18px 25px;
+
+    text-decoration:none;
+
+    color:#071c63;
+
+    font-weight:bold;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.mobile-menu a:hover{
+
+    background:#f4f4f4;
+
+}
+
+}

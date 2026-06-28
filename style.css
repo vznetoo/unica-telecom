@@ -1,0 +1,1132 @@
+body{
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+    180deg,
+#00b140,
+#008d34
+);
+
+    margin:0;
+    padding:0;
+}
+
+
+
+h1{
+
+    text-align:center;
+
+    color:#1fb14d;
+
+}
+
+label{
+
+    display:block;
+
+    margin-top:15px;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:5px;
+
+    box-sizing:border-box;
+
+    border:1px solid #d9d9d9;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+}
+.card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 0 10px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+.card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+.header button{
+
+    width:auto;
+
+    padding:10px 20px;
+
+    font-weight:bold;
+
+}
+.plano-card h2,
+.plano-card p{
+
+    position:relative;
+
+    z-index:2;
+
+}
+button{
+
+  
+
+    width:100%;
+
+    padding:14px;
+
+    background:#1fb14d;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+}
+
+/* DASHBOARD */
+
+.dashboard{
+
+    max-width:1000px;
+
+    margin:30px auto;
+
+    padding:20px;
+
+}
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.header button{
+
+    width:auto;
+
+}
+
+
+
+ .plano-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #1fb14d,
+        #2ad864
+    );
+
+    color:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    margin-bottom:20px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+.plano-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+
+    height:250px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:-100px;
+
+    right:-80px;
+
+}
+
+.plano-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    bottom:-80px;
+
+    left:-50px;
+
+}
+.consumo-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 0 10px rgba(0,0,0,.08);
+
+    text-align:center;
+
+}
+
+.consumo-card h2{
+
+    font-size:48px;
+
+    margin:0;
+
+    color:#1fb14d;
+
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+.card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 0 10px rgba(0,0,0,.08);
+
+}
+
+.card h3{
+
+    margin-top:0;
+
+    color:#1fb14d;
+
+}
+
+@media(max-width:768px){
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+.header img{
+    height:70px;
+}
+progress{
+
+    width:100%;
+
+    height:20px;
+
+    margin-top:15px;
+
+    margin-bottom:15px;
+
+}
+.card p{
+
+    margin-bottom:12px;
+
+    line-height:1.5;
+
+}
+
+.status{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border:1px solid #1fb14d;
+
+    color:#1fb14d;
+
+    border-radius:6px;
+
+    font-weight:bold;
+
+}
+
+.plano-card h2{
+
+    margin:0;
+
+    font-size:32px;
+
+}
+
+.plano-card p{
+
+    margin-top:15px;
+
+    font-size:18px;
+
+}
+
+.card{
+
+    min-height:180px;
+}
+.consumo-info{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:40px;
+
+    margin-top:25px;
+
+}
+
+.circulo{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:conic-gradient(
+        #22c55e 0% 76%,
+        #ef4444 76% 100%
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.circulo-interno{
+
+    width:90px;
+
+    height:90px;
+
+    background:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    font-weight:bold;
+}
+
+.legenda{
+
+    text-align:left;
+}
+
+.legenda p{
+
+    margin:10px 0;
+}
+.suporte-card{
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.suporte-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+.header{
+
+    background:white;
+
+    padding:15px 25px;
+
+    border-radius:15px;
+
+    box-shadow:0 0 10px rgba(0,0,0,.08);
+
+}
+.footer{
+
+    text-align:center;
+
+    margin-top:30px;
+
+    color:#666;
+
+}
+.login-page{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+.login-card{
+    width:1300px;
+    max-width:95%;
+    height:820px;
+    background:white;
+    border-radius:40px;
+    overflow:hidden;
+    display:flex;
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
+}
+
+/* LADO ESQUERDO */
+
+.login-left{
+    width:38%;
+    background:linear-gradient(
+        180deg,
+        #00a63f,
+        #008d34
+    );
+    color:white;
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+}
+
+.logo-login{
+    width:190px;
+    margin-bottom:20px;
+    display:block;
+    margin:20 auto 50px auto;
+}
+
+.mascote-login{
+    width:300px;
+    display:block;
+    margin:40px auto 40px;
+    position:relative;
+    z-index:2;
+}
+
+
+.login-left{
+    display:flex;
+    flex-direction:column;
+    padding:50px 40px;
+
+    position:relative;
+}
+
+.login-left{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.login-left::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:340px;
+    height:340px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:120px;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:.8;
+
+
+}
+.login-left::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:800px;
+    height:800px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,255,.05);
+
+    bottom:-380px;
+    left:-420px;
+
+}
+.login-left .bg-circle{
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    right:-60px;
+    top:80px;
+
+}
+.seguranca{
+    margin-top:25px;
+    background:rgba(255,255,255,.12);
+    padding:15px;
+    border-radius:15px;
+    color:white;
+    font-size:15px;
+    line-height:1.5;
+}
+
+/* LADO DIREITO */
+
+.login-right{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+.login-form{
+    width:100%;
+    max-width:500px;
+    text-align:left;
+}
+
+.login-form h1{
+    text-align:center;
+    font-size:58px;
+    color:#071c63;
+    margin-bottom:50px;
+}
+.login-form label{
+    display:block;
+    margin-bottom:10px;
+    font-size:18px;
+    font-weight:600;
+    color:#08184a;
+}
+
+.login-form input{
+    width:100%;
+    padding:18px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    margin-bottom:25px;
+    font-size:18px;
+}
+
+.login-form button{
+    width:100%;
+    height:65px;
+    background:#00a63f;
+    border:none;
+    border-radius:14px;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-form button:hover{
+    background:#008d34;
+}
+.seguranca{
+
+    margin-top:auto;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:18px;
+
+    padding:18px 22px;
+
+    font-size:17px;
+
+}
+.subtexto{
+    color:white;
+    font-size:24px;
+    line-height:1.8;
+    max-width:420px;
+    font-weight:400;
+    opacity:.95;
+}
+.icone-cadeado{
+    width:90px;
+    height:90px;
+    background:#e9f8ee;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    margin:0 auto 25px auto;
+}
+.login-left h2{
+    font-size:58px;
+    font-weight:800;
+    line-height:1.05;
+    color:white;
+    margin-top:10px;
+    margin-bottom:20px;
+}
+.input-group{
+    display:flex;
+    align-items:center;
+    height:68px;
+
+    border:2px solid #ececec;
+
+    transition:.3s;
+
+    border-radius:15px;
+    padding:0 15px;
+    margin-bottom:20px;
+    background:white;
+}
+.input-group:focus-within{
+
+    border-color:#00a63f;
+
+    box-shadow:0 0 0 4px rgba(0,166,63,.12);
+
+}
+
+.input-group span{
+    font-size:20px;
+}
+
+.input-group input{
+    border:none;
+    outline:none;
+    background:none;
+    padding:18px 12px;
+}
+
+input::placeholder{
+    color:#9ca3af;
+}
+.login-form button{
+
+    height:68px;
+
+    font-size:24px;
+
+    border-radius:15px;
+
+    background:linear-gradient(
+    90deg,
+    #00b140,
+    #009b38
+    );
+
+    transition:.3s;
+
+}
+.login-form button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,166,63,.25);
+
+}
+.icone-cadeado{
+
+    width:95px;
+
+    height:95px;
+
+    font-size:44px;
+
+    background:#edf9f1;
+
+    box-shadow:0 10px 25px rgba(0,166,63,.12);
+
+}
+/* ===================================
+   RESPONSIVO LOGIN
+=================================== */
+
+@media (max-width:768px){
+
+.login-page{
+
+    padding:15px;
+
+}
+
+.login-card{
+
+    width:100%;
+
+    height:auto;
+
+    flex-direction:column;
+
+    border-radius:25px;
+
+}
+
+.login-left{
+
+    width:100%;
+
+    padding:40px 25px;
+
+    text-align:center;
+
+}
+
+.logo-login{
+
+    width:180px;
+
+    margin-bottom:25px;
+
+}
+
+.mascote-login{
+
+    width:170px;
+
+    margin:20px auto;
+
+}
+
+.login-left h2{
+
+    font-size:32px;
+
+    line-height:1.2;
+
+}
+
+.subtexto{
+
+    font-size:17px;
+
+    max-width:100%;
+
+    margin:auto;
+
+}
+
+.seguranca{
+
+    margin-top:25px;
+
+    font-size:14px;
+
+}
+
+.login-right{
+
+    width:100%;
+
+    padding:40px 25px;
+
+}
+
+.login-form{
+
+    max-width:100%;
+
+}
+
+.login-form h1{
+
+    font-size:40px;
+
+    margin-bottom:35px;
+
+}
+
+.icone-cadeado{
+
+    width:70px;
+
+    height:70px;
+
+    font-size:30px;
+
+}
+
+.input-group{
+
+    margin-bottom:18px;
+
+}
+
+.input-group input{
+
+    font-size:17px;
+
+    padding:16px 10px;
+
+}
+
+.login-form button{
+
+    height:58px;
+
+    font-size:18px;
+
+}
+
+}
+/* ==========================================
+           MOBILE DASHBOARD
+========================================== */
+
+.menu-mobile{
+
+    display:none;
+
+}
+
+@media(max-width:768px){
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+.dashboard{
+
+    width:100%;
+
+    margin:0;
+
+    padding:15px;
+
+}
+
+.header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+}
+
+.header img{
+
+    height:55px;
+
+}
+
+.header button{
+
+    width:100%;
+
+}
+
+.plano-card{
+
+    padding:22px;
+
+}
+
+.plano-card h2{
+
+    font-size:24px;
+
+}
+
+.plano-card p{
+
+    font-size:15px;
+
+}
+
+.consumo-info{
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.cards{
+
+    grid-template-columns:1fr;
+
+}
+
+.card{
+
+    min-height:auto;
+
+}
+
+.circulo{
+
+    width:95px;
+
+    height:95px;
+
+}
+
+.circulo-interno{
+
+    width:70px;
+
+    height:70px;
+
+}
+
+.footer{
+
+    font-size:13px;
+
+}
+
+}
+.menu-mobile{
+
+    display:none;
+
+}
+
+@media(max-width:768px){
+
+.menu-mobile{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:white;
+
+    padding:15px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.menu-mobile button{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:12px;
+
+    background:#00a63f;
+
+    color:white;
+
+    border:none;
+
+    font-size:22px;
+
+}
+
+.menu-mobile h2{
+
+    color:#071c63;
+
+    font-size:20px;
+
+}
+
+}/* ========================================= */
+/* RESPONSIVO - CELULAR                      */
+/* ========================================= */
+
+@media (max-width: 768px){
+
+    body{
+        overflow-x:hidden;
+    }
+
+    /* LOGIN */
+
+    .login-card{
+        width:100%;
+        height:auto;
+        flex-direction:column;
+        border-radius:0;
+    }
+
+    .login-left{
+        width:100%;
+        padding:30px 20px;
+        text-align:center;
+        align-items:center;
+    }
+
+    .logo-login{
+        width:150px;
+    }
+
+    .mascote-login{
+        width:170px;
+        margin:20px auto;
+    }
+
+    .login-left h2{
+        font-size:34px;
+        margin-top:15px;
+    }
+
+    .subtexto{
+        font-size:18px;
+        text-align:center;
+    }
+
+    .login-right{
+        padding:35px 25px;
+    }
+
+    .login-form h1{
+        font-size:38px;
+        margin-bottom:30px;
+    }
+
+    .icone-cadeado{
+        width:75px;
+        height:75px;
+        font-size:32px;
+    }
+
+    /* ESCOLHA DE SERVIÇOS */
+
+    .container{
+        flex-direction:column;
+        height:auto;
+    }
+
+    .left-side{
+        width:100%;
+        padding:30px 20px;
+    }
+
+    .left-side .logo{
+        width:150px;
+    }
+
+    .left-side .mascote{
+        width:180px;
+    }
+
+    .right-side{
+        width:100%;
+        padding:30px 20px;
+    }
+
+    .cards{
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .card{
+        width:100%;
+    }
+
+    /* DASHBOARD INTERNET */
+
+    .dashboard{
+        padding:15px;
+    }
+
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .plano-card{
+        padding:20px;
+    }
+
+    .plano-card h2{
+        font-size:26px;
+    }
+
+    .consumo-info{
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}

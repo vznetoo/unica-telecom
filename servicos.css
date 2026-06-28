@@ -1,0 +1,428 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:linear-gradient(
+135deg,
+#eef8f1,
+#dcefe2
+);
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow-x:hidden;
+}
+
+.container{
+width:100%;
+max-width:1400px;
+min-height:850px;
+background:white;
+border-radius:40px;
+overflow:hidden;
+display:flex;
+box-shadow:0 20px 50px rgba(0,0,0,.12);
+}
+
+/* ESQUERDA */
+
+.left-side{
+width:35%;
+background:linear-gradient(
+180deg,
+#00a63f,
+#008d34
+);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.logo{
+width:260px;
+position:absolute;
+top:40px;
+}
+
+.mascote{
+width:420px;
+}
+
+.seguranca{
+position:absolute;
+bottom:50px;
+background:rgba(255,255,255,.12);
+padding:20px 25px;
+border-radius:20px;
+color:white;
+font-size:18px;
+}
+
+/* DIREITA */
+
+.right-side{
+flex:1;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:50px;
+}
+
+.cadeado{
+width:90px;
+height:90px;
+background:#e9f8ee;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+}
+
+.right-side h1{
+margin-top:30px;
+color:#071c63;
+font-size:42px;
+font-weight:700;
+}
+
+.linha{
+width:60px;
+height:5px;
+background:#00a63f;
+border-radius:20px;
+margin:25px 0 50px;
+}
+
+/* CARDS */
+
+.cards{
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.card{
+width:250px;
+background:white;
+border-radius:30px;
+padding:25px;
+text-align:center;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.imagem-servico{
+height:180px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.imagem-servico img{
+max-width:160px;
+max-height:160px;
+object-fit:contain;
+}
+
+.card h2{
+color:#071c63;
+margin-bottom:15px;
+font-size:24px;
+}
+
+.card p{
+color:#6b7280;
+line-height:1.6;
+font-size:16px;
+}
+
+.card span{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:70px;
+height:70px;
+border:2px solid #d9f5df;
+border-radius:50%;
+margin-top:30px;
+font-size:38px;
+color:#00a63f;
+}
+/* =====================================
+   RESPONSIVO - TELA DE SERVIÇOS
+===================================== */
+
+@media (max-width: 768px){
+
+    body{
+
+        display:block;
+        padding:15px;
+
+    }
+
+    .container{
+
+        width:100%;
+        height:auto;
+
+        flex-direction:column;
+
+        border-radius:25px;
+
+    }
+
+    /* LADO VERDE */
+
+    .left-side{
+
+        width:100%;
+
+        padding:35px 20px;
+
+    }
+
+    .logo{
+
+        position:static;
+
+        width:170px;
+
+        margin-bottom:25px;
+
+    }
+
+    .mascote{
+
+        width:180px;
+
+        margin-bottom:25px;
+
+    }
+
+    .seguranca{
+
+        position:static;
+
+        width:100%;
+
+        text-align:center;
+
+        font-size:15px;
+
+    }
+
+    /* LADO BRANCO */
+
+    .right-side{
+
+        width:100%;
+
+        padding:30px 20px;
+
+    }
+
+    .cadeado{
+
+        width:70px;
+        height:70px;
+
+        font-size:28px;
+
+    }
+
+    .right-side h1{
+
+        font-size:30px;
+
+        text-align:center;
+
+    }
+
+    .linha{
+
+        margin:20px auto 35px;
+
+    }
+
+    /* CARDS */
+
+    .cards{
+
+        width:100%;
+
+        flex-direction:column;
+
+        gap:20px;
+
+    }
+
+    .card{
+
+        width:100%;
+
+        max-width:380px;
+
+        margin:auto;
+
+    }
+
+    .imagem-servico{
+
+        height:150px;
+
+    }
+
+    .imagem-servico img{
+
+        max-width:130px;
+
+        max-height:130px;
+
+    }
+
+    .card h2{
+
+        font-size:24px;
+
+    }
+
+    .card p{
+
+        font-size:16px;
+
+    }
+
+}
+/*=========================
+MENU MOBILE
+==========================*/
+
+.mobile-header{
+
+    display:none;
+
+}
+
+.mobile-menu{
+
+    display:none;
+
+}
+
+@media(max-width:768px){
+
+.mobile-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 20px;
+
+    background:#00b140;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+}
+
+.mobile-logo{
+
+    width:120px;
+
+}
+
+#menuBtn{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:white;
+
+    color:#00b140;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+.mobile-menu{
+
+    position:fixed;
+
+    left:-260px;
+
+    top:0;
+
+    width:250px;
+
+    height:100vh;
+
+    background:white;
+
+    transition:.35s;
+
+    box-shadow:5px 0 20px rgba(0,0,0,.15);
+
+    z-index:999;
+
+    padding-top:80px;
+
+}
+
+.mobile-menu.active{
+
+    left:0;
+
+}
+
+.mobile-menu a{
+
+    display:block;
+
+    padding:18px 25px;
+
+    text-decoration:none;
+
+    color:#071c63;
+
+    font-weight:bold;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.mobile-menu a:hover{
+
+    background:#f4f4f4;
+
+}
+
+}
