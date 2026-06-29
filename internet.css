@@ -315,13 +315,13 @@ body{
 
 .cards{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:repeat(3,1fr);
+    justify-content:center;
 
-    gap:25px;
+    gap:30px;
 
-    margin-bottom:30px;
+    flex-wrap:wrap;
 
 }
 
