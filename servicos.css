@@ -1,428 +1,604 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-body{
-background:linear-gradient(
-135deg,
-#eef8f1,
-#dcefe2
-);
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow-x:hidden;
+body {
+    background: linear-gradient(135deg, #04aa04b9 0%, #33c906 30%, #08e225 70%, #00fa00b7 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 20px 0;
 }
 
-.container{
-width:100%;
-max-width:1400px;
-min-height:850px;
-background:white;
-border-radius:40px;
-overflow:hidden;
-display:flex;
-box-shadow:0 20px 50px rgba(0,0,0,.12);
+.container {
+    width: 100%;
+    max-width: 1400px;
+    min-height: 850px;
+    background: white;
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch; /* Garante que a coluna verde estique até à altura total */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
 }
 
-/* ESQUERDA */
-
-.left-side{
-width:35%;
-background:linear-gradient(
-180deg,
-#00a63f,
-#008d34
-);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-position:relative;
+/* =====================================
+   LADO ESQUERDO (PAINEL VERDE)
+===================================== */
+.left-side {
+    width: 35%;
+    background: radial-gradient(circle at top right, #00e676, #00b0ff 100%), linear-gradient(135deg, #00a83a, #004d1a);
+    background-blend-mode: overlay;
+    background: linear-gradient(145deg, #00c853 0%, #009624 50%, #005612 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Alterado para space-between para empurrar o logo para cima, centralizar a mascote e fixar o botão em baixo */
+    justify-content: space-between; 
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
 }
 
-.logo{
-width:260px;
-position:absolute;
-top:40px;
+.logo {
+    width: 180px;
+    margin-bottom: 0;
+    z-index: 3;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
 }
 
-.mascote{
-width:420px;
+/* Contentor da mascote com overflow visível para não cortar os pés */
+.mascote-container {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.05),
+        rgba(0,0,0,0.08)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    margin: 0 auto;
 }
 
-.seguranca{
-position:absolute;
-bottom:50px;
-background:rgba(255,255,255,.12);
-padding:20px 25px;
-border-radius:20px;
-color:white;
-font-size:18px;
+.mascote {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.25));
+}
+.voltar-login {
+    width: 100%;
+    max-width: 100%;
+    background: #ffffff;
+    color: #00b140;
+    border: 2px solid #00b140;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: 0.3s;
+    margin-top: 0; /* Removida a margem superior antiga */
+    z-index: 3;
 }
 
-/* DIREITA */
-
-.right-side{
-flex:1;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:50px;
-}
-
-.cadeado{
-width:90px;
-height:90px;
-background:#e9f8ee;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:40px;
-}
-
-.right-side h1{
-margin-top:30px;
-color:#071c63;
-font-size:42px;
-font-weight:700;
-}
-
-.linha{
-width:60px;
-height:5px;
-background:#00a63f;
-border-radius:20px;
-margin:25px 0 50px;
-}
-
-/* CARDS */
-
-.cards{
-display:flex;
-justify-content:center;
-gap:20px;
-}
-
-.card{
-width:250px;
-background:white;
-border-radius:30px;
-padding:25px;
-text-align:center;
-cursor:pointer;
-transition:.3s;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 15px 35px rgba(0,0,0,.15);
-}
-
-.imagem-servico{
-height:180px;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.imagem-servico img{
-max-width:160px;
-max-height:160px;
-object-fit:contain;
-}
-
-.card h2{
-color:#071c63;
-margin-bottom:15px;
-font-size:24px;
-}
-
-.card p{
-color:#6b7280;
-line-height:1.6;
-font-size:16px;
-}
-
-.card span{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-width:70px;
-height:70px;
-border:2px solid #d9f5df;
-border-radius:50%;
-margin-top:30px;
-font-size:38px;
-color:#00a63f;
+.voltar-login:hover {
+    background: #f0fdf4;
+    transform: translateY(-2px);
 }
 /* =====================================
-   RESPONSIVO - TELA DE SERVIÇOS
+   LADO DIREITO (CONTEÚDO)
 ===================================== */
-
-@media (max-width: 768px){
-
-    body{
-
-        display:block;
-        padding:15px;
-
-    }
-
-    .container{
-
-        width:100%;
-        height:auto;
-
-        flex-direction:column;
-
-        border-radius:25px;
-
-    }
-
-    /* LADO VERDE */
-
-    .left-side{
-
-        width:100%;
-
-        padding:35px 20px;
-
-    }
-
-    .logo{
-
-        position:static;
-
-        width:170px;
-
-        margin-bottom:25px;
-
-    }
-
-    .mascote{
-
-        width:180px;
-
-        margin-bottom:25px;
-
-    }
-
-    .seguranca{
-
-        position:static;
-
-        width:100%;
-
-        text-align:center;
-
-        font-size:15px;
-
-    }
-
-    /* LADO BRANCO */
-
-    .right-side{
-
-        width:100%;
-
-        padding:30px 20px;
-
-    }
-
-    .cadeado{
-
-        width:70px;
-        height:70px;
-
-        font-size:28px;
-
-    }
-
-    .right-side h1{
-
-        font-size:30px;
-
-        text-align:center;
-
-    }
-
-    .linha{
-
-        margin:20px auto 35px;
-
-    }
-
-    /* CARDS */
-
-    .cards{
-
-        width:100%;
-
-        flex-direction:column;
-
-        gap:20px;
-
-    }
-
-    .card{
-
-        width:100%;
-
-        max-width:380px;
-
-        margin:auto;
-
-    }
-
-    .imagem-servico{
-
-        height:150px;
-
-    }
-
-    .imagem-servico img{
-
-        max-width:130px;
-
-        max-height:130px;
-
-    }
-
-    .card h2{
-
-        font-size:24px;
-
-    }
-
-    .card p{
-
-        font-size:16px;
-
-    }
-
-}
-/*=========================
-MENU MOBILE
-==========================*/
-
-.mobile-header{
-
-    display:none;
-
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o conteúdo para cima e o botão de voltar para o final absoluto */
+    padding: 50px;
+    overflow-y: auto;
 }
 
-.mobile-menu{
-
-    display:none;
-
+.header-servicos {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+    text-align: center;     /* Centraliza o texto */
+    width: 100%;
+    margin-bottom: 25px;
 }
 
-@media(max-width:768px){
-
-.mobile-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:15px 20px;
-
-    background:#00b140;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1000;
-
+.header-servicos h1 {
+    color: #00561b; /* Um verde escuro, discreto e sofisticado que combina com a identidade visual */
+    font-size: 38px;
+    margin: 0;
 }
 
-.mobile-logo{
-
-    width:120px;
-
+.header-servicos p {
+    color: #666;
+    margin-top: 5px;
+    font-size: 16px;
 }
 
-#menuBtn{
-
-    width:45px;
-
-    height:45px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:white;
-
-    color:#00b140;
-
-    font-size:24px;
-
-    cursor:pointer;
-
+.banner-servicos {
+    background: linear-gradient(135deg, #00b83f, #14d356);
+    color: white;
+    border-radius: 25px;
+    padding: 30px 35px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(0, 184, 63, 0.15);
 }
 
-.mobile-menu{
-
-    position:fixed;
-
-    left:-260px;
-
-    top:0;
-
-    width:250px;
-
-    height:100vh;
-
-    background:white;
-
-    transition:.35s;
-
-    box-shadow:5px 0 20px rgba(0,0,0,.15);
-
-    z-index:999;
-
-    padding-top:80px;
-
+.banner-servicos h2 {
+    margin: 0;
+    font-size: 28px;
 }
 
-.mobile-menu.active{
-
-    left:0;
-
+.banner-servicos p {
+    margin-top: 8px;
+    opacity: 0.95;
+    font-size: 15px;
 }
 
-.mobile-menu a{
-
-    display:block;
-
-    padding:18px 25px;
-
-    text-decoration:none;
-
-    color:#071c63;
-
-    font-weight:bold;
-
-    border-bottom:1px solid #eee;
-
+/* =====================================
+   CARDS DE SERVIÇOS
+===================================== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
 }
 
-.mobile-menu a:hover{
-
-    background:#f4f4f4;
-
+.card-servico {
+    background: white;
+    border: 1px solid #edf2f7;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    transition: .3s;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.card-servico:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .10);
+    border-color: #d1fae5;
+}
+
+.icone-servico {
+    font-size: 40px;
+    color: #00b83f;
+    background: #eef8f1;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card-servico h2 {
+    color: #072b78;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.card-servico p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 45px;
+    margin-bottom: 20px;
+}
+
+.card-servico button {
+    background: #00b83f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.card-servico button:hover {
+    background: #009632;
+}
+
+/* =====================================
+   RESPONSIVO (MOBILE)
+===================================== */
+@media (max-width: 768px) {
+    body {
+        display: flex; /* Garante que o alinhamento e o fundo se comportem igual */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #04aa04b9 0%, #33c906 30%, #08e225 70%, #00fa00b7 100%); /* Mantém exatamente o mesmo degradê */
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        border-radius: 25px;
+    }
+
+    .left-side {
+        width: 100%;
+        padding: 30px 20px;
+        align-items: center;
+    }
+
+    .logo {
+        width: 150px;
+        margin-bottom: 15px;
+    }
+
+    .mascote {
+        width: 180px;
+        margin-bottom: 20px;
+    }
+
+    .voltar-login {
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    .right-side {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .header-servicos h1 {
+        font-size: 28px;
+    }
+
+    .banner-servicos {
+        padding: 25px;
+    }
+
+    .banner-servicos h2 {
+        font-size: 22px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+/* Efeito de brilho de fundo (Luz difusa moderna) */
+.left-side::before {
+    content: '';
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 1;
+    pointer-events: none;}
+    /* =====================================
+   ESTRUTURA GERAL DA PÁGINA
+===================================== */
+body {
+    background: linear-gradient(135deg, #04aa04b9 0%, #33c906 30%, #08e225 70%, #00fa00b7 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 20px 0;
+}
+.pagina-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+}
+
+.container {
+    width: 100%;
+    background: white;
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
+    margin-bottom: 20px;
+}
+
+/* =====================================
+   LADO ESQUERDO (PAINEL VERDE)
+===================================== */
+.left-side {
+    width: 35%;
+    background: radial-gradient(circle at top right, #00e676, #00b0ff 100%), linear-gradient(135deg, #00a83a, #004d1a);
+    background-blend-mode: overlay;
+    background: linear-gradient(145deg, #00c853 0%, #009624 50%, #005612 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centraliza perfeitamente o logo e a mascote na vertical */
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo {
+    width: 180px;
+    margin-bottom: 20px;
+    z-index: 3;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+}
+
+/* Contentor circular da mascote com degradê */
+.mascote-container {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.08));
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.12), 
+        inset 0 1px 1px rgba(255, 255, 255, 0.15), 
+        inset 0 -2px 2px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 3;
+}
+
+.mascote {
+    width: 290px;
+    max-width: none;
+    object-fit: contain;
+    margin-top: 15px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.25));
+}
+
+/* Botão Global fora da caixa */
+.voltar-login-global {
+    width: 100%;
+    max-width: 320px;
+    background: #ffffff;
+    color: #00b140;
+    border: 2px solid #00b140;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+    text-align: center;
+}
+
+.voltar-login-global:hover {
+    background: #f0fdf4;
+    transform: translateY(-2px);
+}
+
+/* =====================================
+   LADO DIREITO (CONTEÚDO)
+===================================== */
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.header-servicos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.header-servicos h1 {
+    color: #00561b;
+    font-size: 38px;
+    margin: 0;
+}
+
+.header-servicos p {
+    color: #666;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.banner-servicos {
+    background: linear-gradient(135deg, #00b83f, #14d356);
+    color: white;
+    border-radius: 25px;
+    padding: 30px 35px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(0, 184, 63, 0.15);
+}
+
+.banner-servicos h2 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.banner-servicos p {
+    margin-top: 8px;
+    opacity: 0.95;
+    font-size: 15px;
+}
+
+/* =====================================
+   CARDS DE SERVIÇOS
+===================================== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.card-servico {
+    background: white;
+    border: 1px solid #edf2f7;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    transition: .3s;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-servico:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .10);
+    border-color: #d1fae5;
+}
+
+.icone-servico {
+    font-size: 40px;
+    color: #00b83f;
+    background: #eef8f1;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card-servico h2 {
+    color: #072b78;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.card-servico p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 45px;
+    margin-bottom: 20px;
+}
+
+.card-servico button {
+    background: #00b83f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.card-servico button:hover {
+    background: #009632;
+}
+
+/* =====================================
+   RESPONSIVO (MOBILE)
+===================================== */
+@media (max-width: 768px) {
+    body {
+        display: block;
+        padding: 15px;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        border-radius: 25px;
+    }
+
+    .left-side {
+        width: 100%;
+        padding: 30px 20px;
+        align-items: center;
+    }
+
+    .logo {
+        width: 150px;
+        margin-bottom: 15px;
+    }
+
+    .mascote-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    .mascote {
+        width: 230px;
+    }
+
+    .right-side {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .header-servicos h1 {
+        font-size: 28px;
+    }
+
+    .banner-servicos {
+        padding: 25px;
+    }
+
+    .banner-servicos h2 {
+        font-size: 22px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .voltar-login-global {
+        max-width: 100%;
+    }
 }

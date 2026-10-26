@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,339 +9,739 @@
 
     <link rel="stylesheet" href="internet.css">
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 </head>
 
 <body>
 
-<div class="container">
+    <!-- MODAL SAIR -->
+    <div
+        id="modalSair"
+        class="modal-sair"
+        style="display: none;"
+    >
 
-    <!-- SIDEBAR -->
+        <div class="modal-conteudo-sair">
 
-    <aside class="sidebar">
+            <h3>
+                Deseja sair da conta?
+            </h3>
 
-        <img src="assets/logo.png" class="logo">
+            <div class="acoes-modal-sair">
 
-        <div class="circulo">
+                <button
+                    onclick="fecharModalSair()"
+                    class="btn-cancelar"
+                >
+                    Cancelar
+                </button>
 
-            <img src="assets/mascote.png" class="mascote">
-
-        </div>
-
-        <div class="cliente">
-
-            <span>Cliente</span>
-
-            <h2>Jose Carlos Clemente Da Silva Neto</h2>
-
-        </div>
-
-        <button class="voltar"
-        onclick="window.location.href='servicos.html'">
-
-            ← Voltar aos serviços
-
-        </button>
-
-    </aside>
-
-    <!-- CONTEÚDO -->
-
-    <main class="conteudo">
-
-        <!-- TOPO -->
-
-        <section class="topo">
-
-            <div>
-
-                <h1>Jose Carlos Clemente Da Silva Neto</h1>
-
-                <p>Bem-vindo ao seu plano fibra</p>
+                <button
+                    onclick="confirmarSaida()"
+                    class="btn-confirmar"
+                >
+                    Sair
+                </button>
 
             </div>
-
-            <div class="perfil">
-
-                <i class="fa-regular fa-user"></i>
-
-            </div>
-
-        </section>
-
-        <!-- PLANO -->
-
-        <section class="plano">
-
-            <div class="item">
-
-                <div class="icone">
-
-                    <i class="fa-solid fa-gauge-high"></i>
-
-                </div>
-
-                <div>
-
-                    <small>Seu Plano</small>
-
-                    <h2>500 <span>Mbps</span></h2>
-
-                    <p>Velocidade Download</p>
-
-                </div>
-
-            </div>
-
-            <div class="linha"></div>
-
-            <div class="item">
-
-                <div class="icone">
-
-                    <i class="fa-solid fa-arrow-up"></i>
-
-                </div>
-
-                <div>
-
-                    <small>Upload</small>
-
-                    <h2>250 <span>Mbps</span></h2>
-
-                    <p>Velocidade Upload</p>
-
-                </div>
-
-            </div>
-
-            <div class="linha"></div>
-
-            <div class="item">
-
-                <div class="icone">
-
-                    <i class="fa-regular fa-calendar"></i>
-
-                </div>
-
-                <div>
-
-                    <small>Vencimento</small>
-
-                    <h2>10/07/2025</h2>
-
-                    <p>Data de vencimento</p>
-
-                </div>
-
-            </div>
-
-            <div class="linha"></div>
-
-            <div class="item">
-
-                <div class="icone">
-
-                    <i class="fa-solid fa-check"></i>
-
-                </div>
-
-                <div>
-
-                    <small>Status</small>
-
-                    <h2>Ativo</h2>
-
-                    <p>Plano ativo</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- CARDS -->
-
-        <section class="cards">
-                <!-- CARD TESTE -->
-
-    <div class="card">
-
-        <div class="card-topo">
-
-            <div class="icone-card">
-                <i class="fa-solid fa-gauge-high"></i>
-            </div>
-
-            <div>
-
-                <h3>Teste de Velocidade</h3>
-
-                <p>
-                    Verifique se sua internet está
-                    com a velocidade contratada.
-                </p>
-
-            </div>
-
-        </div>
-
-        <button class="btn-verde"
-            onclick="abrirSpeedtest()">
-
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-            Fazer Teste de Velocidade
-
-        </button>
-
-    </div>
-
-
-
-    <!-- CONTRATO -->
-
-    <div class="card">
-
-        <div class="card-topo">
-
-            <div class="icone-card">
-
-                <i class="fa-regular fa-file-lines"></i>
-
-            </div>
-
-            <div>
-
-                <h3>Meu Contrato</h3>
-
-                <p>
-                    Baixe uma cópia do seu contrato
-                    sempre que precisar.
-                </p>
-
-            </div>
-
-        </div>
-
-        <button class="btn-verde"
-            onclick="baixarContrato()">
-
-            <i class="fa-solid fa-download"></i>
-
-            Baixar Contrato (PDF)
-
-        </button>
-
-    </div>
-
-
-
-    <!-- CONEXÃO -->
-
-    <div class="card">
-
-        <div class="card-topo">
-
-            <div class="icone-card">
-
-                <i class="fa-solid fa-wifi"></i>
-
-            </div>
-
-            <div>
-
-                <h3>Informações de Conexão</h3>
-
-                <p>
-                    Acompanhe há quanto tempo
-                    você está conectado.
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="status">
-
-            <span class="bolinha"></span>
-
-            Conectado há 15 dias
 
         </div>
 
     </div>
 
-</section>
+
+    <div class="container">
+
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+
+        <aside class="sidebar alerta-reduzido">
+
+
+            <!-- TOPO DA SIDEBAR -->
+
+            <div class="sidebar-top">
+
+                <img
+                    src="assets/logo.png"
+                    class="logo"
+                    alt="Logo"
+                >
+
+
+                <!-- PERFIL -->
+
+                <div class="perfil-sidebar-container">
+
+                    <div
+                        class="btn-user-sidebar"
+                        onclick="toggleMenuUsuarioSidebar()"
+                    >
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <span class="status-online"></span>
+
+                    </div>
+
+
+                    <!-- MENU DO BONEQUINHO -->
+
+                    <div
+                        id="menuUsuarioSidebar"
+                        class="menu-usuario-sidebar"
+                    >
+
+                      <button
+    type="button"
+    onclick="abrirModalSair()"
+>
+    <i class="fa-solid fa-right-from-bracket"></i>
+
+    Sair da Conta
+</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 CAIXA DO CLIENTE
+            ====================================================== -->
+
+            <div class="cliente caixa-cliente-reduzido">
+
+                <span>
+                    Cliente
+                </span>
+
+                <h2 id="nomeCliente">
+                </h2>
+
+
+                <div class="cliente-info">
+
+
+                    <!-- TELEFONE -->
+
+                    <div class="info-linha">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <span id="telefoneCliente">
+                            Carregando...
+                        </span>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="info-linha">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <span id="emailCliente">
+                            Carregando...
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 ATUALIZAR DADOS
+            ====================================================== -->
+
+            <div
+                style="
+                    margin-top: 16px;
+                    text-align: center;
+                    width: 100%;
+                "
+            >
+
+                <button
+                    onclick="abrirAtualizacaoDados()"
+
+                    style="
+                        background: transparent;
+                        border: 1px solid rgba(255, 255, 255, 0.4);
+                        color: #ffffff;
+                        padding: 9px 18px;
+                        border-radius: 8px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        transition: all 0.2s;
+                    "
+
+                    onmouseover="
+                        this.style.background='rgba(255, 255, 255, 0.12)'
+                    "
+
+                    onmouseout="
+                        this.style.background='transparent'
+                    "
+                >
+
+                    <i class="fa-solid fa-user-pen"></i>
+
+                    Atualizar Dados
+
+                </button>
+
+            </div>
+
+
+            <!-- =====================================================
+                 VOLTAR PARA OS SERVIÇOS
+            ====================================================== -->
+
+            <div class="voltar-servicos-sidebar">
+
+                <button
+                    type="button"
+                    class="btn-voltar-pagina"
+                    onclick="abrirConfirmacaoVolta(event)"
+                    title="Voltar para os serviços"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    <span>
+                        Voltar para os Serviços
+                    </span>
+
+                </button>
+
+            </div>
+
+
+        </aside>
+
+
+        <!-- =====================================================
+             CONTEÚDO PRINCIPAL
+        ====================================================== -->
+
+        <main class="conteudo">
+
+
+            <!-- =====================================================
+                 BLOCO DO PLANO
+            ====================================================== -->
+
+            <section class="card-plano-mobile">
+
+
+                <div class="plano-topo-mobile">
+
+
+                    <div class="icone-card icone-reduzido">
+
+                        <i class="fa-solid fa-gauge-high"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="plano-label">
+                            Meu Plano
+                        </span>
+
+                        <h3 id="nomePlanoMobile">
+                            Carregando...
+                        </h3>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="plano-detalhes-mobile">
+
+
+                    <!-- VENCIMENTO -->
+
+                    <div class="detalhe-item">
+
+                        <i
+                            id="iconeCalendarioPlano"
+                            class="fa-solid fa-calendar-days"
+                        ></i>
+
+
+                        <div>
+
+                            <small>
+                                Vencimento
+                            </small>
+
+                            <span id="vencimentoPlanoMobile">
+                                Carregando...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="detalhe-item">
+
+                        <i
+                            class="fa-solid fa-triangle-exclamation"
+                            style="color: #ea580c;"
+                        ></i>
+
+
+                        <div>
+
+                            <small>
+                                Status
+                            </small>
+
+                            <span
+                                id="statusPlanoMobile"
+                                class="status-reduzido-texto"
+                            >
+                                Velocidade reduzida
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
 
 
 
-<!-- SUPORTE -->
+            <!-- =====================================================
+                 MODAL CONFIRMAÇÃO DE VOLTA
+            ====================================================== -->
 
-<section class="suporte">
+            <div
+                id="modalVoltar"
+                class="modal-voltar"
+                style="display: none;"
+            >
 
-    <div class="suporte-info">
+                <div class="card-confirmacao">
 
-        <div class="icone-card">
 
-            <i class="fa-solid fa-headset"></i>
+                    <div class="icone-confirmacao">
 
-        </div>
+                        <i class="fa-solid fa-arrow-left"></i>
 
-        <div>
+                    </div>
 
-            <h3>Precisa de ajuda?</h3>
 
-            <p>Estamos prontos para te atender.</p>
+                    <h2>
+                        Voltar para os serviços?
+                    </h2>
+
+
+                    <p>
+                        Deseja voltar para a seleção de serviços?
+                    </p>
+
+
+                    <div class="botoes-confirmacao">
+
+
+                        <button
+                            type="button"
+                            class="btn-cancelar"
+                            onclick="fecharConfirmacaoVolta()"
+                        >
+                            Não
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="btn-confirmar"
+                            onclick="confirmarVolta()"
+                        >
+                            Sim
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 BLOCO DA FATURA ATUAL
+            ====================================================== -->
+
+            <section
+                class="card-fatura-mobile"
+                id="cardFaturaMobile"
+            >
+
+
+                <div class="fatura-info-topo">
+
+
+                    <div class="icone-card icone-reduzido">
+
+                        <i class="fa-solid fa-wallet"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <small id="tituloFatura">
+                            Fatura Atual
+                        </small>
+
+                        <h2 id="valorFaturaMobile">
+                            R$ --,--
+                        </h2>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div
+                    class="fatura-vencimento-mobile alerta-vencido"
+                    id="blocoVencimentoMobile"
+                >
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    <span>
+
+                        Vencida em:
+
+                        <strong id="dataVencimentoMobile">
+                            --/--/----
+                        </strong>
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="acoes-fatura-mobile">
+
+
+                    <button
+                        class="btn-pix"
+                        onclick="pagarViaPix()"
+                    >
+
+                        <i class="fa-solid fa-qrcode"></i>
+
+                        Copiar PIX
+
+                    </button>
+
+
+                    <button
+                        class="btn-financeiro"
+                        onclick="abrirHistoricoFaturas()"
+                    >
+
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                        Histórico
+
+                    </button>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 CARDS DE UTILIDADES
+            ====================================================== -->
+
+            <section class="cards">
+
+
+                <!-- =================================================
+                     INFORMAÇÕES DE CONEXÃO
+                ================================================== -->
+
+                <div class="card">
+
+
+                    <div class="card-topo">
+
+
+                        <div class="icone-card">
+
+                            <i class="fa-solid fa-earth-americas"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Informações de Conexão
+                            </h3>
+
+                            <p>
+                                Acompanhe o status da sua conexão.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="status-conexao">
+
+                        <!-- Bolinha com efeito de piscar ativo -->
+
+                        <span
+                            id="bolinhaStatus"
+                            class="bolinha offline piscar"
+                        ></span>
+
+
+                        <span id="statusConexao">
+                            Velocidade reduzida por falta de pagamento
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TESTE DE VELOCIDADE
+                ================================================== -->
+
+                <div class="card">
+
+
+                    <div class="card-topo">
+
+
+                        <div class="icone-card">
+
+                            <i class="fa-solid fa-gauge-high"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Teste de Velocidade
+                            </h3>
+
+                            <p>
+                                Verifique se sua internet está com a velocidade contratada.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        class="btn-verde"
+                        onclick="abrirSpeedtest()"
+                    >
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                        Fazer Teste
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SUPORTE
+                ================================================== -->
+
+                <div class="card">
+
+
+                    <div class="card-topo">
+
+
+                        <div class="icone-card">
+
+                            <i class="fa-solid fa-headset"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Precisa de Ajuda?
+                            </h3>
+
+                            <p>
+                                Nossa equipe está pronta para te atender.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <a
+                        href="https://unicatelecom.web.vmix.chat/"
+                        target="_blank"
+                        style="
+                            text-decoration: none;
+                            width: 100%;
+                        "
+                    >
+
+                        <button
+                            class="btn-verde"
+                            style="width: 100%;"
+                        >
+
+                            <i class="fa-solid fa-comments"></i>
+
+                            Iniciar Atendimento
+
+                        </button>
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL HISTÓRICO FINANCEIRO
+    ====================================================== -->
+
+    <div
+        id="modalHistorico"
+        class="modal"
+        style="display: none;"
+    >
+
+        <div class="modal-conteudo">
+
+
+            <h2>
+                Histórico de Faturas
+            </h2>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Vencimento
+                        </th>
+
+                        <th>
+                            Valor
+                        </th>
+
+                        <th>
+                            Data Pagamento
+                        </th>
+
+                        <th>
+                            Comprovante
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="corpoTabelaHistorico">
+
+                    <!-- As faturas vão aparecer aqui automaticamente -->
+
+                </tbody>
+
+            </table>
+
+
+            <button
+                onclick="fecharHistorico()"
+            >
+                Fechar
+            </button>
+
 
         </div>
 
     </div>
 
-    <button class="btn-whats"
-        onclick="abrirWhatsapp()">
 
-        <i class="fa-brands fa-whatsapp"></i>
 
-        Falar no WhatsApp
+    <!-- =====================================================
+         SCRIPTS
+    ====================================================== -->
 
-    </button>
-
-</section>
-
-<footer>
-
-    © 2026 Todos os direitos reservados.
-
-</footer>
-
-</main>
-
-</div>
-
-<script src="internet.js"></script>
+    <script src="internet.js"></script>
 
 </body>
-<div class="mobile-header">
-
-    <button id="menuBtn">☰</button>
-
-    <img src="assets/logo.png" class="mobile-logo">
-
-</div>
-<div class="mobile-menu" id="mobileMenu">
-
-    <a href="servicos.html">🏠 Serviços</a>
-
-    <a href="dashboard.html">📱 Única Móvel</a>
-
-    <a href="cam.html">📷 Única CAM</a>
-
-    <a href="internet.html">🌐 Plano Fibra</a>
-
-</div>
 
 </html>

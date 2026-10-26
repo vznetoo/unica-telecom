@@ -1,0 +1,602 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ==========================
+   BODY
+========================== */
+
+body {
+    background: linear-gradient(
+        180deg,
+        #e8fff0 0%,
+        #f5f5f5 100%
+    );
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 40px 20px;
+
+    background-attachment: fixed;
+}
+
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.container-selecao {
+    width: 100%;
+    max-width: 650px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ==========================
+   TOPO
+   IGUAL AO CONTRATOS-FIBRA
+========================== */
+
+.topo {
+    text-align: center;
+
+    margin-bottom: 50px;
+}
+
+
+/* CÍRCULO DA LOGO */
+
+.logo-box {
+    width: 120px;
+    height: 120px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    margin: 0 auto 20px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* LOGO */
+
+.logo {
+    width: 75px;
+    height: auto;
+
+    display: block;
+}
+
+
+/* TÍTULO */
+
+.topo h1 {
+    color: #1fb14d;
+
+    font-size: 38px;
+
+    margin-bottom: 10px;
+
+    font-weight: 700;
+}
+
+
+/* SUBTÍTULO */
+
+.subtitulo-contratos {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 10px auto 25px auto;
+
+    padding: 0 10px;
+
+    font-size: 15px;
+
+    color: #6b7280;
+
+    font-weight: 500;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+/* NÚMERO DE LINHAS */
+
+.quantidade-linhas {
+    color: #00b140;
+
+    font-weight: 700;
+}
+
+
+/* ==========================
+   LISTA
+========================== */
+
+.lista-linhas {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* ==========================
+   CARD
+========================== */
+
+.card-contrato {
+    width: 100%;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.08);
+
+    margin-bottom: 25px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    border: 2px solid #d9f5e3;
+
+    cursor: pointer;
+}
+
+
+.card-contrato:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 40px rgba(0, 168, 58, 0.15);
+}
+
+
+/* ==========================
+   TOPO DO CARD
+========================== */
+
+.card-contrato-topo {
+    background:
+        linear-gradient(
+            135deg,
+            #1fb14d,
+            #29d863
+        );
+
+    color: #ffffff;
+
+    padding: 18px 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+/* ==========================
+   INFORMAÇÃO DO PLANO
+========================== */
+
+.info-plano-movel {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+.info-plano-movel i {
+    font-size: 17px;
+}
+
+
+/* ==========================
+   STATUS
+========================== */
+
+.tag-status {
+    background:
+        rgba(255, 255, 255, 0.18);
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================
+   CORPO DO CARD
+========================== */
+
+.card-contrato-corpo {
+    padding: 20px 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+/* ==========================
+   DETALHES
+========================== */
+
+.detalhes-linha span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+
+.detalhes-linha strong {
+    color: #1e293b;
+
+    font-size: 18px;
+}
+
+
+/* NÚMERO */
+
+.numero-linha {
+    font-size: 20px !important;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* CHIP SIM */
+
+.chip-info {
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    color: #94a3b8;
+}
+
+
+.chip-info i {
+    margin-right: 4px;
+}
+
+
+/* ==========================
+   BOTÃO AVANÇAR
+========================== */
+
+.btn-avancar {
+    flex-shrink: 0;
+
+    width: 54px;
+    height: 54px;
+
+    background: #1fb14d;
+
+    color: #ffffff;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    border: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-avancar:hover {
+    background: #17953f;
+
+    transform: scale(1.05);
+}
+
+
+/* ==========================
+   BOTÃO VOLTAR
+========================== */
+
+.btn-voltar-servicos {
+    position: fixed;
+
+    top: 28px;
+    left: 48px;
+
+    background:
+        rgba(255, 255, 255, 0.95);
+
+    border: none;
+
+    color: #00a83a;
+
+    padding: 11px 16px;
+
+    border-radius: 50px;
+
+    font-weight: 500;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.08);
+
+    z-index: 1000;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.btn-voltar-servicos:hover {
+    transform: translateX(-3px);
+
+    box-shadow:
+        0 7px 22px rgba(0, 0, 0, 0.12);
+}
+
+
+.btn-voltar-servicos i {
+    font-size: 17px;
+}
+
+
+/* ==========================
+   MENSAGEM CARREGANDO
+========================== */
+
+.mensagem-carregando {
+    width: 100%;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    padding: 35px 20px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.05);
+
+    color: #64748b;
+}
+
+
+.mensagem-carregando i {
+    color: #00c853;
+
+    font-size: 28px;
+
+    margin-bottom: 12px;
+}
+
+
+/* ==========================
+   MENSAGEM DE ERRO
+========================== */
+
+.mensagem-erro {
+    width: 100%;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    padding: 30px 20px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+
+.mensagem-erro i {
+    color: #ef4444;
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+}
+
+
+.mensagem-erro p {
+    color: #64748b;
+
+    margin-bottom: 18px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================
+   BOTÃO TENTAR NOVAMENTE
+========================== */
+
+.btn-tentar-novamente {
+    background: #00c853;
+
+    color: white;
+
+    border: none;
+
+    padding: 11px 20px;
+
+    border-radius: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.btn-tentar-novamente:hover {
+    background: #009639;
+}
+
+
+/* ==========================
+   RESPONSIVO
+========================== */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 25px 15px;
+    }
+
+
+    .container-selecao {
+        max-width: 100%;
+    }
+
+
+    .btn-voltar-servicos {
+        top: 20px;
+
+        left: 20px;
+
+        padding: 10px 13px;
+
+        font-size: 13px;
+    }
+
+
+    .topo h1 {
+        font-size: 28px;
+
+        padding: 0 10px;
+    }
+
+
+    .subtitulo-contratos {
+        font-size: 13px;
+
+        white-space: normal;
+    }
+
+
+    .card-contrato-corpo {
+        padding: 20px;
+    }
+
+
+    .numero-linha {
+        font-size: 18px !important;
+    }
+
+}
+
+
+/* ==========================
+   CELULAR PEQUENO
+========================== */
+
+@media (max-width: 500px) {
+
+    .logo-box {
+        width: 110px;
+        height: 110px;
+    }
+
+
+    .logo {
+        width: 70px;
+    }
+
+
+    .topo h1 {
+        font-size: 24px;
+    }
+
+
+    .subtitulo-contratos {
+        font-size: 12.5px;
+    }
+
+
+    .card-contrato-topo {
+        padding: 17px 20px;
+    }
+
+
+    .card-contrato-corpo {
+        padding: 18px 20px;
+    }
+
+
+    .info-plano-movel {
+        font-size: 16px;
+    }
+
+
+    .btn-avancar {
+        width: 50px;
+        height: 50px;
+    }
+
+}

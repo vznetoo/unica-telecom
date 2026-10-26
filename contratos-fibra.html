@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Selecionar Contrato</title>
+
+    <link rel="stylesheet" href="contratos-fibra.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <style>
+
+        /* =========================================================
+           MODAL DE CONFIRMAÇÃO
+        ========================================================= */
+
+        .modal-voltar {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.35);
+
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+
+            z-index: 9999;
+        }
+
+
+        .modal-voltar.ativo {
+            display: flex;
+        }
+
+
+        /* =========================================================
+           CARD
+        ========================================================= */
+
+        .card-confirmacao {
+            width: 100%;
+            max-width: 360px;
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            padding: 30px 25px 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.20);
+
+            animation: aparecerModal 0.25s ease;
+        }
+
+
+        /* =========================================================
+           ÍCONE
+        ========================================================= */
+
+        .icone-confirmacao {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #eafff1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .icone-confirmacao i {
+            color: #05c95c;
+
+            font-size: 23px;
+        }
+
+
+        /* =========================================================
+           TEXTOS
+        ========================================================= */
+
+        .card-confirmacao h2 {
+            margin: 0 0 10px;
+
+            color: #222222;
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+
+        .card-confirmacao p {
+            margin: 0 auto 25px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           BOTÕES
+        ========================================================= */
+
+        .botoes-confirmacao {
+            display: flex;
+
+            gap: 10px;
+        }
+
+
+        .botoes-confirmacao button {
+            flex: 1;
+
+            height: 45px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .btn-cancelar {
+            background: #f3f4f6;
+
+            color: #555555;
+
+            border: 1px solid #e5e7eb;
+        }
+
+
+        .btn-cancelar:hover {
+            background: #e9eaec;
+        }
+
+
+        .btn-confirmar {
+            background: #05c95c;
+
+            color: #ffffff;
+
+            border: none;
+
+            box-shadow:
+                0 5px 15px rgba(5, 201, 92, 0.20);
+        }
+
+
+        .btn-confirmar:hover {
+            background: #04b451;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================================
+           ANIMAÇÃO
+        ========================================================= */
+
+        @keyframes aparecerModal {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    scale(0.94)
+                    translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================================================
+           SOMENTE MOBILE
+        ========================================================= */
+
+        @media (min-width: 769px) {
+
+            .modal-voltar {
+                display: none !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+ 
+
+
+    <!-- =========================================================
+         CONTAINER
+    ========================================================== -->
+
+    <div class="container">
+
+
+        <!-- =====================================================
+             BOTÃO VOLTAR
+        ====================================================== -->
+
+ <a href="servicos.html"
+   class="btn-voltar-topo"
+   title="Voltar para os serviços">
+    <i class="fa-solid fa-arrow-left"></i>
+</a>
+
+
+        <!-- =====================================================
+             TOPO
+        ====================================================== -->
+
+        <div class="topo">
+
+            <div class="logo-box">
+
+                <img
+                    src="assets/Logoo.png"
+                    class="logo"
+                    alt="Logo"
+                >
+
+            </div>
+
+
+            <h1>
+                Selecione seu Plano Fibra
+            </h1>
+
+
+            <p
+                class="subtitulo-contratos"
+                id="textoContratos"
+            ></p>
+
+        </div>
+
+
+        <!-- =====================================================
+             LISTA DE CONTRATOS
+        ====================================================== -->
+
+        <div
+            id="listaContratos"
+            class="lista-contratos"
+        ></div>
+
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT DO MODAL
+    ========================================================== -->
+
+    <script>
+
+        function abrirConfirmacaoVolta(event) {
+
+            /*
+             * No computador:
+             * volta diretamente para serviços.html
+             */
+
+            if (window.innerWidth > 768) {
+                return true;
+            }
+
+
+            /*
+             * No celular:
+             * impede o link de abrir imediatamente
+             */
+
+            event.preventDefault();
+
+
+            const modal =
+                document.getElementById("modalVoltar");
+
+
+            if (modal) {
+
+                modal.classList.add("ativo");
+
+            }
+
+
+            return false;
+
+        }
+
+
+        function fecharConfirmacaoVolta() {
+
+            const modal =
+                document.getElementById("modalVoltar");
+
+
+            if (modal) {
+
+                modal.classList.remove("ativo");
+
+            }
+
+        }
+
+
+        function confirmarVolta() {
+
+            window.location.href =
+                "servicos.html";
+
+        }
+
+
+        /*
+         * Permite fechar o card apertando ESC
+         */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    fecharConfirmacaoVolta();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- =========================================================
+         JAVASCRIPT DA PÁGINA
+    ========================================================== -->
+
+    <script src="contratos-fibra.js"></script>
+
+
+</body>
+
+</html>

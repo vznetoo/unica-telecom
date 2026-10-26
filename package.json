@@ -1,0 +1,29 @@
+{
+  "name": "unica-movel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cam.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vznetoo/unica-telecom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vznetoo/unica-telecom/issues"
+  },
+  "homepage": "https://github.com/vznetoo/unica-telecom#readme",
+  "dependencies": {
+    "axios": "^1.20.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "form-data": "^4.0.6"
+  }
+}

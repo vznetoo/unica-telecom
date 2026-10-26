@@ -1,0 +1,346 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #225a22b9 0%, #137e258a 30%, #1f752ed3 70%, #00fa005e 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px;
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    position: relative;
+    width: 100%;
+}
+
+/* ==========================
+   BOTÃO VOLTAR TOPO ESQUERDO
+========================== */
+.btn-voltar-topo {
+    position: fixed;
+    top: 28px;
+    left: 48px;
+
+    width: 50px;
+    height: 50px;
+
+    padding: 0;
+    margin: 0;
+
+    background: rgb(255, 255, 255);
+
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 50%;
+
+    color: #05ff6d;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none; /* REMOVE A LINHA */
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.06);
+
+    outline: none;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition: all 0.2s ease;
+}
+
+.btn-voltar-topo:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateX(-3px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.10);
+}
+
+.btn-voltar-topo i {
+    color: #05ff6d;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 900;
+    text-decoration: none;
+}
+/* ==========================
+   TOPO
+========================== */
+.topo {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo-box {
+    width: 115px;
+    height: 115px;
+    background: #ffffff;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+    width: 75px;
+    height: auto;
+    display: block;
+}
+
+.topo h1 {
+    color: #ffffff;
+    font-size: 36px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================
+   SUBTÍTULO EM UMA LINHA
+========================== */
+.subtitulo-contratos {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px auto 25px auto;
+    padding: 0 10px;
+    font-size: 14.5px;
+    color: #d1fae5;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.subtitulo-contratos strong {
+    color: #00ff2a;
+    font-weight: 700;
+}
+
+/* ==========================
+   LISTA E CARDS (TAMANHO INTERMEDIÁRIO)
+========================== */
+.lista-contratos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+}
+
+.card-contrato {
+    width: 100%;
+    max-width: 520px; /* Tamanho intermediário ideal igual ao móvel */
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 2px solid #d9f5e3;
+    box-shadow: 0 12px 35px rgba(0,0,0,.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-contrato:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.20);
+}
+
+.card-contrato.status-ativo:hover {
+    border-color: #1fb14d;
+}
+
+.card-contrato.status-cancelado:hover,
+.card-contrato.status-suspenso:hover {
+    border-color: #e53935;
+}
+
+.card-contrato.status-reduzido:hover {
+    border-color: #e65c00;
+}
+
+/* ==========================
+   HEADER DO CARD
+========================== */
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 22px;
+}
+
+.header-ativo {
+    background: linear-gradient(135deg, #1fb14d, #29d863);
+}
+
+.header-cancelado,
+.header-suspenso {
+    background: linear-gradient(135deg, #e53935, #ff5f5f);
+}
+
+.header-reduzido {
+    background: linear-gradient(135deg, #ff8c00, #ffb347);
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 13px;
+    border-radius: 30px;
+    color: white;
+    font-size: 12.5px;
+    font-weight: bold;
+}
+
+.status-ativo { background: #1fb14d; }
+.status-cancelado, .status-suspenso { background: #e53935; }
+.status-reduzido { background: #ff8c00; }
+
+.card-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    margin: 8px 0 0 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ==========================
+   BODY E ENDEREÇO
+========================== */
+.card-body {
+    background: #fff;
+    padding: 16px 22px;
+}
+
+.endereco {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    text-align: left;
+}
+
+.endereco i {
+    color: #00b140;
+    margin-top: 2px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.endereco div {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #6b7280;
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* ==========================
+   FOOTER E BOTÃO DE ACESSO
+========================== */
+.card-footer {
+    background: #fff;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -46px;
+    padding: 0 18px 18px 18px;
+}
+
+.btn-acessar {
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: #1fb14d;
+    color: white;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 168, 58, 0.20);
+}
+
+.btn-acessar i {
+    font-size: 20px;
+}
+
+.btn-acessar:hover {
+    background: #17953f;
+    transform: scale(1.05);
+}
+
+
+/* ==========================
+   RESPONSIVO (MOBILE)
+========================== */
+
+@media(max-width: 768px) {
+    body {
+        padding: 25px 15px;
+    }
+
+    .container {
+        padding: 15px 10px;
+    }
+
+    .btn-voltar-topo {
+        top: 20px;
+        left: 20px;
+
+        width: 45px;
+        height: 45px;
+
+        padding: 0;
+
+        background: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-voltar-topo i {
+        font-size: 19px;
+    }
+
+    .topo h1 {
+        font-size: 26px;
+        padding: 0 10px;
+    }
+
+    .subtitulo-contratos {
+        font-size: 12.5px;
+        padding: 0 5px;
+    }
+
+    .card-contrato {
+        max-width: 100%;
+    }
+
+    .card-header h2 {
+        font-size: 15px;
+    }
+
+    /* SETA DO BOTÃO DO CARD */
+    .btn-acessar i {
+        font-size: 14px;
+    }
+}
+@media(max-width: 768px) {
+    .btn-acessar {
+        transform: translateX(33px);
+    }
+}

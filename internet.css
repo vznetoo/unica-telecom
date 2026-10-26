@@ -3,141 +3,240 @@
 =========================== */
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 body{
-    background:#eef3f8;
-    color:#1f2937;
+    background: #eef3f8;
+    color: #1f2937;
 }
 
 .container{
-    display:flex;
-    min-height:100vh;
+    display: flex;
+    min-height: 100vh;
 }
 
 /* ===========================
-   SIDEBAR
+   SIDEBAR (DEGRADÊ VERDE UNIFICADO)
 =========================== */
 
 .sidebar{
-
-    width:320px;
-
-    background:linear-gradient(
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px;
+    color: #fff;
+    background: linear-gradient(
         180deg,
-        #00b140,
-        #008d34
+        #00c853 0%,   
+        #009639 100%  
     );
+    transition: background 0.3s ease;
+}
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+/* Alerta de redução (Laranja) */
+.sidebar.alerta-reduzido {
+    background: linear-gradient(
+        180deg,
+        #f97316 0%,   
+        #ea580c 100%  
+    ) !important;
+}
 
-    padding:35px;
+/* Alerta de Suspenso (Vermelho Escuro) */
+.sidebar.alerta-suspenso {
+    background: linear-gradient(
+        180deg,
+        #dc2626 0%,   
+        #991b1b 100%  
+    ) !important;
+}
 
-    color:white;
-
-    position:fixed;
-
-    left:0;
-    top:0;
-    bottom:0;
-
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .logo{
-
-    width:180px;
-
-    margin-bottom:40px;
-
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 25px;
+    object-fit: contain;
 }
 
-.circulo{
+/* ===========================
+   PERFIL / BONEQUINHO NA SIDEBAR COM CÍRCULO 3D DISCRETO
+=========================== */
 
-    width:230px;
-    height:230px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.08);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    margin-bottom:40px;
-
+.perfil-sidebar-container{
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 25px 0;
 }
 
-.mascote{
-
-    width:170px;
-
+.btn-user-sidebar{
+    width: 95px;
+    height: 95px;
+    border: none;
+    border-radius: 50%;
+    /* Degradê suave e discreto com leve transparência para dar efeito 3D subtil */
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(0, 0, 0, 0.12));
+    /* Efeito 3D com sombras internas e externas subtis */
+    box-shadow: 
+        inset 0 3px 6px rgba(255, 255, 255, 0.3), 
+        inset 0 -5px 10px rgba(0, 0, 0, 0.2),
+        0 8px 20px rgba(0,0,0,.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
+
+.btn-user-sidebar:hover {
+    transform: scale(1.05);
+}
+
+.btn-user-sidebar i{
+    font-size: 40px;
+    color: #ffffff;
+    z-index: 2;
+}
+
+/* Bolinha Verde Piscante Fixa */
+.status-online{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #22c55e !important;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    animation: piscar-verde 1.5s infinite;
+    z-index: 10;
+}
+
+@keyframes piscar-verde {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+/* ===========================
+   MENU DO UTILIZADOR (FLUTUANTE)
+=========================== */
+
+.menu-usuario-sidebar {
+    position: absolute;
+    top: 105px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: none;
+    z-index: 99999;
+}
+
+.menu-usuario-sidebar.ativo {
+    display: block !important;
+}
+
+.menu-usuario-sidebar button {
+    width: 100%;
+    border: none;
+    background: #ffffff;
+    padding: 15px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+    transition: background 0.2s;
+}
+
+.menu-usuario-sidebar button:hover {
+    background: #f3f4f6;
+}
+
+.menu-usuario-sidebar button i {
+    color: #ef4444;
+    font-size: 18px;
+}
+
+/* ===========================
+   CLIENTE (CAIXA VERDE / ALERTA)
+=========================== */
 
 .cliente{
+    width: 100%;
+    padding: 20px;
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
 
-    width:100%;
-
-    background:rgba(255,255,255,.15);
-
-    padding:20px;
-
-    border-radius:18px;
-
-    backdrop-filter:blur(12px);
-
-    margin-bottom:25px;
-
+.caixa-cliente-reduzido {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .cliente span{
-
-    opacity:.8;
-
-    font-size:14px;
-
+    opacity: .9;
+    font-size: 14px;
 }
 
 .cliente h2{
-
-    margin-top:8px;
-
-    font-size:24px;
-
+    margin-top: 8px;
+    font-size: 22px;
 }
 
-.voltar{
-
-    width:100%;
-
-    padding:16px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:white;
-
-    color:#00963b;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.3s;
-
+.cliente-info{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.voltar:hover{
-
-    transform:translateY(-3px);
-
+.info-linha{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #fff;
+    opacity: .95;
+    word-break: break-word;
 }
 
 /* ===========================
@@ -145,748 +244,680 @@ body{
 =========================== */
 
 .conteudo{
-
-    flex:1;
-
-    margin-left:320px;
-
-    padding:40px;
-
+    flex: 1;
+    padding: 40px;
 }
 
 /* ===========================
-   TOPO
-=========================== */
-
-.topo{
-
-    background:white;
-
-    padding:28px 35px;
-
-    border-radius:22px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-    margin-bottom:30px;
-
-}
-
-.topo h1{
-
-    color:#071c63;
-
-    font-size:34px;
-
-}
-
-.topo p{
-
-    color:#64748b;
-
-    margin-top:8px;
-
-}
-
-.perfil{
-
-    width:65px;
-    height:65px;
-
-    border-radius:50%;
-
-    background:#eef8f1;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:24px;
-
-    color:#00b140;
-
-}
-
-/* ===========================
-   CARD VERDE
-=========================== */
-
-.plano{
-
-    background:linear-gradient(
-        135deg,
-        #00b140,
-        #00963b
-    );
-
-    border-radius:24px;
-
-    padding:35px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    color:white;
-
-    margin-bottom:30px;
-
-}
-
-.item{
-
-    flex:1;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-}
-
-.icone{
-
-    width:65px;
-    height:65px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.15);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:24px;
-
-}
-
-.item small{
-
-    opacity:.8;
-
-}
-
-.item h2{
-
-    margin:6px 0;
-
-    font-size:32px;
-
-}
-
-.item span{
-
-    font-size:18px;
-
-}
-
-.item p{
-
-    opacity:.9;
-
-}
-
-.linha{
-
-    width:1px;
-
-    height:90px;
-
-    background:rgba(255,255,255,.25);
-
-}
-/* ===========================
-   CARDS
+   CARDS DE UTILIDADES E PLANOS
 =========================== */
 
 .cards{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:30px;
-
-    flex-wrap:wrap;
-
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    width: 100%;
 }
 
 .card{
-
-    background:#fff;
-
-    border-radius:22px;
-
-    padding:28px;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
+    background: #fff;
+    border-radius: 22px;
+    padding: 28px;
+    width: 100%;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    transition: .3s;
 }
 
 .card:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:0 18px 40px rgba(0,177,64,.12);
-
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,177,64,.12);
 }
 
 .card-topo{
-
-    display:flex;
-
-    gap:18px;
-
-    align-items:flex-start;
-
-    margin-bottom:25px;
-
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 25px;
 }
 
 .icone-card{
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    background: #eef8f1 !important;
+    color: #00b140 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
 
-    width:60px;
-
-    height:60px;
-
-    border-radius:18px;
-
-    background:#eef8f1;
-
-    color:#00b140;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:24px;
-
-    flex-shrink:0;
-
+.icone-card.icone-reduzido {
+    background: #fdf2f2 !important;
+    color: #ef4444 !important;
 }
 
 .card h3{
-
-    color:#071c63;
-
-    font-size:22px;
-
-    margin-bottom:8px;
-
+    color: #071c63;
+    font-size: 22px;
+    margin-bottom: 8px;
 }
 
 .card p{
-
-    color:#64748b;
-
-    line-height:1.6;
-
-    font-size:15px;
-
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 15px;
 }
 
 /* ===========================
-   BOTÃO VERDE
+   BOTÕES 
 =========================== */
 
 .btn-verde{
-
-    width:100%;
-
-    height:55px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:#00b140;
-
-    color:white;
-
-    font-size:16px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.3s;
-
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 14px;
+    background: #00b140;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
 }
 
 .btn-verde:hover{
-
-    background:#008d34;
-
-    transform:translateY(-2px);
-
+    background: #008d34;
+    transform: translateY(-2px);
 }
 
 .btn-verde i{
+    margin-right: 10px;
+}
 
-    margin-right:10px;
+.btn-pix {
+    background: #00b140 !important;
+    color: #fff;
+}
 
+.btn-pix:hover {
+    background: #008d34 !important;
+}
+
+.btn-voltar-pagina {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+    padding: 16px;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #00b140;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 2px solid #00b140;
+    transition: 0.2s;
+}
+
+.btn-voltar-pagina:hover {
+    background: #00b140;
+    color: #ffffff;
 }
 
 /* ===========================
-   STATUS
+   STATUS DA CONEXÃO E ANIMAÇÃO
 =========================== */
 
-.status{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-top:15px;
-
-    font-weight:600;
-
-    color:#00a63f;
-
+.status-conexao{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+    font-weight: 600;
 }
 
 .bolinha{
-
-    width:12px;
-
-    height:12px;
-
-    border-radius:50%;
-
-    background:#00c853;
-
-    animation:pulsar 1.3s infinite;
-
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
-@keyframes pulsar{
-
-    0%{
-
-        transform:scale(1);
-
-        opacity:1;
-
-    }
-
-    50%{
-
-        transform:scale(1.4);
-
-        opacity:.5;
-
-    }
-
-    100%{
-
-        transform:scale(1);
-
-        opacity:1;
-
-    }
-
-}
-/* ===========================
-   SUPORTE
-=========================== */
-
-.suporte{
-
-    background:#fff;
-
-    border-radius:22px;
-
-    padding:30px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-    margin-bottom:30px;
-
+.bolinha.online{
+    background: #22c55e;
 }
 
-.suporte-info{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
+.bolinha.offline{
+    background: #ef4444;
 }
 
-.suporte-info h3{
-
-    color:#071c63;
-
-    font-size:24px;
-
-    margin-bottom:6px;
-
+/* Animação da bolinha piscando */
+@keyframes piscarBolinha {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
 }
 
-.suporte-info p{
-
-    color:#64748b;
-
-}
-
-.btn-whats{
-
-    background:#25D366;
-
-    color:white;
-
-    border:none;
-
-    border-radius:14px;
-
-    padding:16px 28px;
-
-    font-size:16px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.btn-whats:hover{
-
-    background:#1fb957;
-
-    transform:translateY(-3px);
-
-}
-
-.btn-whats i{
-
-    margin-right:10px;
-
+.bolinha.piscar, #bolinhaStatus.piscar {
+    animation: piscarBolinha 1.2s infinite ease-in-out;
 }
 
 /* ===========================
-   RODAPÉ
+   CARDS DE PLANO E FATURA (MOBILE)
 =========================== */
 
-footer{
+.card-plano-mobile, 
+.card-fatura-mobile {
+    background: #fff;
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
 
-    text-align:center;
+.plano-topo-mobile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 15px;
+}
 
-    color:#94a3b8;
+.plano-label {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 600;
+}
 
-    font-size:14px;
+.plano-topo-mobile h3 {
+    font-size: 18px;
+    color: #0f172a;
+    margin-top: 2px;
+}
 
-    padding:25px 0;
+.plano-detalhes-mobile {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
 
+.detalhe-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    padding: 10px 14px;
+    border-radius: 12px;
+    flex: 1;
+}
+
+.detalhe-item i {
+    font-size: 18px;
+    color: #00b140;
+}
+
+.detalhe-item small {
+    display: block;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.detalhe-item span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.detalhe-item.status-alerta-laranja i,
+.detalhe-item.status-alerta-laranja span,
+.status-reduzido-texto {
+    color: #f97316 !important;
+}
+
+.fatura-info-topo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.fatura-info-topo small {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.fatura-info-topo h2 {
+    font-size: 26px;
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.fatura-vencimento-mobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.fatura-vencimento-mobile.alerta-vencido {
+    background: #fdf2f2 !important;
+    color: #991b1b !important;
+    border: none !important;
+}
+
+.fatura-vencimento-mobile.alerta-vencido i {
+    color: #ef4444 !important;
+}
+
+.acoes-fatura-mobile {
+    display: flex;
+    gap: 10px;
+}
+
+.acoes-fatura-mobile button {
+    flex: 1;
+    height: 45px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.btn-financeiro {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.btn-financeiro:hover {
+    background: #e2e8f0;
 }
 
 /* ===========================
-   SCROLL
+   MODAIS
 =========================== */
 
-::-webkit-scrollbar{
-
-    width:10px;
-
+.modal, .modal-sair, .modal-atualizar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
 }
 
-::-webkit-scrollbar-thumb{
-
-    background:#00b140;
-
-    border-radius:20px;
-
+.modal-conteudo, .modal-conteudo-sair, .modal-conteudo-atualizar {
+    background: #ffffff;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    position: relative;
 }
 
-::-webkit-scrollbar-track{
+.modal-conteudo-sair h3, .modal-conteudo-atualizar h2 {
+    font-size: 18px;
+    color: #0f172a;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-    background:#eef3f8;
+.acoes-modal-sair {
+    display: flex;
+    gap: 10px;
+}
 
+.acoes-modal-sair button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.btn-confirmar {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+.btn-fechar-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.form-grupo {
+    margin-bottom: 15px;
+}
+
+.form-grupo label {
+    display: block;
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-grupo input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-grupo input:focus {
+    border-color: #00b140;
 }
 
 /* ===========================
    RESPONSIVO
 =========================== */
 
-@media (max-width:1200px){
-
-    .cards{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
 @media (max-width:900px){
-
     .container{
-
-        flex-direction:column;
-
+        flex-direction: column;
     }
-
     .sidebar{
-
-        position:relative;
-
-        width:100%;
-
-        height:auto;
-
-        padding:30px;
-
+        width: 100%;
+        padding: 30px;
     }
-
     .conteudo{
+        padding: 20px;
+    }
+}
+/* CORREÇÃO FINAL - FATURA VENCIDA */
+#cardFaturaMobile .icone-card.icone-reduzido {
+    background: #fdf2f2 !important;
+    color: #ef4444 !important;
+}
 
-        margin-left:0;
+#cardFaturaMobile .fatura-vencimento-mobile.alerta-vencido {
+    background: #fdf2f2 !important;
+    color: #991b1b !important;
+    border: none !important;
+}
 
-        padding:20px;
+#cardFaturaMobile .fatura-vencimento-mobile.alerta-vencido i {
+    color: #ef4444 !important;
+}
 
+#cardFaturaMobile #tituloFatura {
+    color: #ef4444 !important;
+}
+
+#cardFaturaMobile #valorFaturaMobile {
+    color: #222 !important;
+}
+/* =========================================
+   BOTÃO VOLTAR - SOMENTE MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .btn-voltar-pagina {
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+
+        width: 45px !important;
+        height: 45px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        background: rgba(255, 255, 255, 0.22) !important;
+
+        border: 1px solid rgba(255, 255, 255, 0.40) !important;
+        border-radius: 50% !important;
+
+        color: #ffffff !important;
+
+        box-shadow: none !important;
+
+        z-index: 99999 !important;
+
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
     }
 
-    .plano{
-
-        flex-direction:column;
-
-        gap:25px;
-
-        align-items:flex-start;
-
+    /* Esconde o texto no celular */
+    .btn-voltar-pagina span {
+        display: none !important;
     }
 
-    .linha{
+    /* Seta */
+    .btn-voltar-pagina i {
+        display: block !important;
+        margin: 0 !important;
 
-        display:none;
+        color: #ffffff !important;
 
+        font-size: 19px !important;
+        line-height: 1 !important;
     }
 
-    .item{
+    .btn-voltar-pagina:hover {
+        background: rgba(255, 255, 255, 0.30) !important;
+        transform: none !important;
+    }
+}
+/* =========================================
+   MODAL DE CONFIRMAÇÃO DE VOLTA
+========================================= */
 
-        width:100%;
+.modal-voltar {
+    position: fixed;
+    inset: 0;
 
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.40);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    z-index: 999999;
+}
+
+.modal-voltar.ativo {
+    display: flex;
+}
+
+.card-confirmacao {
+    width: 100%;
+    max-width: 360px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    padding: 30px 25px 25px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.20);
+
+    animation: aparecerModalVolta 0.25s ease;
+}
+
+.icone-confirmacao {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #eafff1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icone-confirmacao i {
+    color: #00b140;
+    font-size: 23px;
+}
+
+.card-confirmacao h2 {
+    margin: 0 0 10px;
+
+    color: #222;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.card-confirmacao p {
+    margin: 0 auto 25px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.botoes-confirmacao {
+    display: flex;
+    gap: 10px;
+}
+
+.botoes-confirmacao button {
+    flex: 1;
+
+    height: 45px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.botoes-confirmacao .btn-cancelar {
+    background: #f3f4f6;
+    color: #555;
+
+    border: 1px solid #e5e7eb;
+}
+
+.botoes-confirmacao .btn-confirmar {
+    background: #00b140;
+    color: #ffffff;
+
+    border: none;
+}
+
+.botoes-confirmacao .btn-confirmar:hover {
+    background: #008d34;
+}
+
+@keyframes aparecerModalVolta {
+
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(10px);
     }
 
-    .topo{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:20px;
-
-    }
-
-    .perfil{
-
-        align-self:flex-end;
-
-    }
-
-    .suporte{
-
-        flex-direction:column;
-
-        gap:25px;
-
-        text-align:center;
-
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
     }
 
 }
-
-@media (max-width:600px){
-
-    .logo{
-
-        width:150px;
-
-    }
-
-    .circulo{
-
-        width:170px;
-
-        height:170px;
-
-    }
-
-    .mascote{
-
-        width:130px;
-
-    }
-
-    .topo h1{
-
-        font-size:28px;
-
-    }
-
-    .item h2{
-
-        font-size:24px;
-
-    }
-
-    .card{
-
-        padding:22px;
-
-    }
-
-    .btn-verde,
-
-    .btn-whats{
-
-        width:100%;
-
-    }
-
-}
-/*=========================
-MENU MOBILE
-==========================*/
-
-.mobile-header{
-
-    display:none;
-
+.voltar-servicos-sidebar {
+    width: 100%;
+    margin-top: 22px;
 }
 
-.mobile-menu{
+.voltar-servicos-sidebar .btn-voltar-pagina {
+    width: 100%;
 
-    display:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 
+    padding: 13px 12px;
+
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition: all 0.2s ease;
 }
 
-@media(max-width:768px){
-
-.mobile-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:15px 20px;
-
-    background:#00b140;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1000;
-
+.voltar-servicos-sidebar .btn-voltar-pagina i {
+    font-size: 14px;
 }
 
-.mobile-logo{
+.voltar-servicos-sidebar .btn-voltar-pagina:hover {
+    background: #ffffff;
+    color: #00b140;
 
-    width:120px;
+    border-color: #ffffff;
 
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
-#menuBtn{
-
-    width:45px;
-
-    height:45px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:white;
-
-    color:#00b140;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-}
-
-.mobile-menu{
-
-    position:fixed;
-
-    left:-260px;
-
-    top:0;
-
-    width:250px;
-
-    height:100vh;
-
-    background:white;
-
-    transition:.35s;
-
-    box-shadow:5px 0 20px rgba(0,0,0,.15);
-
-    z-index:999;
-
-    padding-top:80px;
-
-}
-
-.mobile-menu.active{
-
-    left:0;
-
-}
-
-.mobile-menu a{
-
-    display:block;
-
-    padding:18px 25px;
-
-    text-decoration:none;
-
-    color:#071c63;
-
-    font-weight:bold;
-
-    border-bottom:1px solid #eee;
-
-}
-
-.mobile-menu a:hover{
-
-    background:#f4f4f4;
-
-}
-
+.voltar-servicos-sidebar .btn-voltar-pagina:active {
+    transform: translateY(0);
 }

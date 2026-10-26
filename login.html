@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Única Telecom</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-card">
+
+        <!-- LADO ESQUERDO -->
+        <div class="login-left">
+            <div class="bg-circle"></div>
+            <img src="assets/logo.png" class="logo-login" alt="Logo Única Telecom">
+            <img src="assets/mascote.png" class="mascote-login" alt="Mascote">
+            <h2>Conectando você em qualquer lugar</h2>
+            <p class="subtexto">Acesse sua conta e gerencie seus serviços de forma simples e segura.</p>
+        </div>
+
+        <!-- LADO DIREITO -->
+        <div class="login-right">
+            <div class="login-form">
+
+                <!-- LOGO DENTRO DO CÍRCULO -->
+                <div class="icone-logo-circulo">
+                    <img src="assets/logo.png" alt="Logo Única">
+                </div>
+
+                <h1>Bem-vindo</h1>
+
+                <div id="mensagemErro" class="mensagem-erro">
+                    Login ou senha incorretos
+                </div>
+
+                <div class="input-group">
+                    <span>👤</span>
+                    <input type="text" id="login" placeholder="Login">
+                </div>
+
+                <div class="input-group senha-group">
+                    <span>🔒</span>
+                    <input type="password" id="senha" placeholder="Senha">
+                    <i class="fa-solid fa-eye" id="toggleSenha" onclick="mostrarSenha()"></i>
+                </div>
+                <button class="btn-login" onclick="entrar()">
+                    Entrar
+                </button>
+
+                <div class="esqueci-senha">
+                 <a href="https://unicatelecom.web.vmix.chat/" target="_blank" rel="noopener noreferrer">
+    <i class="fa-solid fa-key"></i>
+    Esqueci minha senha
+</a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,2176 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #eef3f8;
+    color: #1f2937;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    width: 320px;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 35px;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        180deg,
+        #00c853 0%,
+        #009639 100%
+    );
+
+    flex-shrink: 0;
+}
+
+.sidebar-top {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+
+    margin-bottom: 25px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.perfil-sidebar-container {
+    position: relative;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 10px 0 25px 0;
+}
+
+.btn-user-sidebar {
+    width: 95px;
+    height: 95px;
+
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.22),
+            rgba(0,0,0,.12)
+        );
+
+    box-shadow:
+        inset 0 3px 6px rgba(255,255,255,.3),
+        inset 0 -5px 10px rgba(0,0,0,.2),
+        0 8px 20px rgba(0,0,0,.15);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: transform .2s;
+}
+
+.btn-user-sidebar:hover {
+    transform: scale(1.04);
+}
+
+.btn-user-sidebar i {
+    font-size: 40px;
+    color: #ffffff;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   STATUS ONLINE
+========================================================= */
+
+.status-online {
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    right: 3px;
+    bottom: 8px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    border: 3px solid #ffffff;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+}
+
+
+/* =========================================================
+   MENU USUÁRIO
+========================================================= */
+
+.menu-usuario-sidebar {
+    position: absolute;
+
+    top: 105px;
+    right: -80px;
+
+    width: 170px;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.15);
+
+    padding: 6px;
+
+    display: none;
+
+    z-index: 1000;
+}
+
+.menu-usuario-sidebar button {
+    width: 100%;
+
+    border: none;
+    background: transparent;
+
+    padding: 11px 12px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #334155;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.menu-usuario-sidebar button:hover {
+    background: #f1f5f9;
+    color: #00a63c;
+}
+
+
+/* =========================================================
+   CLIENTE SIDEBAR
+========================================================= */
+
+.cliente {
+    width: 100%;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(12px);
+
+    background: rgba(255,255,255,.15);
+
+    border: 1px solid rgba(255,255,255,.20);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.05);
+}
+
+.cliente > span {
+    opacity: .9;
+
+    font-size: 14px;
+}
+
+.cliente h2 {
+    margin-top: 8px;
+
+    font-size: 22px;
+
+    line-height: 1.25;
+
+    word-break: break-word;
+}
+
+.cliente-info {
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.info-linha {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 14px;
+
+    color: #ffffff;
+
+    opacity: .95;
+
+    word-break: break-word;
+}
+
+.info-linha i {
+    width: 18px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ATUALIZAR DADOS
+========================================================= */
+
+.atualizar-dados-container {
+    margin-top: 16px;
+
+    text-align: center;
+
+    width: 100%;
+}
+
+.btn-atualizar {
+    background: transparent;
+
+    border: 1px solid rgba(255,255,255,.4);
+
+    color: #ffffff;
+
+    padding: 9px 18px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    transition: all .2s;
+}
+
+.btn-atualizar:hover {
+    background: rgba(255,255,255,.12);
+}
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.conteudo {
+    flex: 1;
+
+    padding: 40px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   CARDS PRINCIPAIS
+========================================================= */
+
+.card-plano,
+.card-consumo,
+.card {
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.08);
+
+    transition: .3s;
+}
+
+.card-plano:hover,
+.card-consumo:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(0,177,64,.10);
+}
+
+
+/* =========================================================
+   CARD PLANO
+========================================================= */
+.card-plano {
+    padding: 26px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #f1f5f9;
+}
+
+.card-plano {
+    padding: 22px;
+
+    margin-bottom: 20px;
+}
+
+.card-topo {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.icone-card {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 18px;
+
+    background: #eef8f1;
+
+    color: #00b140;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+
+    flex-shrink: 0;
+}
+
+.plano-label {
+    display: block;
+
+    font-size: 13px;
+
+    color: #64748b;
+
+    font-weight: 600;
+
+    margin-bottom: 3px;
+}
+
+.card-topo h3 {
+    color: #071c63;
+
+    font-size: 21px;
+
+    margin-bottom: 8px;
+
+    line-height: 1.25;
+}
+
+.plano-detalhes {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #f1f5f9;
+}
+
+.detalhe-item {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    background: #f8fafc;
+
+    padding: 12px 14px;
+
+    border-radius: 12px;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.detalhe-item i {
+    font-size: 18px;
+
+    color: #00b140;
+}
+
+.detalhe-item .status-icon {
+    color: #16a34a;
+}
+
+.detalhe-item small {
+    display: block;
+
+    font-size: 11px;
+
+    color: #64748b;
+
+    margin-bottom: 3px;
+}
+
+.detalhe-item span {
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #0f172a;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   CARD CONSUMO
+========================================================= */
+
+.card-consumo {
+    padding: 28px;
+
+    margin-bottom: 25px;
+}
+
+.card-consumo .card-topo {
+    margin-bottom: 28px;
+}
+
+.card-consumo .card-topo p {
+    color: #64748b;
+
+    line-height: 1.6;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   CONSUMO PRINCIPAL
+========================================================= */
+
+.consumo-principal {
+    display: flex;
+
+    align-items: center;
+
+    gap: 35px;
+
+    padding: 24px;
+
+    background: #f8fafc;
+
+    border: 1px solid #eef2f7;
+
+    border-radius: 18px;
+}
+
+.consumo-percentual {
+    min-width: 120px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.consumo-percentual strong {
+    font-size: 42px;
+
+    color: #00b140;
+
+    line-height: 1;
+}
+
+.consumo-percentual span {
+    margin-top: 7px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   BARRA DE CONSUMO
+========================================================= */
+
+.consumo-barra {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.consumo-barra-fundo {
+    width: 100%;
+
+    height: 16px;
+
+    background: #e2e8f0;
+
+    border-radius: 50px;
+
+    overflow: hidden;
+}
+
+.consumo-barra-progresso {
+    height: 100%;
+
+    border-radius: 50px;
+
+    background: #00b140;
+
+    transition: width .5s ease;
+}
+
+.consumo-legenda {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 10px;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+.consumo-legenda strong {
+    color: #00b140;
+}
+
+
+/* =========================================================
+   DETALHES CONSUMO
+========================================================= */
+
+.consumo-detalhes {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 18px;
+}
+
+.consumo-item,
+.consumo-total {
+    background: #ffffff;
+
+    border: 1px solid #eef2f7;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.consumo-item-titulo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.consumo-item strong {
+    color: #0f172a;
+
+    font-size: 18px;
+}
+
+.consumo-total span {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.consumo-total strong {
+    color: #00b140;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   BOLINHAS
+========================================================= */
+
+.bolinha {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+.bolinha-verde {
+    background: #16a34a;
+}
+
+.bolinha-vermelha {
+    background: #ef4444;
+}
+
+
+/* =========================================================
+   GRID DE CARDS
+========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(350px, 1fr));
+
+    gap: 25px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+    padding: 28px;
+
+    width: 100%;
+
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 40px rgba(0,177,64,.12);
+}
+
+.card .card-topo {
+    margin-bottom: 25px;
+}
+
+.card .card-topo h3 {
+    color: #071c63;
+
+    font-size: 22px;
+
+    margin-bottom: 8px;
+}
+
+.card .card-topo p {
+    color: #64748b;
+
+    line-height: 1.6;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES DOS CARDS
+========================================================= */
+
+.informacao {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.informacao:last-child {
+    border-bottom: none;
+}
+
+.informacao span {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.informacao strong {
+    color: #0f172a;
+
+    font-size: 15px;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   VALIDADE
+========================================================= */
+
+.validade {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    background: #f8fafc;
+
+    padding: 20px;
+
+    border-radius: 15px;
+}
+
+.validade strong {
+    color: #0f172a;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+.validade span {
+    display: inline-flex;
+
+    width: fit-content;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background: #eef8f1;
+
+    color: #00a63c;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SUPORTE
+========================================================= */
+
+.suporte-card {
+    cursor: pointer;
+}
+
+.btn-verde {
+    width: 100%;
+
+    height: 55px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #00b140;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.btn-verde:hover {
+    background: #008d34;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
+
+.btn-voltar-pagina {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+    padding: 16px;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    color: #00b140;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.05);
+
+    border: 2px solid #00b140;
+
+    transition: .2s;
+}
+/* =========================================================
+   BOTÃO VOLTAR PARA OS SERVIÇOS - PC
+========================================================= */
+
+.voltar-servicos-sidebar {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.voltar-servicos-sidebar .btn-voltar-pagina {
+    width: 100%;
+
+    margin-top: 0;
+
+    padding: 13px 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.12);
+
+    transition: all 0.2s ease;
+}
+
+.voltar-servicos-sidebar .btn-voltar-pagina:hover {
+    background: #ffffff;
+
+    color: #00a83a;
+
+    border-color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.18);
+}
+
+.voltar-servicos-sidebar .btn-voltar-pagina i {
+    font-size: 15px;
+}
+.btn-voltar-pagina:hover {
+    background: #00b140;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MODAL SAIR
+========================================================= */
+
+.modal-sair {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(15,23,42,.45);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+
+    backdrop-filter: blur(4px);
+}
+
+.modal-conteudo-sair {
+    width: min(400px, calc(100% - 40px));
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.2);
+
+    text-align: center;
+}
+
+.modal-conteudo-sair h3 {
+    color: #0f172a;
+
+    font-size: 21px;
+
+    margin-bottom: 25px;
+}
+
+.acoes-modal-sair {
+    display: flex;
+
+    gap: 12px;
+}
+
+.btn-cancelar,
+.btn-confirmar {
+    flex: 1;
+
+    height: 45px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+.btn-confirmar {
+    background: #00b140;
+
+    color: #ffffff;
+}
+
+.btn-cancelar:hover {
+    background: #e2e8f0;
+}
+
+.btn-confirmar:hover {
+    background: #008d34;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 280px;
+
+        padding: 30px;
+    }
+
+    .conteudo {
+        padding: 30px;
+    }
+
+    .consumo-principal {
+        gap: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET / CELULAR
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 30px;
+    }
+
+    .conteudo {
+        padding: 20px;
+    }
+
+    .cliente {
+        max-width: 600px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        padding: 25px 20px;
+    }
+
+    .logo {
+        width: 155px;
+    }
+
+    .btn-user-sidebar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .btn-user-sidebar i {
+        font-size: 34px;
+    }
+
+    .menu-usuario-sidebar {
+        top: 90px;
+        right: -55px;
+    }
+
+    .conteudo {
+        padding: 15px;
+    }
+
+    .card-plano,
+    .card-consumo,
+    .card {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .plano-detalhes {
+        flex-direction: column;
+    }
+
+    .consumo-principal {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 20px;
+    }
+
+    .consumo-percentual {
+        align-items: flex-start;
+
+        flex-direction: row;
+
+        gap: 10px;
+
+        min-width: 0;
+    }
+
+    .consumo-percentual strong {
+        font-size: 34px;
+    }
+
+    .consumo-percentual span {
+        margin-top: 8px;
+    }
+
+    .consumo-legenda {
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .consumo-detalhes {
+        grid-template-columns: 1fr;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .card-topo {
+        gap: 13px;
+    }
+
+    .icone-card {
+        width: 52px;
+        height: 52px;
+
+        border-radius: 15px;
+
+        font-size: 21px;
+    }
+
+    .card-topo h3 {
+        font-size: 19px;
+    }
+
+    .card .card-topo h3 {
+        font-size: 19px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .cliente h2 {
+        font-size: 19px;
+    }
+
+    .conteudo {
+        padding: 12px;
+    }
+
+    .card-plano,
+    .card-consumo,
+    .card {
+        padding: 17px;
+    }
+
+    .detalhe-item {
+        padding: 10px;
+    }
+
+    .detalhe-item span {
+        font-size: 13px;
+    }
+
+    .btn-voltar-pagina {
+        padding: 14px;
+
+        font-size: 14px;
+    }
+
+}
+/* ======================================
+   BOTÃO VOLTAR - MOBILE
+   ====================================== */
+
+.btn-voltar-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .btn-voltar-mobile {
+        display: flex;
+        position: fixed;
+        top: 18px;
+        left: 18px;
+
+        width: 48px;
+        height: 48px;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+
+        background: rgba(255, 255, 255, 0.15);
+
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
+        color: #fff;
+        font-size: 20px;
+
+        cursor: pointer;
+
+        z-index: 1000;
+
+        box-shadow:
+            0 4px 15px rgba(0, 0, 0, 0.12);
+
+        transition:
+            transform 0.2s ease,
+            background 0.2s ease;
+    }
+
+    .btn-voltar-mobile:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.05);
+    }
+
+    .btn-voltar-mobile:active {
+        transform: scale(0.95);
+    }
+}
+.modal-voltar {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: 9999;
+}
+.modal-voltar .card-confirmacao {
+    width: min(90%, 400px);
+    padding: 30px;
+    background: #fff;
+    border-radius: 22px;
+    text-align: center;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+    animation: aparecerModal 0.2s ease;
+}
+@keyframes aparecerModal {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* ======================================
+   VOLTAR PARA OS SERVIÇOS - SIDEBAR
+====================================== */
+
+.voltar-servicos-sidebar {
+    width: 100%;
+    margin-top: 48px;
+}
+
+.voltar-servicos-sidebar .btn-voltar-pagina {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 13px 12px;
+
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition: all 0.2s ease;
+}
+
+.voltar-servicos-sidebar .btn-voltar-pagina:hover {
+    background: #ffffff;
+    color: #00b140;
+    border-color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+/* ======================================
+   VOLTAR PARA SERVIÇOS - PC
+====================================== */
+
+.voltar-servicos-sidebar {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.voltar-servicos-sidebar .btn-voltar-pagina {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 13px 12px;
+
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition: all 0.2s ease;
+}
+
+.voltar-servicos-sidebar .btn-voltar-pagina:hover {
+    background: #ffffff;
+    color: #00b140;
+    border-color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ======================================
+   BOTÃO VOLTAR - MOBILE
+====================================== */
+
+.btn-voltar-mobile {
+    display: none;
+}
+
+
+/* ======================================
+   MOBILE
+====================================== */
+
+@media (max-width: 768px) {
+
+    /* Esconde o botão grande da sidebar */
+
+    .voltar-servicos-sidebar {
+        display: none;
+    }
+
+
+    /* Bolinha transparente */
+
+    .btn-voltar-mobile {
+
+        display: flex;
+
+        position: fixed;
+
+        top: 18px;
+        left: 18px;
+
+        width: 48px;
+        height: 48px;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        border: 1px solid rgba(255, 255, 255, 0.35);
+
+        background: rgba(255, 255, 255, 0.15);
+
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
+        color: #ffffff;
+
+        font-size: 20px;
+
+        cursor: pointer;
+
+        z-index: 10000;
+
+        box-shadow:
+            0 4px 15px rgba(0, 0, 0, 0.12);
+
+        transition:
+            transform 0.2s ease,
+            background 0.2s ease;
+    }
+
+
+    .btn-voltar-mobile:hover {
+
+        background: rgba(255, 255, 255, 0.25);
+
+        transform: scale(1.05);
+    }
+
+
+    .btn-voltar-mobile:active {
+
+        transform: scale(0.95);
+    }
+}
+/* ======================================
+   MODAL - VOLTAR PARA OS SERVIÇOS
+====================================== */
+
+.modal-voltar {
+    position: fixed !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100vh !important;
+
+    display: none;
+    align-items: center !important;
+    justify-content: center !important;
+
+    background: rgba(15, 23, 42, 0.50) !important;
+
+    z-index: 99999 !important;
+
+    padding: 20px;
+}
+
+
+/* ======================================
+   CARD DO MODAL
+====================================== */
+
+.modal-voltar .card-confirmacao {
+    width: min(400px, 100%) !important;
+
+    background: #ffffff !important;
+
+    border-radius: 22px !important;
+
+    padding: 30px 25px !important;
+
+    text-align: center !important;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25) !important;
+
+    animation: aparecerModal 0.2s ease;
+
+    position: relative;
+}
+
+
+/* ======================================
+   ÍCONE
+====================================== */
+
+.modal-voltar .icone-confirmacao {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: #eef8f1;
+
+    color: #00b140;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.modal-voltar .icone-confirmacao i {
+    font-size: 22px;
+}
+
+
+/* ======================================
+   TÍTULO
+====================================== */
+
+.modal-voltar .card-confirmacao h2 {
+    margin: 0 0 8px;
+
+    color: #1f2937;
+
+    font-size: 22px;
+
+    line-height: 1.2;
+}
+
+
+/* ======================================
+   TEXTO
+====================================== */
+
+.modal-voltar .card-confirmacao p {
+    margin: 0 0 25px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ======================================
+   BOTÕES
+====================================== */
+
+.modal-voltar .botoes-confirmacao {
+    display: flex !important;
+
+    gap: 12px;
+
+    width: 100%;
+}
+
+.modal-voltar .botoes-confirmacao button {
+    flex: 1;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* NÃO */
+
+.modal-voltar .botoes-confirmacao .btn-cancelar {
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+
+/* SIM */
+
+.modal-voltar .botoes-confirmacao .btn-confirmar {
+    background: #00b140;
+
+    color: #ffffff;
+}
+
+
+/* HOVER */
+
+.modal-voltar .botoes-confirmacao .btn-cancelar:hover {
+    background: #e2e8f0;
+}
+
+.modal-voltar .botoes-confirmacao .btn-confirmar:hover {
+    background: #008d34;
+}
+
+
+/* ======================================
+   ANIMAÇÃO
+====================================== */
+
+@keyframes aparecerModal {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+#validadePlanoMovel .dias-restantes-verde {
+    color: #00b140 !important;
+    font-weight: 700 !important;
+}
+/* ======================================
+   REALIZAR CARGA
+====================================== */
+
+.btn-realizar-carga {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 14px 18px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #00b140;
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.btn-realizar-carga:hover {
+    background: #008f34;
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(0, 177, 64, 0.25);
+}
+
+.btn-realizar-carga:active {
+    transform: scale(0.98);
+}
+
+.btn-realizar-carga i {
+    font-size: 19px;
+}
+/* ======================================
+   MENU SAIR DA CONTA - PC
+====================================== */
+
+.menu-usuario-sidebar {
+    position: absolute;
+
+    top: 105px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 220px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    padding: 0;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.18);
+
+    z-index: 9999;
+
+    display: none;
+}
+
+
+.menu-usuario-sidebar button {
+
+    width: 100%;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 16px;
+
+    background: #ffffff;
+
+    border: none;
+
+    border-radius: 16px;
+
+    color: #1f2937;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition: background 0.2s ease;
+}
+
+
+.menu-usuario-sidebar button i {
+
+    color: #ef4444;
+
+    font-size: 17px;
+}
+
+
+.menu-usuario-sidebar button:hover {
+
+    background: #f7f7f7;
+}
+/* ======================================
+   MENU SAIR DA CONTA - MOBILE
+====================================== */
+
+@media (max-width: 768px) {
+
+    .menu-usuario-sidebar {
+        position: absolute;
+
+        top: 105px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: 220px;
+
+        background: #ffffff;
+
+        border-radius: 16px;
+
+        padding: 0;
+
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.18);
+
+        z-index: 9999;
+
+        display: none;
+    }
+
+
+    .menu-usuario-sidebar button {
+
+        width: 100%;
+        height: 48px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        padding: 0 16px;
+
+        background: #ffffff;
+
+        border: none;
+
+        border-radius: 16px;
+
+        color: #1f2937;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        text-align: left;
+
+        transition: background 0.2s ease;
+    }
+
+
+    .menu-usuario-sidebar button i {
+
+        color: #ef4444;
+
+        font-size: 17px;
+    }
+
+
+    .menu-usuario-sidebar button:hover {
+
+        background: #f7f7f7;
+    }
+}
+
+
+/* ======================================
+   MODAL CONFIRMAÇÃO DE SAÍDA
+====================================== */
+
+.modal-sair {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: 99999;
+}
+
+
+.modal-conteudo-sair {
+
+    width: min(90%, 340px);
+
+    padding: 25px 24px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+
+.icone-sair-confirmacao {
+
+    width: 50px;
+    height: 50px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.icone-sair-confirmacao i {
+
+    font-size: 40px;
+
+    color: #00b140;
+}
+
+
+.modal-conteudo-sair p {
+
+    margin: 0 0 22px;
+
+    color: #374151;
+
+    font-size: 17px;
+
+    line-height: 1.4;
+}
+
+
+.acoes-modal-sair {
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.acoes-modal-sair button {
+
+    flex: 1;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.acoes-modal-sair .btn-cancelar {
+
+    background: #eef2f7;
+
+    color: #526176;
+}
+
+
+.acoes-modal-sair .btn-confirmar {
+
+    background: #00b140;
+
+    color: #ffffff;
+}
+/* ======================================
+   MODAL ATUALIZAR DADOS
+====================================== */
+
+.modal-atualizar-dados {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: 99999;
+}
+
+
+/* ======================================
+   CARD
+====================================== */
+
+.modal-conteudo-atualizar {
+
+    position: relative;
+
+    width: min(90%, 340px);
+
+    padding: 32px 24px 24px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ======================================
+   BOTÃO FECHAR
+====================================== */
+
+.btn-fechar-atualizar {
+
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(0, 177, 64, 0.25);
+
+    background: #ffffff;
+
+    color: #00b140;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+/* ======================================
+   ÍCONE
+====================================== */
+
+.icone-atualizar-confirmacao {
+
+    width: 36px;
+    height: 36px;
+
+    margin: 0 auto 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #00b140;
+
+    color: #ffffff;
+}
+
+
+.icone-atualizar-confirmacao i {
+
+    font-size: 18px;
+}
+
+
+/* ======================================
+   TEXTO
+====================================== */
+
+.modal-conteudo-atualizar p {
+
+    margin: 0 0 22px;
+
+    color: #374151;
+
+    font-size: 17px;
+
+    line-height: 1.4;
+}
+
+
+/* ======================================
+   BOTÃO OK
+====================================== */
+
+.btn-ok-atualizar {
+
+    width: 100%;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #00b140;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-ok-atualizar:hover {
+
+    background: #009e39;
+}
+
+
+.btn-ok-atualizar:active {
+
+    transform: scale(0.98);
+}

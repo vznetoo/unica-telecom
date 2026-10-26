@@ -1,103 +1,1080 @@
-=<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Escolha o Serviço</title>
 
-<link rel="stylesheet" href="servicos.css">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Escolha o Serviço</title>
+
+    <link
+        rel="stylesheet"
+        href="servicos.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
 </head>
+
 
 <body>
 
-<div class="container">
 
-```
-<div class="left-side">
+<!-- =========================================
+     BOTÃO VOLTAR
+========================================= -->
 
-    <img src="assets/logo.png" class="logo">
+<button
+    class="btn-voltar"
+    onclick="abrirConfirmacaoVolta(event)"
+    title="Voltar para o Login"
+>
 
-    <img src="assets/mascote.png" class="mascote">
+    <i class="fa-solid fa-arrow-left"></i>
 
-    <div class="seguranca">
-        🔒 Seus dados estão protegidos com segurança e privacidade.
-    </div>
+</button>
 
-</div>
 
-<div class="right-side">
 
-    <div class="cadeado">🔒</div>
+<!-- =========================================
+     MODAL DE CONFIRMAÇÃO
+========================================= -->
 
-    <h1>O que você deseja acessar?</h1>
+<div
+    id="modalVoltar"
+    class="modal-voltar"
+>
 
-    <div class="linha"></div>
+    <div class="card-confirmacao">
 
-    <div class="cards">
+        <div class="icone-confirmacao">
 
-        <div class="card" onclick="window.location.href='dashboard.html'">
-
-            <div class="imagem-servico">
-                <img src="assets/movel.png">
-            </div>
-
-            <h2>Única Móvel</h2>
-
-            <p>
-                Consulte seu plano,
-                consumo, recargas
-                e muito mais.
-            </p>
-
-            <span>→</span>
+            <i class="fa-solid fa-arrow-left"></i>
 
         </div>
 
-        <div class="card" onclick="window.location.href='cam.html'">
 
-            <div class="imagem-servico">
-                <img src="assets/camera.png">
-            </div>
+        <h2>
+            Voltar para o Login?
+        </h2>
 
-            <h2>Única Cam</h2>
 
-            <p>
-                Acesse suas câmeras,
-                visualize gravações
-                e muito mais.
-            </p>
+        <p>
+            Deseja sair da área do cliente e voltar para o Login?
+        </p>
 
-            <span>→</span>
 
-        </div>
+        <div class="botoes-confirmacao">
 
-        <div class="card" onclick="window.location.href='internet.html'">
+            <button
+                type="button"
+                class="btn-cancelar"
+                onclick="fecharConfirmacaoVolta()"
+            >
+                Não
+            </button>
 
-            <div class="imagem-servico">
-                <img src="assets/internet.png">
-            </div>
 
-            <h2>Plano de Internet</h2>
-
-            <p>
-                Gerencie seu plano,
-                consumo e suporte
-                técnico.
-            </p>
-
-            <span>→</span>
+            <button
+                type="button"
+                class="btn-confirmar"
+                onclick="confirmarVolta()"
+            >
+                Sim
+            </button>
 
         </div>
 
     </div>
 
 </div>
-```
+
+
+
+<!-- =========================================
+     MODAL ÚNICA CAM
+========================================= -->
+
+<div
+    id="modalCam"
+    class="modal-cam"
+>
+
+    <div class="card-modal-cam">
+
+        <div class="icone-modal-cam">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </div>
+
+
+        <h2>
+            Serviço em desenvolvimento
+        </h2>
+
+
+        <p>
+            A Única Cam ainda está em desenvolvimento.
+            Em breve você poderá acessar esse serviço
+            por aqui.
+        </p>
+
+
+        <button
+            type="button"
+            class="btn-modal-cam"
+            onclick="fecharModalCam()"
+        >
+            OK
+        </button>
+
+    </div>
 
 </div>
+
+
+
+<div class="pagina-wrapper">
+
+    <div class="container">
+
+
+        <!-- =========================================
+             LADO ESQUERDO
+        ========================================= -->
+
+        <div class="left-side">
+
+            <img
+                src="assets/logo.png"
+                class="logo"
+            >
+
+
+            <!-- CÍRCULO 3D DISCRETO COM A MASCOTE -->
+
+            <div class="mascote-container">
+
+                <img
+                    src="assets/mascote.png"
+                    class="mascote"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             LADO DIREITO
+        ========================================= -->
+
+        <div class="right-side">
+
+
+            <header class="header-servicos">
+
+                <div>
+
+                    <h1 id="nomeCliente">
+                        Olá, Cliente
+                    </h1>
+
+
+                    <p>
+                        Selecione o serviço que deseja acessar
+                    </p>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =========================================
+                 BANNER
+            ========================================= -->
+
+            <section class="banner-servicos">
+
+                <div class="banner-texto">
+
+                    <h2>
+                        Bem-vindo à Central do Cliente
+                    </h2>
+
+
+                    <p>
+                        Acesse seus serviços de forma rápida,
+                        simples e segura.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================================
+                 CARDS
+            ========================================= -->
+
+            <div class="cards">
+
+
+                <!-- =====================================
+                     ÚNICA MÓVEL
+                ====================================== -->
+
+                <div
+                    class="card-servico"
+                    onclick="window.location.href='contratos-movel.html'"
+                >
+
+                    <div class="icone-servico">
+
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Única Móvel
+                    </h2>
+
+
+                    <p>
+                        Consulte plano, consumo,
+                        recargas e muito mais.
+                    </p>
+
+
+                    <button>
+                        Acessar →
+                    </button>
+
+                </div>
+
+
+
+                <!-- =====================================
+                     ÚNICA CAM
+                ====================================== -->
+
+                <div
+                    class="card-servico card-cam"
+                    onclick="abrirModalCam()"
+                >
+
+                    <div class="icone-servico">
+
+                        <i class="fa-solid fa-video"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Única Cam
+                    </h2>
+
+
+                    <p>
+                        Visualize câmeras,
+                        gravações e monitoramento.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="btn-acessar-cam"
+                        onclick="event.stopPropagation(); abrirModalCam()"
+                    >
+                        Acessar →
+                    </button>
+
+                </div>
+
+
+
+                <!-- =====================================
+                     INTERNET
+                ====================================== -->
+
+                <div
+                    class="card-servico"
+                    onclick="window.location.href='contratos-fibra.html'"
+                >
+
+                    <div class="icone-servico">
+
+                        <i class="fa-solid fa-earth-americas"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Plano de Internet
+                    </h2>
+
+
+                    <p>
+                        Gerencie seu plano,
+                        faturas e suporte.
+                    </p>
+
+
+                    <button>
+                        Acessar →
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<style>
+
+
+/* =========================================
+   BOTÃO VOLTAR
+========================================= */
+
+.btn-voltar {
+
+    position: fixed;
+
+    top: 28px;
+    left: 48px;
+
+    width: 50px;
+    height: 50px;
+
+    padding: 0;
+    margin: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #ffffff;
+
+    border-radius: 50%;
+
+    color: #05ff6d;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.06);
+
+    outline: none;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition: all 0.2s ease;
+}
+
+
+.btn-voltar i {
+
+    color: #05c95c;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    font-weight: 900;
+}
+
+
+.btn-voltar:hover {
+
+    background: rgba(255, 255, 255, 0.35);
+
+    transform: translateX(-3px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.10);
+}
+
+
+
+/* =========================================
+   MODAL VOLTAR
+========================================= */
+
+.modal-voltar {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    z-index: 9999;
+}
+
+
+.modal-voltar.ativo {
+
+    display: flex;
+}
+
+
+
+/* =========================================
+   CARD DE CONFIRMAÇÃO
+========================================= */
+
+.card-confirmacao {
+
+    width: 100%;
+
+    max-width: 360px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    padding: 30px 25px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.20);
+
+    animation:
+        aparecerModal 0.25s ease;
+}
+
+
+
+/* =========================================
+   ÍCONE
+========================================= */
+
+.icone-confirmacao {
+
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #eafff1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.icone-confirmacao i {
+
+    color: #05c95c;
+
+    font-size: 23px;
+}
+
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.card-confirmacao h2 {
+
+    margin: 0 0 10px;
+
+    color: #222222;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+
+/* =========================================
+   TEXTO
+========================================= */
+
+.card-confirmacao p {
+
+    margin: 0 auto 25px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.botoes-confirmacao {
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.botoes-confirmacao button {
+
+    flex: 1;
+
+    height: 45px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+
+/* NÃO */
+
+.btn-cancelar {
+
+    background: #f3f4f6;
+
+    color: #555555;
+
+    border: 1px solid #e5e7eb;
+}
+
+
+.btn-cancelar:hover {
+
+    background: #e9eaec;
+}
+
+
+
+/* SIM */
+
+.btn-confirmar {
+
+    background: #05c95c;
+
+    color: #ffffff;
+
+    border: none;
+
+    box-shadow:
+        0 5px 15px rgba(5, 201, 92, 0.20);
+}
+
+
+.btn-confirmar:hover {
+
+    background: #04b451;
+
+    transform: translateY(-1px);
+}
+
+
+
+/* =========================================
+   ANIMAÇÃO MODAL VOLTAR
+========================================= */
+
+@keyframes aparecerModal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.94)
+            translateY(10px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+
+/* =========================================
+   ÚNICA CAM
+   BOTÃO TRANSPARENTE
+========================================= */
+
+.btn-acessar-cam {
+
+    background: transparent !important;
+
+    color: #05c95c !important;
+
+    border: 1px solid #05c95c !important;
+
+    box-shadow: none !important;
+}
+
+
+.btn-acessar-cam:hover {
+
+    background:
+        rgba(5, 201, 92, 0.08) !important;
+
+    color: #05c95c !important;
+
+    transform: translateY(-1px);
+}
+
+
+
+/* =========================================
+   MODAL ÚNICA CAM
+========================================= */
+
+.modal-cam {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    z-index: 99999;
+}
+
+
+
+/* =========================================
+   CARD MODAL ÚNICA CAM
+========================================= */
+
+.card-modal-cam {
+
+    width: 100%;
+
+    max-width: 360px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    padding: 30px 25px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.20);
+
+    animation:
+        aparecerModalCam 0.25s ease;
+}
+
+
+
+/* =========================================
+   ÍCONE MODAL ÚNICA CAM
+========================================= */
+
+.icone-modal-cam {
+
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #eafff1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.icone-modal-cam i {
+
+    color: #05c95c;
+
+    font-size: 25px;
+}
+
+
+
+/* =========================================
+   TÍTULO MODAL ÚNICA CAM
+========================================= */
+
+.card-modal-cam h2 {
+
+    margin: 0 0 10px;
+
+    color: #222222;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+
+/* =========================================
+   TEXTO MODAL ÚNICA CAM
+========================================= */
+
+.card-modal-cam p {
+
+    margin: 0 auto 25px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+
+/* =========================================
+   BOTÃO OK
+========================================= */
+
+.btn-modal-cam {
+
+    width: 100%;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #05c95c;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(5, 201, 92, 0.20);
+
+    transition: 0.2s ease;
+}
+
+
+.btn-modal-cam:hover {
+
+    background: #04b451;
+
+    transform: translateY(-1px);
+}
+
+
+
+/* =========================================
+   ANIMAÇÃO MODAL ÚNICA CAM
+========================================= */
+
+@keyframes aparecerModalCam {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.94)
+            translateY(10px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .btn-voltar {
+
+        top: 20px;
+
+        left: 20px;
+
+        width: 45px;
+        height: 45px;
+
+        background:
+            rgba(255, 255, 255, 0.25);
+    }
+
+
+    .btn-voltar i {
+
+        font-size: 19px;
+    }
+
+}
+
+
+
+/* =========================================
+   SCRIPT
+========================================= */
+
+</style>
+
+
+
+<script>
+
+
+/* =========================================
+   ABRIR CONFIRMAÇÃO
+========================================= */
+
+function abrirConfirmacaoVolta(event) {
+
+    if (event) {
+
+        event.preventDefault();
+    }
+
+
+    const modal =
+        document.getElementById("modalVoltar");
+
+
+    if (modal) {
+
+        modal.classList.add("ativo");
+    }
+
+}
+
+
+
+/* =========================================
+   FECHAR CONFIRMAÇÃO
+========================================= */
+
+function fecharConfirmacaoVolta() {
+
+    const modal =
+        document.getElementById("modalVoltar");
+
+
+    if (modal) {
+
+        modal.classList.remove("ativo");
+    }
+
+}
+
+
+
+/* =========================================
+   CONFIRMAR VOLTA
+========================================= */
+
+function confirmarVolta() {
+
+    window.location.href =
+        "login.html";
+}
+
+
+
+/* =========================================
+   MODAL ÚNICA CAM
+========================================= */
+
+function abrirModalCam() {
+
+    const modal =
+        document.getElementById("modalCam");
+
+
+    if (modal) {
+
+        modal.style.display = "flex";
+    }
+
+}
+
+
+function fecharModalCam() {
+
+    const modal =
+        document.getElementById("modalCam");
+
+
+    if (modal) {
+
+        modal.style.display = "none";
+    }
+
+}
+
+
+
+/* =========================================
+   FECHAR ÚNICA CAM CLICANDO FORA
+========================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById("modalCam");
+
+
+        if (
+            modal &&
+            event.target === modal
+        ) {
+
+            fecharModalCam();
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   ESC FECHA OS MODAIS
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            fecharConfirmacaoVolta();
+
+            fecharModalCam();
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   CARREGAR NOME DO CLIENTE
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const dadosCliente =
+            JSON.parse(
+                localStorage.getItem(
+                    "dadosCliente"
+                )
+            );
+
+
+        if (
+            dadosCliente &&
+            dadosCliente.contratos &&
+            dadosCliente.contratos.length > 0
+        ) {
+
+            document.getElementById(
+                "nomeCliente"
+            ).innerText =
+                `Olá, ${dadosCliente.contratos[0].razaoSocial}`;
+
+        }
+
+    }
+);
+
+</script>
+
 
 </body>
+
 </html>
-<img src="assets/camera1.jpg">
-<img src="assets/camera2.jpg">

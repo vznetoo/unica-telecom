@@ -2,92 +2,191 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Única Móvel</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
 </head>
 
+
 <body>
-    <div class="menu-mobile">
-        <div class="mobile-header">
 
-    <button id="menuBtn">☰</button>
 
-    <img src="assets/logo.png" class="mobile-logo">
+<!-- ======================================
+     BOTÃO VOLTAR - MOBILE
+======================================= -->
 
-</div>
-<div class="mobile-menu" id="mobileMenu">
-
-    <a href="servicos.html">🏠 Serviços</a>
-
-    <a href="dashboard.html">📱 Única Móvel</a>
-
-    <a href="cam.html">📷 Única CAM</a>
-
-    <a href="internet.html">🌐 Plano Fibra</a>
-
-</div>
-
-<button id="abrirMenu">
-
-☰
-
+<button
+    type="button"
+    class="btn-voltar-mobile"
+    onclick="abrirConfirmacaoVolta()"
+    aria-label="Voltar para os serviços"
+>
+    <i class="fa-solid fa-arrow-left"></i>
 </button>
 
-<h2>Única Telecom</h2>
 
-</div>
+<!-- ======================================
+     MODAL SAIR DA CONTA
+======================================= -->
 
-    <div class="dashboard">
+<div
+    id="modalSair"
+    class="modal-sair"
+    style="display: none;"
+>
 
-        <div class="header">
-            <img src="assets/logo.png" alt="Única Móvel">
-            <button onclick="sair()">Sair</button>
-        </div>
+    <div class="modal-conteudo-sair">
 
-      <div class="plano-card">
+        <div class="icone-sair-confirmacao">
 
-    <h2>Única Móvel 30GB</h2>
-
-    <p>
-        🟢 Status: Ativo
-    </p>
-
-    <p>
-        Plano Atual
-    </p>
-
-</div>
-
-<div class="consumo-card">
-
-    <h2>76%</h2>
-
-    <p>Seu Consumo</p>
-
-    <progress value="76" max="100"></progress>
-
-    <div class="consumo-info">
-
-        <div class="circulo">
-
-            <div class="circulo-interno">
-
-                22,94 GB
-
-            </div>
+            <i class="fa-solid fa-right-from-bracket"></i>
 
         </div>
 
-        <div class="legenda">
 
-            <p>🟢 Dados: 17,94 GB</p>
+        <p>
+            Deseja voltar para sua área de Login?
+        </p>
 
-            <p>🔴 YouTube: 5,00 GB</p>
 
-            <p><strong>30 GB totais</strong></p>
+        <div class="acoes-modal-sair">
+
+            <button
+                type="button"
+                class="btn-cancelar"
+                onclick="fecharModalSair()"
+            >
+                Não
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-confirmar"
+                onclick="confirmarSaida()"
+            >
+                Sim
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ====================================== 
+     MODAL ATUALIZAR DADOS
+======================================= -->
+
+<div
+    id="modalAtualizarDados"
+    class="modal-atualizar-dados"
+    style="display: none;"
+>
+
+    <div class="modal-conteudo-atualizar">
+
+        <!-- FECHAR -->
+        <button
+            type="button"
+            class="btn-fechar-atualizar"
+            onclick="fecharAtualizacaoDados()"
+            aria-label="Fechar"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+
+        <!-- ÍCONE -->
+        <div class="icone-atualizar-confirmacao">
+
+            <i class="fa-solid fa-info"></i>
+
+        </div>
+
+
+        <!-- MENSAGEM -->
+        <p>
+            Você será direcionado para um de nossos atendentes.
+        </p>
+
+
+        <!-- OK -->
+        <button
+            type="button"
+            class="btn-ok-atualizar"
+            onclick="confirmarAtualizacaoDados()"
+        >
+            OK
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ======================================
+     MODAL CONFIRMAÇÃO DE VOLTA
+======================================= -->
+
+<div
+    id="modalVoltar"
+    class="modal-voltar"
+    style="display: none;"
+>
+
+    <div class="card-confirmacao">
+
+        <div class="icone-confirmacao">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </div>
+
+
+        <h2>
+            Voltar para os serviços?
+        </h2>
+
+
+        <p>
+            Deseja voltar para a seleção de serviços?
+        </p>
+
+
+        <div class="botoes-confirmacao">
+
+            <button
+                type="button"
+                class="btn-cancelar"
+                onclick="fecharConfirmacaoVolta()"
+            >
+                Não
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-confirmar"
+                onclick="confirmarVolta()"
+            >
+                Sim
+            </button>
 
         </div>
 
@@ -95,89 +194,602 @@
 
 </div>
 
-        <div class="cards">
 
-       <div class="card">
-    <h3>Cliente</h3>
+<!-- ======================================
+     CONTAINER
+======================================= -->
 
-    <p><strong>Nome:</strong><br>
-    Jose Carlos Clemente Da Silva Neto</p>
+<div class="container">
 
-    <p><strong>CPF:</strong><br>
-    139.987.104-85</p>
 
-    <p><strong>Nascimento:</strong><br>
-    04/04/2006</p>
-</div>
+    <!-- ======================================
+         SIDEBAR
+    ======================================= -->
 
-   <div class="card">
+    <aside class="sidebar">
 
-    <h3>Linha</h3>
 
-    <p>
-        <strong>Telefone:</strong><br>
-        (81) 99287-1960
-    </p>
+        <div class="sidebar-top">
 
-    <p>
-        <strong>Status:</strong><br>
 
-        <span class="status">
-            ATIVO
-        </span>
-    </p>
+            <!-- LOGO -->
 
-    <p>
-        <strong>Tipo de SIM:</strong><br>
-        SIM Físico
-    </p>
-</div>
+            <img
+                src="assets/logo.png"
+                class="logo"
+                alt="Logo Única"
+            >
+
+
+            <!-- ======================================
+                 PERFIL
+            ======================================= -->
+
+            <div class="perfil-sidebar-container">
+
+                <div
+                    class="btn-user-sidebar"
+                    onclick="toggleMenuUsuarioSidebar()"
+                >
+
+                    <i class="fa-regular fa-user"></i>
+
+                    <span class="status-online"></span>
+
+                </div>
+
+
+                <!-- MENU USUÁRIO -->
+
+                <div
+                    id="menuUsuarioSidebar"
+                    class="menu-usuario-sidebar"
+                >
+
+                    <button
+                        type="button"
+                        onclick="abrirModalSair()"
+                    >
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Sair da Conta
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ======================================
+             CLIENTE
+        ======================================= -->
+
+        <div class="cliente">
+
+
+            <span>
+                Cliente
+            </span>
+
+
+            <h2 id="nomeCliente">
+                Carregando...
+            </h2>
+
+
+            <div class="cliente-info">
+
+
+                <!-- CPF -->
+
+                <div class="info-linha">
+
+                    <i class="fa-solid fa-id-card"></i>
+
+                    <span id="cpfCliente">
+                        Carregando...
+                    </span>
+
+                </div>
+
+
+                <!-- E-MAIL -->
+
+                <div class="info-linha">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <span id="emailCliente">
+                        Carregando...
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ======================================
+             ATUALIZAR DADOS
+        ======================================= -->
+
+        <div class="atualizar-dados-container">
+
+
+            <button
+                type="button"
+                onclick="abrirAtualizacaoDados()"
+                class="btn-atualizar"
+            >
+
+                <i class="fa-solid fa-user-pen"></i>
+
+                Atualizar Dados
+
+            </button>
+
+
+        </div>
+
+
+        <!-- ======================================
+             VOLTAR PARA OS SERVIÇOS
+        ======================================= -->
+
+        <div class="voltar-servicos-sidebar">
+
+            <button
+                type="button"
+                class="btn-voltar-pagina"
+                onclick="abrirConfirmacaoVolta()"
+                title="Voltar para os serviços"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span>
+                    Voltar para os Serviços
+                </span>
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- ======================================
+         CONTEÚDO
+    ======================================= -->
+
+    <main class="conteudo">
+
+
+        <!-- ======================================
+             PLANO
+        ======================================= -->
+
+        <section class="card-plano">
+
+
+            <div class="card-topo">
+
+
+                <div class="icone-card">
+
+                    <i class="fa-solid fa-sim-card"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span class="plano-label">
+                        Meu Plano
+                    </span>
+
+
+                    <h3 id="planoMovel">
+                        Carregando...
+                    </h3>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="plano-detalhes">
+
+
+                <!-- VALIDADE -->
+
+                <div class="detalhe-item">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <div>
+
+                        <small>
+                            Validade
+                        </small>
+
+                        <span id="validadePlanoMovel">
+                            Carregando...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="detalhe-item">
+
+                    <i class="fa-solid fa-circle-check status-icon"></i>
+
+                    <div>
+
+                        <small>
+                            Status
+                        </small>
+
+                        <span id="statusPlanoMovel">
+                            Ativo
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+             CONSUMO
+        ======================================= -->
+
+        <section class="card-consumo">
+
+
+            <div class="card-topo">
+
+
+                <div class="icone-card">
+
+                    <i class="fa-solid fa-chart-simple"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Seu Consumo
+                    </h3>
+
+                    <p>
+                        Acompanhe o consumo da sua franquia.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="consumo-principal">
+
+
+                <div class="consumo-percentual">
+
+                    <strong>
+                        53%
+                    </strong>
+
+                    <span>
+                        utilizado
+                    </span>
+
+                </div>
+
+
+                <div class="consumo-barra">
+
+                    <div class="consumo-barra-fundo">
+
+                        <div
+                            class="consumo-barra-progresso"
+                            style="width: 53%;"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="consumo-legenda">
+
+                        <span>
+                            13,20 GB utilizados
+                        </span>
+
+                        <strong>
+                            11,80 GB restantes
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- DETALHAMENTO -->
+
+            <div class="consumo-detalhes">
+
+
+                <div class="consumo-item">
+
+                    <span class="consumo-item-titulo">
+
+                        <span class="bolinha bolinha-verde"></span>
+
+                        DADOS
+
+                    </span>
+
+                    <strong>
+                        6,85 GB
+                    </strong>
+
+                </div>
+
+
+                <div class="consumo-item">
+
+                    <span class="consumo-item-titulo">
+
+                        <span class="bolinha bolinha-vermelha"></span>
+
+                        YouTube
+
+                    </span>
+
+                    <strong>
+                        4,94 GB
+                    </strong>
+
+                </div>
+
+
+                <div class="consumo-total">
+
+                    <span>
+                        Franquia total
+                    </span>
+
+                    <strong>
+                        25,00 GB
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+             CARDS
+        ======================================= -->
+
+        <section class="cards">
+
+
+            <!-- ======================================
+                 MINHA LINHA
+            ======================================= -->
 
             <div class="card">
-    <h3>E-mail</h3>
 
-    <p>
-        neto.unica@gmail.com
-    </p>
+
+                <div class="card-topo">
+
+
+                    <div class="icone-card">
+
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Minha Linha
+                        </h3>
+
+                        <p>
+                            Informações da sua linha móvel.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- NÚMERO -->
+
+                <div class="informacao">
+
+                    <span>
+                        Número
+                    </span>
+
+                    <strong id="numeroLinhaMovel">
+                        Carregando...
+                    </strong>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="informacao">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="statusLinhaMovel">
+                        Carregando...
+                    </strong>
+
+                </div>
+
+
+                <!-- SIM -->
+
+                <div class="informacao">
+
+                    <span>
+                        Tipo de SIM
+                    </span>
+
+                    <strong id="tipoSimMovel">
+                        Carregando...
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ======================================
+                 NOVA RECARGA
+            ======================================= -->
+
+            <div class="card card-carga">
+
+
+                <div class="card-topo">
+
+
+                    <div class="icone-card">
+
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Nova Recarga
+                        </h3>
+
+                        <p>
+                            Adicione uma recarga ao seu plano móvel.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-realizar-carga"
+                    onclick="window.open('https://unicatelecom.web.vmix.chat/', '_blank')"
+                >
+
+                    <i class="fa-solid fa-comments"></i>
+
+                    Realizar recarga
+
+                </button>
+
+
+            </div>
+
+
+            <!-- ======================================
+                 SUPORTE
+            ======================================= -->
+
+<div
+    class="card suporte-card"
+    onclick="window.open('https://unicatelecom.web.vmix.chat/', '_blank', 'noopener,noreferrer')"
+>
+    <div class="card-topo">
+
+        <div class="icone-card">
+            <i class="fa-solid fa-headset"></i>
+        </div>
+
+        <div>
+            <h3>Precisa de Ajuda?</h3>
+            <p>
+                Nossa equipe está pronta para te atender.
+            </p>
+        </div>
+
+    </div>
+
+
+                <button
+                    type="button"
+                    class="btn-verde"
+                >
+
+                    <i class="fa-solid fa-comments"></i>
+
+                    Iniciar Atendimento
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
 </div>
 
-           <div class="card">
-    <h3>Validade</h3>
 
-    <p>
-        Válido de 12/09/2026
-        até 12/10/2026
-    </p>
-
-    <p>
-        15 dias restantes
-    </p>
-</div>
-<div class="card suporte-card"
-onclick="abrirWhatsapp()">
-
-    <h3>
-        🎧 Está com dúvidas ou problemas
-        com a sua telefonia móvel?
-    </h3>
-
-    <p>
-        Entre em contato conosco.
-    </p>
-
-</div>
-
-
-
-</div>
-
-<div class="footer">
-    Versão 1.0 - Única Móvel
-</div>
-
-</div>
+<!-- ======================================
+     JAVASCRIPT
+======================================= -->
 
 <script src="dashboard.js"></script>
 
+<script src="servicos.js"></script>
+
+
 </body>
+
 </html>
