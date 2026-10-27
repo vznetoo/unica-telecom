@@ -9,7 +9,15 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: [
+        "https://unicatelecom.com.br",
+        "https://www.unicatelecom.com.br"
+    ],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use(express.json());
 
 console.log("======================================");
