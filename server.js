@@ -249,7 +249,8 @@ app.post("/faturas", async (req, res) => {
 
 
 
-// ======================================
+
+ // ======================================
  // LOGIN CENTRAL DO ASSINANTE - SGP
  // ======================================
 
@@ -271,20 +272,7 @@ app.post("/login", async (req, res) => {
             });
         }
 
-        const identificador = login.trim();
-
-        // CPF/CNPJ: envia somente números.
-        // E-mail: mantém o endereço completo.
-        const loginSGP = identificador.includes("@")
-            ? identificador
-            : identificador.replace(/\D/g, "");
-
-        const form = new FormData();
-
-        form.append("token", process.env.SGP_TOKEN.trim());
-        form.append("app", process.env.SGP_APP.trim());
-        form.append("cpfcnpj", loginSGP);
-        form.append("senha", senha);
+const loginSGP = login.trim();
 
         const resposta = await axios.post(
             "https://sistema.unicatelecom.com.br/api/central/contratos",
@@ -316,6 +304,8 @@ app.post("/login", async (req, res) => {
         });
     }
 });
+
+
 
 
 
