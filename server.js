@@ -254,13 +254,14 @@ app.post("/faturas", async (req, res) => {
  // LOGIN CENTRAL DO ASSINANTE - SGP
  // ======================================
 
+
 app.post("/login", async (req, res) => {
     try {
         const { login, senha } = req.body;
 
         if (!login || !senha) {
             return res.status(400).json({
-                erro: "Informe o CPF/CNPJ ou e-mail e a senha."
+                erro: "Informe seu login e senha."
             });
         }
 
@@ -268,11 +269,19 @@ app.post("/login", async (req, res) => {
             console.error("SGP_TOKEN ou SGP_APP não configurado.");
 
             return res.status(500).json({
-                erro: "A autenticação do SGP não está configurada no servidor."
+                erro: "A autenticação do SGP não está configurada."
             });
         }
 
-const loginSGP = login.trim();
+        const loginSGP = login.trim();
+
+        // Criar o formulário enviado ao SGP
+        const form = new FormData();
+
+        form.append("token", process.env.SGP_TOKEN.trim());
+        form.append("app", process.env.SGP_APP.trim());
+        form.append("cpfcnpj", loginSGP);
+        form.append("senha", senha);
 
         const resposta = await axios.post(
             "https://sistema.unicatelecom.com.br/api/central/contratos",
@@ -304,9 +313,6 @@ const loginSGP = login.trim();
         });
     }
 });
-
-
-
 
 
 // ======================================
