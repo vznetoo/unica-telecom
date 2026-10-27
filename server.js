@@ -255,6 +255,8 @@ app.post("/faturas", async (req, res) => {
  // ======================================
 
 
+
+
 app.post("/login", async (req, res) => {
     try {
         const { login, senha } = req.body;
@@ -266,8 +268,6 @@ app.post("/login", async (req, res) => {
         }
 
         if (!process.env.SGP_TOKEN || !process.env.SGP_APP) {
-            console.error("SGP_TOKEN ou SGP_APP não configurado.");
-
             return res.status(500).json({
                 erro: "A autenticação do SGP não está configurada."
             });
@@ -275,9 +275,7 @@ app.post("/login", async (req, res) => {
 
         const loginSGP = login.trim();
 
-        // Criar o formulário enviado ao SGP
         const form = new FormData();
-
         form.append("token", process.env.SGP_TOKEN.trim());
         form.append("app", process.env.SGP_APP.trim());
         form.append("cpfcnpj", loginSGP);
@@ -295,9 +293,6 @@ app.post("/login", async (req, res) => {
             }
         );
 
-        console.log("Status retornado pelo SGP:", resposta.status);
-        console.log("Autenticação aceita:", resposta.data?.auth);
-
         return res.json(resposta.data);
 
     } catch (erro) {
@@ -313,6 +308,8 @@ app.post("/login", async (req, res) => {
         });
     }
 });
+
+
 
 
 // ======================================
