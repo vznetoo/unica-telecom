@@ -279,6 +279,7 @@ app.post("/login", async (req, res) => {
         form.append("token", process.env.SGP_TOKEN.trim());
         form.append("app", process.env.SGP_APP.trim());
         form.append("cpfcnpj", loginSGP);
+        form.append("usuario", loginSGP);
         form.append("senha", senha);
 
         const resposta = await axios.post(
