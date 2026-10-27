@@ -1760,13 +1760,19 @@ const tipo =
                    CLIENTE NÃO POSSUI SERVIÇO
                 ================================================= */
 
-                if (resposta.status === 404) {
+               
+if (resposta.status === 404) {
+    console.error(
+        "A API retornou 404. Verifique a URL e os logs do servidor."
+    );
 
-                    mostrarTelaSemServico();
+    mostrarErro(
+        "Não foi possível localizar as linhas móveis. Tente novamente ou entre em contato com o suporte."
+    );
 
-                    return;
+    return;
+}
 
-                }
 
 
                 /* =================================================
