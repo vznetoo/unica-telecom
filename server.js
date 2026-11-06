@@ -1,6 +1,3 @@
-
-
-
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
@@ -9,18 +6,8 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(cors({
-    origin: [
-        "https://unicatelecom.com.br",
-        "https://www.unicatelecom.com.br",
-        "https://localhost"
-    ],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+app.use(cors());
 app.use(express.json());
-
 
 console.log("======================================");
 console.log("SERVIDOR INICIADO");
@@ -32,33 +19,16 @@ console.log("======================================");
 // ======================================
 
 app.get("/cliente/:cpf", async (req, res) => {
-
     try {
+        const cpf = req.params.cpf.replace(/\D/g, "");
 
-        const cpf =
-            req.params.cpf.replace(/\D/g, "");
-
-        console.log("======================================");
-        console.log("CONSULTA CLIENTE");
-        console.log("CPF:", cpf);
-        console.log("======================================");
+        console.log("CONSULTA CLIENTE - CPF:", cpf);
 
         const form = new FormData();
 
-        form.append(
-            "token",
-            process.env.SGP_TOKEN
-        );
-
-        form.append(
-            "app",
-            process.env.SGP_APP
-        );
-
-        form.append(
-            "cpfcnpj",
-            cpf
-        );
+        form.append("token", process.env.SGP_TOKEN);
+        form.append("app", process.env.SGP_APP);
+        form.append("cpfcnpj", cpf);
 
         const resposta = await axios.post(
             "https://sistema.unicatelecom.com.br/api/ura/consultacliente/",
@@ -69,28 +39,18 @@ app.get("/cliente/:cpf", async (req, res) => {
             }
         );
 
-        res.json(
-            resposta.data
-        );
+        return res.json(resposta.data);
 
     } catch (erro) {
-
-        console.log(
+        console.error(
             "ERRO CONSULTA CLIENTE:",
-            erro.response?.data ||
-            erro.message
+            erro.response?.data || erro.message
         );
 
-        res.status(
-            erro.response?.status || 500
-        ).json({
-            erro:
-                erro.response?.data ||
-                erro.message
+        return res.status(erro.response?.status || 500).json({
+            erro: erro.response?.data || erro.message
         });
-
     }
-
 });
 
 
@@ -99,41 +59,29 @@ app.get("/cliente/:cpf", async (req, res) => {
 // ======================================
 
 app.post("/verifica-acesso", async (req, res) => {
-
     try {
+        const { cpfcnpj, senha, contrato } = req.body;
 
-        const {
-            cpfcnpj,
-            senha,
-            contrato
-        } = req.body;
+        if (!process.env.SGP_TOKEN || !process.env.SGP_APP) {
+            return res.status(500).json({
+                erro: "Autenticação do SGP não configurada."
+            });
+        }
 
         console.log("======================================");
         console.log("VERIFICA ACESSO");
         console.log("CPF:", cpfcnpj);
         console.log("CONTRATO:", contrato);
-        console.log(
-            "SENHA:",
-            senha ? "OK" : "VAZIA"
-        );
+        console.log("SENHA:", senha ? "OK" : "VAZIA");
         console.log("======================================");
 
         const form = new FormData();
 
-        form.append(
-            "cpfcnpj",
-            cpfcnpj
-        );
-
-        form.append(
-            "senha",
-            senha
-        );
-
-        form.append(
-            "contrato",
-            String(contrato)
-        );
+        form.append("token", process.env.SGP_TOKEN.trim());
+        form.append("app", process.env.SGP_APP.trim());
+        form.append("cpfcnpj", cpfcnpj);
+        form.append("senha", senha);
+        form.append("contrato", String(contrato));
 
         const resposta = await axios.post(
             "https://sistema.unicatelecom.com.br/api/central/verificaacesso/",
@@ -144,42 +92,27 @@ app.post("/verifica-acesso", async (req, res) => {
             }
         );
 
+        console.log("RESPOSTA SGP:", resposta.data);
+
         console.log(
-            "RESPOSTA SGP:",
-            resposta.data
+            "DADOS COMPLETOS DO CLIENTE:",
+            JSON.stringify(resposta.data, null, 2)
         );
 
-        res.json(
-            resposta.data
-        );
+        return res.json(resposta.data);
 
     } catch (erro) {
-
-        console.error(
-            "ERRO VERIFICA ACESSO:"
-        );
-
-        console.error(
-            "STATUS:",
-            erro.response?.status
-        );
-
+        console.error("ERRO VERIFICA ACESSO:");
+        console.error("STATUS:", erro.response?.status);
         console.error(
             "RESPOSTA:",
-            erro.response?.data ||
-            erro.message
+            erro.response?.data || erro.message
         );
 
-        res.status(
-            erro.response?.status || 500
-        ).json({
-            erro:
-                erro.response?.data ||
-                erro.message
+        return res.status(erro.response?.status || 500).json({
+            erro: erro.response?.data || erro.message
         });
-
     }
-
 });
 
 
@@ -188,41 +121,16 @@ app.post("/verifica-acesso", async (req, res) => {
 // ======================================
 
 app.post("/faturas", async (req, res) => {
-
     try {
-
-        const {
-            cpfcnpj,
-            senha,
-            contrato
-        } = req.body;
+        const { cpfcnpj, senha, contrato } = req.body;
 
         const form = new FormData();
 
-        form.append(
-            "token",
-            process.env.SGP_TOKEN
-        );
-
-        form.append(
-            "app",
-            process.env.SGP_APP
-        );
-
-        form.append(
-            "cpfcnpj",
-            cpfcnpj
-        );
-
-        form.append(
-            "senha",
-            senha
-        );
-
-        form.append(
-            "contrato",
-            contrato
-        );
+        form.append("token", process.env.SGP_TOKEN);
+        form.append("app", process.env.SGP_APP);
+        form.append("cpfcnpj", cpfcnpj);
+        form.append("senha", senha);
+        form.append("contrato", contrato);
 
         const resposta = await axios.post(
             "https://sistema.unicatelecom.com.br/api/central/titulos/",
@@ -233,43 +141,34 @@ app.post("/faturas", async (req, res) => {
             }
         );
 
-        res.json(
-            resposta.data
-        );
+        return res.json(resposta.data);
 
     } catch (erro) {
-
-        console.log(
+        console.error(
             "ERRO FATURAS:",
-            erro.response?.data ||
-            erro.message
+            erro.response?.data || erro.message
         );
 
-        res.status(
-            erro.response?.status || 500
-        ).json({
-            erro:
-                erro.response?.data ||
-                erro.message
+        return res.status(erro.response?.status || 500).json({
+            erro: erro.response?.data || erro.message
         });
-
     }
-
 });
 
 
-
-
- // ======================================
- // LOGIN CENTRAL DO ASSINANTE - SGP
- // ======================================
-
-
-
+// ======================================
+// LOGIN CENTRAL DO ASSINANTE - SGP
+// ======================================
 
 app.post("/login", async (req, res) => {
+    const inicioLogin = Date.now();
+
     try {
-        const { login, senha } = req.body;
+        console.log("======================================");
+        console.log("[LOGIN] Nova tentativa");
+        console.log("======================================");
+
+        const { login, senha, captchaToken } = req.body;
 
         if (!login || !senha) {
             return res.status(400).json({
@@ -277,20 +176,87 @@ app.post("/login", async (req, res) => {
             });
         }
 
+        // VALIDAR CAPTCHA
+
+        if (!captchaToken) {
+            return res.status(400).json({
+                erro: "Confirme que você não é um robô."
+            });
+        }
+
+        if (!process.env.RECAPTCHA_SECRET_KEY) {
+            console.error("RECAPTCHA_SECRET_KEY não configurada.");
+
+            return res.status(500).json({
+                erro: "A verificação de segurança não está configurada."
+            });
+        }
+
+        const inicioCaptcha = Date.now();
+
+        const parametros = new URLSearchParams();
+
+        parametros.append(
+            "secret",
+            process.env.RECAPTCHA_SECRET_KEY
+        );
+
+        parametros.append(
+            "response",
+            captchaToken
+        );
+
+        const verificacao = await axios.post(
+            "https://www.google.com/recaptcha/api/siteverify",
+            parametros.toString(),
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                timeout: 10000
+            }
+        );
+
+        console.log(
+            `[TEMPO] CAPTCHA: ${Date.now() - inicioCaptcha} ms`
+        );
+
+        if (verificacao.data.success !== true) {
+            console.warn(
+                "CAPTCHA REJEITADO:",
+                verificacao.data["error-codes"] || []
+            );
+
+            return res.status(403).json({
+                erro: "Erro no login. Tente novamente."
+            });
+        }
+
+        // VALIDAR CONFIGURAÇÃO SGP
+
         if (!process.env.SGP_TOKEN || !process.env.SGP_APP) {
+            console.error("Credenciais do SGP não configuradas.");
+
             return res.status(500).json({
                 erro: "A autenticação do SGP não está configurada."
             });
         }
 
-        const loginSGP = login.trim();
+        // PREPARAR LOGIN SGP
+
+        const loginSGP = String(login).trim();
 
         const form = new FormData();
+
         form.append("token", process.env.SGP_TOKEN.trim());
         form.append("app", process.env.SGP_APP.trim());
         form.append("cpfcnpj", loginSGP);
         form.append("usuario", loginSGP);
         form.append("senha", senha);
+
+        console.log("[LOGIN] Enviando dados ao SGP.");
+
+        const inicioSGP = Date.now();
 
         const resposta = await axios.post(
             "https://sistema.unicatelecom.com.br/api/central/contratos",
@@ -304,23 +270,45 @@ app.post("/login", async (req, res) => {
             }
         );
 
+        console.log(
+            `[TEMPO] SGP login: ${Date.now() - inicioSGP} ms`
+        );
+
+        console.log(
+            `[TEMPO] Login total: ${Date.now() - inicioLogin} ms`
+        );
+
+        console.log("[LOGIN] Resposta recebida do SGP.");
+
         return res.json(resposta.data);
 
     } catch (erro) {
-        console.error("ERRO NO LOGIN SGP");
+        console.error("======================================");
+        console.error("[LOGIN] ERRO");
         console.error("STATUS:", erro.response?.status);
+
         console.error(
-            "RESPOSTA:",
+            "RESPOSTA SGP:",
             JSON.stringify(erro.response?.data || erro.message)
         );
 
-        return res.status(erro.response?.status || 500).json({
-            erro: "Não foi possível realizar o login."
+        console.error(
+            `[TEMPO] Login até o erro: ${Date.now() - inicioLogin} ms`
+        );
+
+        const statusSGP = erro.response?.status;
+
+        if (statusSGP === 401 || statusSGP === 403) {
+            return res.status(401).json({
+                erro: "Erro no Login. Tente novamente."
+            });
+        }
+
+        return res.status(500).json({
+            erro: "Não foi possível realizar o login. Tente novamente."
         });
     }
 });
-
-
 
 
 // ======================================
@@ -328,23 +316,12 @@ app.post("/login", async (req, res) => {
 // ======================================
 
 app.get("/contrato/:contratoId", async (req, res) => {
-
-    console.log("======================================");
-    console.log("GERAR CONTRATO PDF");
-    console.log("======================================");
-
     try {
+        const contratoId = req.params.contratoId;
 
-        const contratoId =
-            req.params.contratoId;
+        console.log("GERAR CONTRATO PDF:", contratoId);
 
-        console.log(
-            "Contrato:",
-            contratoId
-        );
-
-        const form =
-            new FormData();
+        const form = new FormData();
 
         const resposta = await axios.post(
             "https://sistema.unicatelecom.com.br/api/centralapp/contrato/print/contrato/",
@@ -356,34 +333,22 @@ app.get("/contrato/:contratoId", async (req, res) => {
             }
         );
 
-        res.setHeader(
-            "Content-Type",
-            "application/pdf"
-        );
-
+        res.setHeader("Content-Type", "application/pdf");
         res.setHeader(
             "Content-Disposition",
             "inline; filename=contrato.pdf"
         );
 
-        res.send(
-            resposta.data
-        );
+        return res.send(resposta.data);
 
     } catch (erro) {
-
-        console.log(
+        console.error(
             "ERRO CONTRATO:",
-            erro.response?.data ||
-            erro.message
+            erro.response?.data || erro.message
         );
 
-        res.status(500).send(
-            "Erro"
-        );
-
+        return res.status(500).send("Erro");
     }
-
 });
 
 
@@ -392,41 +357,17 @@ app.get("/contrato/:contratoId", async (req, res) => {
 // ======================================
 
 app.post("/contrato", async (req, res) => {
-
     try {
+        const { login, senha } = req.body;
 
-        console.log(
-            "BODY RECEBIDO:",
-            req.body
-        );
+        console.log("GERAR CONTRATO PDF");
+        console.log("LOGIN RECEBIDO:", login);
+        console.log("SENHA RECEBIDA:", senha ? "OK" : "VAZIA");
 
-        const {
-            login,
-            senha
-        } = req.body;
+        const form = new FormData();
 
-        console.log(
-            "LOGIN RECEBIDO:",
-            login
-        );
-
-        console.log(
-            "SENHA RECEBIDA:",
-            senha ? "OK" : "VAZIA"
-        );
-
-        const form =
-            new FormData();
-
-        form.append(
-            "usuario",
-            login
-        );
-
-        form.append(
-            "senha",
-            senha
-        );
+        form.append("usuario", login);
+        form.append("senha", senha);
 
         const resposta = await axios.post(
             "https://sistema.unicatelecom.com.br/api/centralapp/contrato/print/contrato/",
@@ -438,49 +379,29 @@ app.post("/contrato", async (req, res) => {
             }
         );
 
-        res.setHeader(
-            "Content-Type",
-            "application/pdf"
-        );
-
+        res.setHeader("Content-Type", "application/pdf");
         res.setHeader(
             "Content-Disposition",
             "inline; filename=contrato.pdf"
         );
 
-        res.send(
-            resposta.data
-        );
+        return res.send(resposta.data);
 
     } catch (erro) {
-
-        console.log(
-            "STATUS:",
-            erro.response?.status
-        );
+        console.error("ERRO AO GERAR CONTRATO:");
+        console.error("STATUS:", erro.response?.status);
 
         if (erro.response?.data) {
-
-            console.log(
+            console.error(
                 "RESPOSTA:",
-                Buffer.from(
-                    erro.response.data
-                ).toString("utf8")
+                Buffer.from(erro.response.data).toString("utf8")
             );
-
         }
 
-        console.log(
-            "MESSAGE:",
-            erro.message
-        );
+        console.error("MESSAGE:", erro.message);
 
-        res.status(500).send(
-            "Erro"
-        );
-
+        return res.status(500).send("Erro");
     }
-
 });
 
 
@@ -489,463 +410,160 @@ app.post("/contrato", async (req, res) => {
 // ======================================
 
 app.get("/teste", (req, res) => {
-
-    res.send(
-        "Servidor funcionando!"
-    );
-
+    res.send("Servidor funcionando!");
 });
 
 
 // ======================================
-// BRAZ MÓVEL
-// BUSCAR CLIENTE + LINHAS
+// BRAZ MÓVEL - BUSCAR CLIENTE + LINHAS
 // ======================================
 
 app.get("/api/movel/cliente/:cpf", async (req, res) => {
-
     try {
-
-        // ----------------------------------
-        // PEGAR CPF
-        // ----------------------------------
-
-        const cpf =
-            req.params.cpf.replace(/\D/g, "");
+        const cpf = req.params.cpf.replace(/\D/g, "");
 
         console.log("======================================");
         console.log("BRAZ MÓVEL - CONSULTA CLIENTE");
         console.log("CPF:", cpf);
         console.log("======================================");
 
-
-        // ----------------------------------
-        // VALIDAR CPF
-        // ----------------------------------
-
         if (cpf.length !== 11) {
-
             return res.status(400).json({
                 erro: "CPF inválido."
             });
-
         }
 
-
-        // ----------------------------------
-        // VERIFICAR TOKEN
-        // ----------------------------------
-
-        const tokenExiste =
-            !!process.env.BRAZ_MOVEL_TOKEN;
-
-        console.log(
-            "TOKEN BRAZ EXISTE:",
-            tokenExiste
-        );
-
-
-        if (!tokenExiste) {
-
-            console.error(
-                "BRAZ_MOVEL_TOKEN não foi encontrado no .env"
-            );
+        if (!process.env.BRAZ_MOVEL_TOKEN) {
+            console.error("BRAZ_MOVEL_TOKEN não configurado.");
 
             return res.status(500).json({
-                erro:
-                    "Token da Braz Móvel não configurado no servidor."
+                erro: "Token da Braz Móvel não configurado no servidor."
             });
-
         }
-
-
-        // ----------------------------------
-        // CONSULTAR BRAZ MÓVEL
-        // ----------------------------------
 
         const url =
             `https://api.brazmovel.com.br/v1/customer/cpf/${cpf}`;
 
-        console.log(
-            "CHAMANDO BRAZ MÓVEL:",
-            url
-        );
+        console.log("CHAMANDO BRAZ MÓVEL:", url);
 
+        const resposta = await axios.get(url, {
+            headers: {
+                Authorization:
+                    `Bearer ${process.env.BRAZ_MOVEL_TOKEN}`
+            },
+            timeout: 15000
+        });
 
-        const resposta =
-            await axios.get(
-                url,
-                {
-                    headers: {
-                        Authorization:
-                            `Bearer ${process.env.BRAZ_MOVEL_TOKEN}`
-                    },
-
-                    timeout: 15000
-                }
-            );
-
-
-        // ----------------------------------
-        // RESPOSTA
-        // ----------------------------------
-
-        console.log(
-            "STATUS BRAZ MÓVEL:",
-            resposta.status
-        );
-
-        console.log(
-            "CLIENTE ENCONTRADO:",
-            resposta.data?.name
-        );
-
+        console.log("STATUS BRAZ MÓVEL:", resposta.status);
+        console.log("CLIENTE ENCONTRADO:", resposta.data?.name);
         console.log(
             "LINHAS ENCONTRADAS:",
             resposta.data?.lines?.length || 0
         );
 
-
-        // ----------------------------------
-        // DEVOLVER PARA FRONTEND
-        // ----------------------------------
-
-        res.json(
-            resposta.data
-        );
-
+        return res.json(resposta.data);
 
     } catch (erro) {
-
-        console.log("======================================");
-        console.log("ERRO BRAZ MÓVEL");
-        console.log("======================================");
-
-        console.log(
-            "STATUS:",
-            erro.response?.status
-        );
-
-        console.log(
+        console.error("======================================");
+        console.error("ERRO BRAZ MÓVEL");
+        console.error("STATUS:", erro.response?.status);
+        console.error(
             "DADOS:",
-            JSON.stringify(
-                erro.response?.data,
-                null,
-                2
-            )
+            JSON.stringify(erro.response?.data, null, 2)
         );
+        console.error("MENSAGEM:", erro.message);
 
-        console.log(
-            "MENSAGEM:",
-            erro.message
-        );
-
-
-        // ----------------------------------
-        // 401
-        // ----------------------------------
-
-        if (
-            erro.response?.status === 401
-        ) {
-
+        if (erro.response?.status === 401) {
             return res.status(401).json({
-                erro:
-                    "Token da Braz Móvel inválido ou expirado."
+                erro: "Token da Braz Móvel inválido ou expirado."
             });
-
         }
 
-
-        // ----------------------------------
-        // 403
-        // ----------------------------------
-
-        if (
-            erro.response?.status === 403
-        ) {
-
+        if (erro.response?.status === 403) {
             return res.status(403).json({
-                erro:
-                    "Acesso negado pela Braz Móvel. Verifique o token e as permissões da API."
+                erro: "Acesso negado pela Braz Móvel. Verifique o token e as permissões da API."
             });
-
         }
 
-
-        // ----------------------------------
-        // 404
-        // ----------------------------------
-
-        if (
-            erro.response?.status === 404
-        ) {
-
+        if (erro.response?.status === 404) {
             return res.status(404).json({
-                erro:
-                    "Cliente não encontrado na Braz Móvel."
+                erro: "Cliente não encontrado na Braz Móvel."
             });
-
         }
 
-
-        // ----------------------------------
-        // OUTROS ERROS
-        // ----------------------------------
-
-        return res.status(
-            erro.response?.status || 500
-        ).json({
-            erro:
-                "Erro ao consultar cliente na Braz Móvel."
+        return res.status(erro.response?.status || 500).json({
+            erro: "Erro ao consultar cliente na Braz Móvel."
         });
-
     }
-
 });
 
 
 // ======================================
-// BRAZ MÓVEL
-// BUSCAR PLANOS DA LINHA
+// BRAZ MÓVEL - BUSCAR PLANOS DA LINHA
 // ======================================
 
 app.get("/api/movel/linha/:lineId/planos", async (req, res) => {
-
     try {
-
-        const lineId =
-            req.params.lineId;
+        const lineId = req.params.lineId;
 
         console.log("======================================");
         console.log("BRAZ MÓVEL - PLANOS DA LINHA");
         console.log("LINE ID:", lineId);
         console.log("======================================");
 
-
-        // ----------------------------------
-        // VALIDAR ID DA LINHA
-        // ----------------------------------
-
         if (!lineId) {
-
             return res.status(400).json({
-                erro:
-                    "ID da linha não informado."
+                erro: "ID da linha não informado."
             });
-
         }
-
-
-        // ----------------------------------
-        // VERIFICAR TOKEN
-        // ----------------------------------
 
         if (!process.env.BRAZ_MOVEL_TOKEN) {
-
             return res.status(500).json({
-                erro:
-                    "Token da Braz Móvel não configurado."
+                erro: "Token da Braz Móvel não configurado."
             });
-
         }
-
-
-        // ----------------------------------
-        // CONSULTAR PLANOS NA BRAZ
-        // ----------------------------------
 
         const url =
             `https://api.brazmovel.com.br/v1/line/${lineId}/plan`;
 
+        console.log("CHAMANDO BRAZ MÓVEL:", url);
+
+        const resposta = await axios.get(url, {
+            headers: {
+                Authorization:
+                    `Bearer ${process.env.BRAZ_MOVEL_TOKEN}`
+            },
+            timeout: 15000
+        });
+
+        console.log("STATUS PLANOS:", resposta.status);
         console.log(
-            "CHAMANDO BRAZ MÓVEL:",
-            url
+            "PLANOS RETORNADOS:",
+            JSON.stringify(resposta.data, null, 2)
         );
 
-
-        const resposta =
-            await axios.get(
-                url,
-                {
-                    headers: {
-                        Authorization:
-                            `Bearer ${process.env.BRAZ_MOVEL_TOKEN}`
-                    },
-
-                    timeout: 15000
-                }
-            );
-
-
-        // ----------------------------------
-        // MOSTRAR RESPOSTA
-        // ----------------------------------
-
-        console.log(
-            "STATUS PLANOS:",
-            resposta.status
-        );
-
-        console.log(
-            "PLANOS RETORNADOS:"
-        );
-
-        console.log(
-            JSON.stringify(
-                resposta.data,
-                null,
-                2
-            )
-        );
-
-
-        // ----------------------------------
-        // DEVOLVER PARA FRONTEND
-        // ----------------------------------
-
-        res.json(
-            resposta.data
-        );
-
+        return res.json(resposta.data);
 
     } catch (erro) {
-
-        console.log("======================================");
-        console.log("ERRO AO BUSCAR PLANOS");
-        console.log("======================================");
-
-        console.log(
-            "STATUS:",
-            erro.response?.status
-        );
-
-        console.log(
+        console.error("======================================");
+        console.error("ERRO AO BUSCAR PLANOS");
+        console.error("STATUS:", erro.response?.status);
+        console.error(
             "DADOS:",
-            JSON.stringify(
-                erro.response?.data,
-                null,
-                2
-            )
+            JSON.stringify(erro.response?.data, null, 2)
         );
+        console.error("MENSAGEM:", erro.message);
 
-        console.log(
-            "MENSAGEM:",
-            erro.message
-        );
-
-
-        // ----------------------------------
-        // DEVOLVER ERRO
-        // ----------------------------------
-
-        res.status(
-            erro.response?.status || 500
-        ).json({
-            erro:
-                "Erro ao consultar planos da linha na Braz Móvel."
+        return res.status(erro.response?.status || 500).json({
+            erro: "Erro ao consultar planos da linha na Braz Móvel."
         });
-
     }
-
 });
 
 
 // ======================================
-// DOWNLOAD DE COMPROVANTE / RECIBO
+// BRAZ MÓVEL - CONSUMO DA LINHA
 // ======================================
-
-app.post("/api/comprovante", async (req, res) => {
-
-    try {
-
-        const {
-            url
-        } = req.body;
-
-
-        if (!url) {
-
-            return res.status(400).json({
-                erro:
-                    "URL não informada."
-            });
-
-        }
-
-
-        console.log("======================================");
-        console.log(
-            "BAIXANDO COMPROVANTE:",
-            url
-        );
-        console.log("======================================");
-
-
-        const resposta =
-            await axios.get(
-                url,
-                {
-                    responseType:
-                        "arraybuffer",
-
-                    timeout:
-                        15000,
-
-                    headers: {
-                        "User-Agent":
-                            "Mozilla/5.0"
-                    }
-                }
-            );
-
-
-        res.setHeader(
-            "Content-Type",
-            "application/pdf"
-        );
-
-        res.setHeader(
-            "Content-Disposition",
-            "attachment; filename=comprovante-pagamento.pdf"
-        );
-
-
-        res.send(
-            resposta.data
-        );
-
-
-    } catch (erro) {
-
-        console.log(
-            "ERRO AO BAIXAR COMPROVANTE:",
-            erro.message
-        );
-
-        res.status(500).json({
-            erro:
-                "Erro ao baixar o comprovante do servidor externo."
-        });
-
-    }
-
-});
-
-
-// ======================================
-// INICIAR SERVIDOR
-// ======================================
-
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, "0.0.0.0", () => {
-    console.log("======================================");
-    console.log(`Servidor rodando na porta ${PORT}`);
-    console.log("======================================");
-});
-
 
 app.get("/api/movel/linha/:lineId/usage", async (req, res) => {
     try {
@@ -955,6 +573,12 @@ app.get("/api/movel/linha/:lineId/usage", async (req, res) => {
         console.log("BRAZ MÓVEL - CONSUMO DA LINHA");
         console.log("LINE ID:", lineId);
         console.log("======================================");
+
+        if (!process.env.BRAZ_MOVEL_TOKEN) {
+            return res.status(500).json({
+                erro: "Token da Braz Móvel não configurado."
+            });
+        }
 
         const url =
             `https://api.brazmovel.com.br/v1/line/${lineId}/usage`;
@@ -968,38 +592,83 @@ app.get("/api/movel/linha/:lineId/usage", async (req, res) => {
         });
 
         console.log("STATUS USAGE:", resposta.status);
-
-        console.log("CONSUMO RETORNADO:");
         console.log(
+            "CONSUMO RETORNADO:",
             JSON.stringify(resposta.data, null, 2)
         );
 
-        res.json(resposta.data);
+        return res.json(resposta.data);
 
     } catch (erro) {
-
-        console.log("======================================");
-        console.log("ERRO AO BUSCAR CONSUMO");
-        console.log("======================================");
-
-        console.log("STATUS:", erro.response?.status);
-
-        console.log(
+        console.error("======================================");
+        console.error("ERRO AO BUSCAR CONSUMO");
+        console.error("STATUS:", erro.response?.status);
+        console.error(
             "DADOS:",
-            JSON.stringify(
-                erro.response?.data,
-                null,
-                2
-            )
+            JSON.stringify(erro.response?.data, null, 2)
         );
+        console.error("MENSAGEM:", erro.message);
 
-        console.log("MENSAGEM:", erro.message);
-
-        res.status(
-            erro.response?.status || 500
-        ).json({
-            erro:
-                "Erro ao consultar consumo da linha na Braz Móvel."
+        return res.status(erro.response?.status || 500).json({
+            erro: "Erro ao consultar consumo da linha na Braz Móvel."
         });
     }
+});
+
+
+// ======================================
+// DOWNLOAD DE COMPROVANTE / RECIBO
+// ======================================
+
+app.post("/api/comprovante", async (req, res) => {
+    try {
+        const { url } = req.body;
+
+        if (!url) {
+            return res.status(400).json({
+                erro: "URL não informada."
+            });
+        }
+
+        console.log("BAIXANDO COMPROVANTE:", url);
+
+        const resposta = await axios.get(url, {
+            responseType: "arraybuffer",
+            timeout: 15000,
+            headers: {
+                "User-Agent": "Mozilla/5.0"
+            }
+        });
+
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader(
+            "Content-Disposition",
+            "attachment; filename=comprovante-pagamento.pdf"
+        );
+
+        return res.send(resposta.data);
+
+    } catch (erro) {
+        console.error(
+            "ERRO AO BAIXAR COMPROVANTE:",
+            erro.message
+        );
+
+        return res.status(500).json({
+            erro: "Erro ao baixar o comprovante do servidor externo."
+        });
+    }
+});
+
+
+// ======================================
+// INICIAR SERVIDOR
+// ======================================
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log("======================================");
+    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log("======================================");
 });
