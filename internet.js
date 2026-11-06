@@ -2216,7 +2216,7 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
                     : `${diasAtraso} dias de atraso`;
 
             tituloFatura.innerText =
-                `Valor original até a data de vencimento (${textoAtraso})`;
+                `Valor Até Vencimento (${textoAtraso})`;
 
             tituloFatura.style.setProperty(
                 "color",
@@ -2304,7 +2304,7 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
 
         if (tituloFatura) {
             tituloFatura.innerText =
-                "Valor original até a data de vencimento";
+                "Valor Até Vencimento";
 
             tituloFatura.style.setProperty(
                 "color",
