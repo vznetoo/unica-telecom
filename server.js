@@ -7,19 +7,20 @@ const axios = require("axios");
 const FormData = require("form-data");
 require("dotenv").config();
 
-app.use(cors());
-app.use(express.json());
+const app = express();
 
 app.use(cors({
     origin: [
         "https://unicatelecom.com.br",
-        "https://www.unicatelecom.com.br"
+        "https://www.unicatelecom.com.br",
+        "https://localhost"
     ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json());
+
 
 console.log("======================================");
 console.log("SERVIDOR INICIADO");
