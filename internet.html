@@ -60,7 +60,7 @@
              SIDEBAR
         ====================================================== -->
 
-        <aside class="sidebar alerta-reduzido">
+        <aside class="sidebar">
 
 
             <!-- TOPO DA SIDEBAR -->
@@ -68,7 +68,7 @@
             <div class="sidebar-top">
 
                 <img
-                    src="assets/logo.png"
+                    src="assets/Logoo.png"
                     class="logo"
                     alt="Logo"
                 >
@@ -308,10 +308,11 @@
 
                     <div class="detalhe-item">
 
-                        <i
-                            class="fa-solid fa-triangle-exclamation"
-                            style="color: #ea580c;"
-                        ></i>
+                     <i
+
+    id="iconeStatusPlano"
+    class="fa-solid fa-circle-notch fa-spin"
+></i>
 
 
                         <div>
@@ -320,12 +321,12 @@
                                 Status
                             </small>
 
-                            <span
-                                id="statusPlanoMobile"
-                                class="status-reduzido-texto"
-                            >
-                                Velocidade reduzida
-                            </span>
+<span
+    id="statusPlanoMobile"
+    class="status-plano-texto"
+>
+    Carregando...
+</span>
 
                         </div>
 
@@ -338,7 +339,22 @@
             </section>
 
 
+<!-- AVISO DE INTERNET SUSPENSA -->
+<div id="avisoInternetSuspensa" class="aviso-internet-suspensa" style="display: none;">
 
+    <div class="aviso-suspenso-icone">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+
+    <div class="aviso-suspenso-conteudo">
+        <h3>Internet suspensa</h3>
+
+        <p>
+            Sua internet foi bloqueada devido à falta de pagamento; pague o boleto para restabelecer o sinal imediatamente.
+        </p>
+    </div>
+
+</div>
             <!-- =====================================================
                  MODAL CONFIRMAÇÃO DE VOLTA
             ====================================================== -->
@@ -422,12 +438,12 @@
                     <div>
 
                         <small id="tituloFatura">
-                            Fatura Atual
+                            Valor original até a data de vecimento
                         </small>
 
-                        <h2 id="valorFaturaMobile">
-                            R$ --,--
-                        </h2>
+                       <h2 id="valorFaturaMobile">
+    Carregando...
+</h2>
 
                     </div>
 
@@ -445,11 +461,11 @@
 
                     <span>
 
-                        Vencida em:
+                        Vencimento:
 
-                        <strong id="dataVencimentoMobile">
-                            --/--/----
-                        </strong>
+                       <strong id="dataVencimentoMobile">
+    Carregando...
+</strong>
 
                     </span>
 
@@ -535,15 +551,15 @@
 
                         <!-- Bolinha com efeito de piscar ativo -->
 
-                        <span
-                            id="bolinhaStatus"
-                            class="bolinha offline piscar"
-                        ></span>
+                       <span
+    id="bolinhaStatus"
+    class="bolinha"
+></span>
 
 
-                        <span id="statusConexao">
-                            Velocidade reduzida por falta de pagamento
-                        </span>
+                       <span id="statusConexao">
+    Verificando conexão...
+</span>
 
                     </div>
 
