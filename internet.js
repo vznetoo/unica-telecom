@@ -2,7 +2,7 @@
 // URL PÚBLICA DA API
 // ==========================================================
 
-const API_BASE_URL = "https://sistema.unicatelecom.com.br";
+const API_BASE_URL = "https://unica-telecom.onrender.com";
 
 // ======================================
 // CARREGAMENTO E INICIALIZAÇÃO
@@ -25,10 +25,163 @@ if (dadosCliente && dadosCliente.contratos) {
 
 let faturasCliente = [];
 let faturaAtualObjeto = null;
+let avisoReducaoExibido = false;
+let avisoSuspensaoExibido = false;
+// ======================================
+// EXIBIR SOMENTE A VELOCIDADE DA FIBRA
+// ======================================
 
+function atualizarNomePlanoFibra() {
+    const elPlano = document.getElementById("nomePlanoMobile");
 
-// Garante que o código corre apenas após o HTML estar totalmente carregado
+    if (!elPlano || !cliente) return;
+
+    const nomePlano = String(
+        cliente.planointernet ||
+        cliente.servico_plano ||
+        ""
+    );
+
+    const match = nomePlano.match(
+        /(\d+(?:[.,]\d+)?)\s*(GBPS|MBPS|GB|MB|MEGAS?)/i
+    );
+
+    if (match) {
+        elPlano.innerText = `${match[1].replace(",", ".")}${match[2].toUpperCase().includes("GB") ? "GB" : "MB"}`;
+    } else {
+        elPlano.innerText = "Velocidade não identificada";
+    }
+
+    console.log("Plano original:", nomePlano);
+    console.log("Plano exibido:", elPlano.innerText);
+}
+// ======================================
+// ESTADO VISUAL INICIAL: NEUTRO
+// ======================================
+
+function aplicarEstadoInicialVerde() {
+    const sidebar = document.querySelector(".sidebar");
+    const caixaCliente = document.querySelector(".cliente");
+
+    const statusPlano = document.getElementById("statusPlanoMobile");
+    const detalheStatus = statusPlano?.closest(".detalhe-item");
+    const iconeStatus = detalheStatus?.querySelector("i");
+
+    sidebar?.classList.remove("alerta-reduzido", "alerta-suspenso");
+    caixaCliente?.classList.remove("caixa-cliente-reduzido");
+
+    detalheStatus?.classList.remove(
+        "status-alerta-laranja",
+        "status-alerta-vermelho"
+    );
+
+    if (statusPlano) {
+        statusPlano.classList.remove(
+            "status-reduzido-texto",
+            "status-suspenso-texto"
+        );
+
+        statusPlano.innerText = "Carregando...";
+        statusPlano.style.setProperty("color", "#64748b", "important");
+    }
+
+    if (iconeStatus) {
+        iconeStatus.className = "fa-solid fa-circle-notch fa-spin";
+        iconeStatus.style.setProperty("color", "#94a3b8", "important");
+    }
+
+    const icones = [
+        document.querySelector(".card-plano-mobile .icone-card"),
+        document.querySelector(".card-fatura-mobile .icone-card")
+    ];
+
+    icones.forEach((icone) => {
+        if (!icone) return;
+
+        icone.classList.remove("icone-reduzido");
+
+        icone.style.setProperty(
+            "background-color",
+            "transparent",
+            "important"
+        );
+
+        icone.style.setProperty(
+            "color",
+            "#94a3b8",
+            "important"
+        );
+
+        const iconeInterno = icone.querySelector("i");
+
+        if (iconeInterno) {
+            iconeInterno.style.setProperty(
+                "color",
+                "#94a3b8",
+                "important"
+            );
+        }
+    });
+
+    const tituloFatura = document.getElementById("tituloFatura");
+    const valorFatura = document.getElementById("valorFaturaMobile");
+
+    if (tituloFatura) {
+        tituloFatura.style.setProperty(
+            "color",
+            "#64748b",
+            "important"
+        );
+    }
+
+    if (valorFatura) {
+        valorFatura.style.setProperty(
+            "color",
+            "#64748b",
+            "important"
+        );
+    }
+}
+
+const blocoVencimento = document.getElementById("blocoVencimentoMobile");
+
+if (blocoVencimento) {
+    blocoVencimento.style.setProperty("color", "#1fb14d", "important");
+
+    blocoVencimento.querySelectorAll("*").forEach(elemento => {
+        elemento.style.setProperty("color", "#1fb14d", "important");
+        elemento.style.setProperty("fill", "#1fb14d", "important");
+        elemento.style.setProperty("stroke", "#1fb14d", "important");
+    });
+}
+
+const iconePlano = document.querySelector(
+    ".card-plano-mobile .icone-card"
+);
+
+if (iconePlano) {
+    iconePlano.style.setProperty(
+        "color",
+        "#1fb14d",
+        "important"
+    );
+
+    iconePlano.style.setProperty(
+        "fill",
+        "#1fb14d",
+        "important"
+    );
+
+    iconePlano.querySelectorAll("*").forEach(elemento => {
+        elemento.style.setProperty("color", "#1fb14d", "important");
+        elemento.style.setProperty("fill", "#1fb14d", "important");
+        elemento.style.setProperty("stroke", "#1fb14d", "important");
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    aplicarEstadoInicialVerde();
 
     if (!cliente) {
         console.warn("Nenhum contrato encontrado no localStorage.");
@@ -60,39 +213,35 @@ document.addEventListener("DOMContentLoaded", () => {
             "Telefone não informado";
     }
 
+ 
+atualizarNomePlanoFibra();
 
-const elPlano = document.getElementById('nomePlanoMobile');
 
-    if (elPlano) {
-        const nomePlano =
-            cliente.planointernet ||
-            cliente.servico_plano ||
-            "";
 
-        // Procura estritamente por números seguidos de MB ou GB logo no início ou em qualquer parte
-        const match = nomePlano.match(/(\d+)\s*(MB|GB)/i);
 
-        if (match) {
-            // Junta apenas o número e a unidade (ex:  + MB -> 100MB)
-            elPlano.innerText = (match[1] + match[2]).toUpperCase();
-        } else {
-            elPlano.innerText =
-                nomePlano.toUpperCase() ||
-                "PLANO RESIDENCIAL";
-        }
-    }
     const elVencimentoPlano =
         document.getElementById("vencimentoPlanoMobile");
 
     if (elVencimentoPlano && cliente.cobVencimento) {
-
         elVencimentoPlano.innerText =
             `Dia ${cliente.cobVencimento}`;
     }
 
-    // Busca o status real da conexão no SGP
-    verificarStatusConexao();
+    const valorFaturaInicial =
+        document.getElementById("valorFaturaMobile");
 
+    const vencimentoInicial =
+        document.getElementById("dataVencimentoMobile");
+
+    if (valorFaturaInicial) {
+        valorFaturaInicial.innerText = "Carregando...";
+    }
+
+    if (vencimentoInicial) {
+        vencimentoInicial.innerText = "Carregando...";
+    }
+
+    verificarStatusConexao();
     carregarFaturas();
     inicializarMenuUsuario();
     inicializarBotoesAcao();
@@ -103,107 +252,124 @@ const elPlano = document.getElementById('nomePlanoMobile');
 // STATUS DA CONEXÃO
 // ======================================
 
-function atualizarStatusConexao(online) {
+function atualizarStatusConexao(online, reduzido = false) {
 
-    const bolinha =
-        document.getElementById("bolinhaStatus");
-
-    const textoStatus =
-        document.getElementById("statusConexao");
+    const bolinha = document.getElementById("bolinhaStatus");
+    const textoStatus = document.getElementById("statusConexao");
 
     if (!bolinha || !textoStatus) return;
 
-    if (online) {
+    let cor;
+    let texto;
 
-        bolinha.className = "bolinha online";
-        bolinha.style.background = "#22c55e";
-        textoStatus.innerText = "Online";
+    if (reduzido) {
+        cor = "#f97316";
+        texto = "Online — velocidade reduzida";
+
+    } else if (online) {
+        cor = "#22c55e";
+        texto = "Online";
 
     } else {
-
-        bolinha.className = "bolinha offline";
-        bolinha.style.background = "#ef4444";
-        textoStatus.innerText = "Offline";
+        cor = "#ef4444";
+        texto = "Offline";
     }
+
+    bolinha.className = "bolinha piscar";
+    bolinha.style.setProperty("background-color", cor, "important");
+    bolinha.style.setProperty("--cor-luz", cor);
+
+    textoStatus.innerText = texto;
 }
 
 
 async function verificarStatusConexao() {
+
     try {
+
         const contratoAtual = JSON.parse(
             localStorage.getItem("contratoFibra") || "null"
         );
 
-        const senha = contratoAtual?.contratoCentralSenha;
+        if (!contratoAtual) {
+            atualizarStatusConexao(false);
+            return;
+        }
 
-        console.log("CONTRATO USADO:", contratoAtual);
+        // Verifica se o contrato está em velocidade reduzida
+        const statusContrato = (
+            contratoAtual.contratoStatusDisplay || ""
+        ).toLowerCase();
+
+        const estaEmReducao = statusContrato.includes("reduz");
+
+        console.log("STATUS DO CONTRATO:", statusContrato);
+        console.log("ESTÁ EM REDUÇÃO:", estaEmReducao);
+
+        // Cliente ativo em velocidade reduzida
+        if (estaEmReducao) {
+
+            atualizarStatusConexao(true, true);
+            return;
+        }
+
+        // Clientes normais continuam consultando o SGP
+        const senha = contratoAtual.contratoCentralSenha || "";
 
         const resposta = await fetch(
             `${API_BASE_URL}/verifica-acesso`,
             {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify({
-                    cpfcnpj: contratoAtual?.cpfCnpj,
+                    cpfcnpj: contratoAtual.cpfCnpj,
                     senha: senha,
-                    contrato: contratoAtual?.contratoId
+                    contrato: contratoAtual.contratoId
                 })
             }
         );
 
         const dados = await resposta.json();
 
-        console.log(
-            "RESPOSTA COMPLETA DO SGP:",
-            JSON.stringify(dados, null, 2)
-        );
+        console.log("RESPOSTA COMPLETA DO SGP:", dados);
 
         if (!resposta.ok) {
-            console.error("ERRO HTTP:", resposta.status, dados);
             atualizarStatusConexao(false);
             return;
         }
 
-        console.log("STATUS SGP:", dados.status);
-        console.log("MENSAGEM SGP:", dados.msg);
-
         atualizarStatusConexao(Number(dados.status) === 1);
 
-      } catch (erro) {
+    } catch (erro) {
+
         console.error("Erro ao verificar conexão:", erro);
     }
 }
+
+
 // ======================================
 // FATURAS E AVALIAÇÃO DE CORES/STATUS
 // ======================================
 
 async function carregarFaturas() {
-
     if (!contratoSelecionado) return;
 
     try {
-
         const resposta = await fetch(
             `${API_BASE_URL}/faturas`,
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 body: JSON.stringify({
-
-                    cpfcnpj:
-                        contratoSelecionado.cpfCnpj,
-
-                    senha:
-                        contratoSelecionado.contratoCentralSenha,
-
-                    contrato:
-                        contratoSelecionado.contratoId
+                    cpfcnpj: contratoSelecionado.cpfCnpj,
+                    senha: contratoSelecionado.contratoCentralSenha,
+                    contrato: contratoSelecionado.contratoId
                 })
             }
         );
@@ -217,7 +383,6 @@ async function carregarFaturas() {
         }
 
         if (!dados.faturas || dados.faturas.length === 0) {
-
             document.getElementById(
                 "valorFaturaMobile"
             ).innerText = "Nenhuma fatura";
@@ -251,7 +416,6 @@ async function carregarFaturas() {
             faturasCliente[0];
 
         if (!faturaAtualObjeto) {
-
             document.getElementById(
                 "valorFaturaMobile"
             ).innerText = "Nenhuma fatura";
@@ -271,27 +435,18 @@ async function carregarFaturas() {
             Number(faturaAtualObjeto.valor);
 
         if (!isNaN(valorPlano)) {
-
             document.getElementById(
                 "valorFaturaMobile"
             ).innerText =
                 `R$ ${valorPlano
                     .toFixed(2)
                     .replace(".", ",")}`;
-
-        } else {
-
-            console.log(
-                "Valor inválido:",
-                faturaAtualObjeto.valor
-            );
         }
 
         let dataFormatada =
             "--/--/----";
 
         if (faturaAtualObjeto.vencimento) {
-
             const dataPura =
                 faturaAtualObjeto.vencimento
                     .split("T")[0];
@@ -300,7 +455,6 @@ async function carregarFaturas() {
                 dataPura.split("-");
 
             if (partes.length === 3) {
-
                 dataFormatada =
                     `${partes[2]}/${partes[1]}/${partes[0]}`;
             }
@@ -317,7 +471,6 @@ async function carregarFaturas() {
         );
 
     } catch (erro) {
-
         console.error(
             "Erro ao carregar faturas:",
             erro
@@ -330,20 +483,16 @@ async function carregarFaturas() {
     }
 }
 
+
 // ==========================================
 // AVALIAÇÃO DE ESTADO
 // ==========================================
 
 function avaliarEstadoEaplicar(dataFormatada, textoRotuloPadrao) {
+    const statusSgp = String(cliente?.status || "").toLowerCase();
+    const statusDisplay = String(cliente?.contratoStatusDisplay || "").toLowerCase();
 
-    const statusSgp =
-        (cliente.status || "").toLowerCase();
-
-    const statusDisplay =
-        (cliente.contratoStatusDisplay || "").toLowerCase();
-
-    const statusCombinado =
-        `${statusSgp} ${statusDisplay}`;
+    const statusCombinado = `${statusSgp} ${statusDisplay}`;
 
     const estaSuspenso =
         statusCombinado.includes("suspenso") ||
@@ -354,9 +503,6 @@ function avaliarEstadoEaplicar(dataFormatada, textoRotuloPadrao) {
         statusCombinado.includes("reduz") ||
         statusCombinado.includes("bloqueio");
 
-    // IMPORTANTE:
-    // Fatura vencida NÃO altera o status do plano.
-
     if (estaSuspenso) {
 
         aplicarCoresEstadoCliente(
@@ -365,13 +511,34 @@ function avaliarEstadoEaplicar(dataFormatada, textoRotuloPadrao) {
             "Vencida em"
         );
 
+        // POP-UP DE SUSPENSÃO
+        if (!avisoSuspensaoExibido) {
+            avisoSuspensaoExibido = true;
+
+            alertPersonalizado(
+                "Sua internet foi bloqueada devido à falta de pagamento; Pague o boleto para restabelecer o sinal imediatamente.",
+                null,
+                "#dc2626"
+            );
+        }
+
     } else if (estaReduzido) {
 
         aplicarCoresEstadoCliente(
             "reduzido",
             dataFormatada,
-            "Vencida em"
+            "Vencimento:"
         );
+
+        if (!avisoReducaoExibido) {
+            avisoReducaoExibido = true;
+
+            alertPersonalizado(
+                "Sua velocidade foi reduzida devido ao atraso no pagamento. Pague o boleto para normalizar o sinal.",
+                null,
+                "#f97316"
+            );
+        }
 
     } else {
 
@@ -382,6 +549,7 @@ function avaliarEstadoEaplicar(dataFormatada, textoRotuloPadrao) {
         );
     }
 }
+
 
 // ==========================================
 // APLICADOR DINÂMICO DE CORES DA TELA
@@ -404,6 +572,15 @@ function aplicarCoresEstadoCliente(
             ".card-plano-mobile .icone-card"
         );
 
+    const iconePlanoCardInterno =
+        iconePlanoCard?.querySelector("i");
+       const elPlanoTexto =
+    document.getElementById("nomePlanoMobile");
+
+// Mantém a mesma identificação de velocidade
+// utilizada na função atualizarNomePlanoFibra()
+atualizarNomePlanoFibra();
+
     const iconeFaturaCard =
         document.querySelector(
             ".card-fatura-mobile .icone-card"
@@ -422,16 +599,6 @@ function aplicarCoresEstadoCliente(
     const statusPlanoMobile =
         document.getElementById(
             "statusPlanoMobile"
-        );
-
-    const statusConexao =
-        document.getElementById(
-            "statusConexao"
-        );
-
-    const bolinhaStatus =
-        document.getElementById(
-            "bolinhaStatus"
         );
 
     const elDataVencimento =
@@ -455,17 +622,33 @@ function aplicarCoresEstadoCliente(
         document.getElementById(
             "iconeCalendarioPlano"
         );
+// COR DA DATA DE VENCIMENTO NO CARD DO PLANO
+const vencimentoPlanoMobile =
+    document.getElementById("vencimentoPlanoMobile");
 
+if (vencimentoPlanoMobile) {
+
+    const corVencimento =
+        estado === "suspenso"
+            ? "#dc2626"
+            : estado === "reduzido"
+                ? "#f97316"
+                : "#00b140";
+
+    vencimentoPlanoMobile.style.setProperty(
+        "color",
+        corVencimento,
+        "important"
+    );
+}
 
     if (elDataVencimento) {
-
         elDataVencimento.innerText =
             dataFormatada;
     }
 
 
     if (blocoVencimento) {
-
         blocoVencimento.innerHTML =
             `<i class="fa-regular fa-clock"></i>
              <span>${textoRotulo}:</span>
@@ -475,8 +658,6 @@ function aplicarCoresEstadoCliente(
 
     if (!sidebar || !caixaCliente) return;
 
-
-    // Limpa classes anteriores
     sidebar.classList.remove(
         "alerta-reduzido",
         "alerta-suspenso"
@@ -487,7 +668,6 @@ function aplicarCoresEstadoCliente(
     );
 
     if (containerTopoFatura) {
-
         containerTopoFatura.classList.remove(
             "fatura-alerta"
         );
@@ -495,134 +675,57 @@ function aplicarCoresEstadoCliente(
 
 
     // ======================================
-    // SUSPENSO
+    // 1. SUSPENSO
     // ======================================
 
     if (estado === "suspenso") {
 
-        sidebar.classList.add(
-            "alerta-suspenso"
-        );
-
-        caixaCliente.classList.add(
-            "caixa-cliente-reduzido"
-        );
+        sidebar.classList.add("alerta-suspenso");
+        caixaCliente.classList.add("caixa-cliente-reduzido");
 
         if (containerTopoFatura) {
-
-            containerTopoFatura.classList.add(
-                "fatura-alerta"
-            );
+            containerTopoFatura.classList.add("fatura-alerta");
         }
 
         if (iconePlanoCard) {
+            iconePlanoCard.classList.add("icone-reduzido");
+            iconePlanoCard.style.setProperty("background-color", "#fff1f2", "important");
+            iconePlanoCard.style.setProperty("color", "#dc2626", "important");
+        }
 
-            iconePlanoCard.classList.add(
-                "icone-reduzido"
-            );
+        if (iconePlanoCardInterno) {
+            iconePlanoCardInterno.style.setProperty("color", "#dc2626", "important");
+        }
+
+        if (elPlanoTexto) {
+            elPlanoTexto.style.setProperty("color", "#dc2626", "important");
         }
 
         if (iconeFaturaCard) {
-
-            iconeFaturaCard.classList.add(
-                "icone-reduzido"
-            );
+            iconeFaturaCard.classList.add("icone-reduzido");
         }
 
         if (detalheItemStatus) {
-
-            detalheItemStatus.classList.add(
-                "status-alerta-laranja"
-            );
+            detalheItemStatus.classList.remove("status-alerta-laranja");
+            detalheItemStatus.classList.add("status-alerta-vermelho");
         }
 
-
-        // Ícone Meu Plano em vermelho
-        if (iconePlanoCard) {
-
-            iconePlanoCard.style.setProperty(
-                "background-color",
-                "#fff1f2",
-                "important"
-            );
-
-            iconePlanoCard.style.setProperty(
-                "color",
-                "#dc2626",
-                "important"
-            );
-        }
-
-
-        // Ícone da fatura em vermelho
-        if (iconeFaturaCard) {
-
-            iconeFaturaCard.style.setProperty(
-                "background-color",
-                "#fff1f2",
-                "important"
-            );
-
-            iconeFaturaCard.style.setProperty(
-                "color",
-                "#dc2626",
-                "important"
-            );
-
-            const iconeInternoFatura =
-                iconeFaturaCard.querySelector("i");
-
-            if (iconeInternoFatura) {
-
-                iconeInternoFatura.style.setProperty(
-                    "color",
-                    "#dc2626",
-                    "important"
-                );
-            }
-        }
-
-
-        // Calendário vermelho
         if (iconeCalendarioPlano) {
-
-            iconeCalendarioPlano.style.setProperty(
-                "color",
-                "#dc2626",
-                "important"
-            );
+            iconeCalendarioPlano.style.setProperty("color", "#dc2626", "important");
         }
-
 
         if (blocoVencimento) {
-
-            blocoVencimento.className =
-                "fatura-vencimento-mobile alerta-vencido";
-
-            blocoVencimento.style.background =
-                "#fff1f2";
-
-            blocoVencimento.style.color =
-                "#e11d48";
-
-            blocoVencimento.style.border =
-                "1px solid #fecdd3";
+            blocoVencimento.className = "fatura-vencimento-mobile alerta-vencido";
+            blocoVencimento.style.background = "#fff1f2";
+            blocoVencimento.style.color = "#e11d48";
+            blocoVencimento.style.border = "1px solid #fecdd3";
         }
-
 
         if (statusPlanoMobile) {
-
-            statusPlanoMobile.innerText =
-                "Suspenso";
-
-            statusPlanoMobile.style.setProperty(
-                "color",
-                "#dc2626",
-                "important"
-            );
+            statusPlanoMobile.innerText = "Suspenso";
+            statusPlanoMobile.style.setProperty("color", "#dc2626", "important");
         }
 
-        // Exibe o triângulo vermelho no status
         if (iconeStatusPlano) {
             iconeStatusPlano.className = "fa-solid fa-triangle-exclamation";
             iconeStatusPlano.style.setProperty("color", "#dc2626", "important");
@@ -630,88 +733,56 @@ function aplicarCoresEstadoCliente(
 
 
     // ======================================
-    // VELOCIDADE REDUZIDA
+    // 2. VELOCIDADE REDUZIDA
     // ======================================
 
     } else if (estado === "reduzido") {
 
-        sidebar.classList.add(
-            "alerta-reduzido"
-        );
-
-        caixaCliente.classList.add(
-            "caixa-cliente-reduzido"
-        );
+        sidebar.classList.add("alerta-reduzido");
+        caixaCliente.classList.add("caixa-cliente-reduzido");
 
         if (containerTopoFatura) {
-
-            containerTopoFatura.classList.add(
-                "fatura-alerta"
-            );
+            containerTopoFatura.classList.add("fatura-alerta");
         }
 
         if (iconePlanoCard) {
+            iconePlanoCard.classList.add("icone-reduzido");
+            iconePlanoCard.style.setProperty("background-color", "#fff7ed", "important");
+            iconePlanoCard.style.setProperty("color", "#ea580c", "important");
+        }
 
-            iconePlanoCard.classList.add(
-                "icone-reduzido"
-            );
+        if (iconePlanoCardInterno) {
+            iconePlanoCardInterno.style.setProperty("color", "#ea580c", "important");
+        }
+
+        if (elPlanoTexto) {
+            elPlanoTexto.style.setProperty("color", "#ea580c", "important");
         }
 
         if (iconeFaturaCard) {
-
-            iconeFaturaCard.classList.add(
-                "icone-reduzido"
-            );
+            iconeFaturaCard.classList.add("icone-reduzido");
         }
 
         if (detalheItemStatus) {
-
-            detalheItemStatus.classList.add(
-                "status-alerta-laranja"
-            );
+            detalheItemStatus.classList.add("status-alerta-laranja");
         }
 
-
-        // Calendário laranja
         if (iconeCalendarioPlano) {
-
-            iconeCalendarioPlano.style.setProperty(
-                "color",
-                "#ea580c",
-                "important"
-            );
+            iconeCalendarioPlano.style.setProperty("color", "#ea580c", "important");
         }
-
 
         if (blocoVencimento) {
-
-            blocoVencimento.className =
-                "fatura-vencimento-mobile alerta-vencido";
-
-            blocoVencimento.style.background =
-                "#fff1f2";
-
-            blocoVencimento.style.color =
-                "#e11d48";
-
-            blocoVencimento.style.border =
-                "1px solid #fecdd3";
+            blocoVencimento.className = "fatura-vencimento-mobile alerta-vencido";
+            blocoVencimento.style.background = "#fff1f2";
+            blocoVencimento.style.color = "#e11d48";
+            blocoVencimento.style.border = "1px solid #fecdd3";
         }
-
 
         if (statusPlanoMobile) {
-
-            statusPlanoMobile.innerText =
-                "Velocidade reduzida";
-
-            statusPlanoMobile.style.setProperty(
-                "color",
-                "#f97316",
-                "important"
-            );
+            statusPlanoMobile.innerText = "Velocidade reduzida";
+            statusPlanoMobile.style.setProperty("color", "#f97316", "important");
         }
 
-        // Exibe o triângulo laranja no status
         if (iconeStatusPlano) {
             iconeStatusPlano.className = "fa-solid fa-triangle-exclamation";
             iconeStatusPlano.style.setProperty("color", "#ea580c", "important");
@@ -719,54 +790,34 @@ function aplicarCoresEstadoCliente(
 
 
     // ======================================
-    // ATIVO
+    // 3. ATIVO
     // ======================================
 
     } else {
 
         if (iconePlanoCard) {
-
-            iconePlanoCard.classList.remove(
-                "icone-reduzido"
-            );
-
-            iconePlanoCard.style.setProperty(
-                "background-color",
-                "#eef8f1",
-                "important"
-            );
-
-            iconePlanoCard.style.setProperty(
-                "color",
-                "#00b140",
-                "important"
-            );
+            iconePlanoCard.classList.remove("icone-reduzido");
+            iconePlanoCard.style.setProperty("background-color", "#eef8f1", "important");
+            iconePlanoCard.style.setProperty("color", "#00b140", "important");
         }
 
+        if (iconePlanoCardInterno) {
+            iconePlanoCardInterno.style.setProperty("color", "#00b140", "important");
+        }
+
+        if (elPlanoTexto) {
+            elPlanoTexto.style.setProperty("color", "#00b140", "important");
+        }
 
         if (iconeFaturaCard) {
-
-            iconeFaturaCard.classList.remove(
-                "icone-reduzido"
-            );
-
-            iconeFaturaCard.style.setProperty(
-                "background-color",
-                "#eef8f1",
-                "important"
-            );
-
-            iconeFaturaCard.style.setProperty(
-                "color",
-                "#00b140",
-                "important"
-            );
+            iconeFaturaCard.classList.remove("icone-reduzido");
+            iconeFaturaCard.style.setProperty("background-color", "#eef8f1", "important");
+            iconeFaturaCard.style.setProperty("color", "#00b140", "important");
 
             const iconeInternoFatura =
                 iconeFaturaCard.querySelector("i");
 
             if (iconeInternoFatura) {
-
                 iconeInternoFatura.style.setProperty(
                     "color",
                     "#00b140",
@@ -775,35 +826,22 @@ function aplicarCoresEstadoCliente(
             }
         }
 
-
-        // Calendário volta ao padrão
         if (iconeCalendarioPlano) {
-
             iconeCalendarioPlano.style.removeProperty(
                 "color"
             );
         }
 
-
         if (detalheItemStatus) {
-
             detalheItemStatus.classList.remove(
-                "status-alerta-laranja"
+                "status-alerta-laranja",
+                "status-alerta-vermelho"
             );
-
-            detalheItemStatus.style.setProperty(
-                "color",
-                "#00b140",
-                "important"
-            );
+            detalheItemStatus.style.removeProperty("color");
         }
 
-
         if (iconeStatusPlano) {
-
-            // Troca o ícone para um sinal de verificação (Check) verde
             iconeStatusPlano.className = "fa-solid fa-circle-check";
-
             iconeStatusPlano.style.setProperty(
                 "color",
                 "#00b140",
@@ -811,9 +849,7 @@ function aplicarCoresEstadoCliente(
             );
         }
 
-
         if (blocoVencimento) {
-
             blocoVencimento.className =
                 "fatura-vencimento-mobile";
 
@@ -827,9 +863,7 @@ function aplicarCoresEstadoCliente(
                 "1px solid #e2e8f0";
         }
 
-
         if (statusPlanoMobile) {
-
             statusPlanoMobile.innerText =
                 "Ativo";
 
@@ -848,7 +882,6 @@ function aplicarCoresEstadoCliente(
 // ======================================
 
 function inicializarMenuUsuario() {
-
     const btnUser =
         document.querySelector(
             ".btn-user-sidebar"
@@ -860,32 +893,22 @@ function inicializarMenuUsuario() {
         );
 
     if (btnUser && menuUser) {
-
         btnUser.addEventListener(
             "click",
             e => {
-
                 e.stopPropagation();
-
-                menuUser.classList.toggle(
-                    "ativo"
-                );
+                menuUser.classList.toggle("ativo");
             }
         );
-
 
         document.addEventListener(
             "click",
             e => {
-
                 if (
                     !menuUser.contains(e.target) &&
                     !btnUser.contains(e.target)
                 ) {
-
-                    menuUser.classList.remove(
-                        "ativo"
-                    );
+                    menuUser.classList.remove("ativo");
                 }
             }
         );
@@ -898,45 +921,35 @@ function inicializarMenuUsuario() {
 // ======================================
 
 function inicializarBotoesAcao() {
-
     const botoesCopiar =
         document.querySelectorAll("button");
 
     botoesCopiar.forEach(btn => {
-
         if (
             btn.innerText.includes(
                 "Copiar PIX"
             )
         ) {
-
             btn.addEventListener(
                 "click",
                 () => {
-
                     if (window.pixAtual) {
-
                         navigator.clipboard
                             .writeText(
                                 window.pixAtual
                             )
                             .then(() => {
-
                                 alertPersonalizado(
                                     "Código PIX copiado com sucesso!"
                                 );
-
                             })
                             .catch(err => {
-
                                 console.error(
                                     "Erro ao copiar PIX:",
                                     err
                                 );
                             });
-
                     } else {
-
                         alertPersonalizado(
                             "Código PIX indisponível no momento."
                         );
@@ -945,17 +958,14 @@ function inicializarBotoesAcao() {
             );
         }
 
-
         if (
             btn.innerText.includes(
                 "Histórico"
             )
         ) {
-
             btn.addEventListener(
                 "click",
                 () => {
-
                     abrirHistoricoFaturas();
                 }
             );
@@ -970,9 +980,9 @@ function inicializarBotoesAcao() {
 
 function alertPersonalizado(
     mensagem,
-    onOk
+    onOk,
+    cor = "#00b140"
 ) {
-
     const overlayAntigo =
         document.getElementById(
             "modalOverlayPersonalizado"
@@ -981,7 +991,6 @@ function alertPersonalizado(
     if (overlayAntigo) {
         overlayAntigo.remove();
     }
-
 
     const overlay =
         document.createElement("div");
@@ -1003,7 +1012,6 @@ function alertPersonalizado(
         backdrop-filter: blur(2px);
     `;
 
-
     const caixa =
         document.createElement("div");
 
@@ -1019,7 +1027,6 @@ function alertPersonalizado(
         animation: escalaModal 0.2s ease-in-out;
         position: relative;
     `;
-
 
     caixa.innerHTML = `
         <button
@@ -1051,7 +1058,7 @@ function alertPersonalizado(
         <div
             style="
                 font-size: 36px;
-                color: #00b140;
+                color: ${cor};
                 margin-bottom: 12px;
                 margin-top: 8px;
             "
@@ -1074,7 +1081,7 @@ function alertPersonalizado(
         <button
             id="btnOkModal"
             style="
-                background: #00b140;
+                background: ${cor};
                 color: white;
                 border: none;
                 padding: 12px 24px;
@@ -1089,44 +1096,33 @@ function alertPersonalizado(
         </button>
     `;
 
-
     overlay.appendChild(caixa);
-
-    document.body.appendChild(
-        overlay
-    );
-
+    document.body.appendChild(overlay);
 
     document
         .getElementById("btnOkModal")
         .addEventListener(
             "click",
             () => {
-
                 overlay.remove();
-
                 if (onOk) {
                     onOk();
                 }
             }
         );
 
-
     document
         .getElementById("fecharModalX")
         .addEventListener(
             "click",
             () => {
-
                 overlay.remove();
             }
         );
 
-
     overlay.addEventListener(
         "click",
         e => {
-
             if (e.target === overlay) {
                 overlay.remove();
             }
@@ -1135,11 +1131,7 @@ function alertPersonalizado(
 }
 
 
-function confirmarPersonalizado(
-    mensagem,
-    onSim
-) {
-
+function confirmarPersonalizado(mensagem, onSim, cor = "#00b140") {
     const overlayAntigo =
         document.getElementById(
             "modalOverlayPersonalizado"
@@ -1148,7 +1140,6 @@ function confirmarPersonalizado(
     if (overlayAntigo) {
         overlayAntigo.remove();
     }
-
 
     const overlay =
         document.createElement("div");
@@ -1170,7 +1161,6 @@ function confirmarPersonalizado(
         backdrop-filter: blur(2px);
     `;
 
-
     const caixa =
         document.createElement("div");
 
@@ -1186,12 +1176,11 @@ function confirmarPersonalizado(
         animation: escalaModal 0.2s ease-in-out;
     `;
 
-
     caixa.innerHTML = `
         <div
             style="
                 font-size: 36px;
-                color: #00b140;
+                color: ${cor};
                 margin-bottom: 12px;
             "
         >
@@ -1216,7 +1205,6 @@ function confirmarPersonalizado(
                 gap: 10px;
             "
         >
-
             <button
                 id="btnNaoModal"
                 style="
@@ -1237,7 +1225,7 @@ function confirmarPersonalizado(
             <button
                 id="btnSimModal"
                 style="
-                    background: #00b140;
+                    background: ${cor};
                     color: white;
                     border: none;
                     padding: 12px;
@@ -1250,39 +1238,29 @@ function confirmarPersonalizado(
             >
                 Sim
             </button>
-
         </div>
     `;
 
-
     overlay.appendChild(caixa);
-
-    document.body.appendChild(
-        overlay
-    );
-
+    document.body.appendChild(overlay);
 
     document
         .getElementById("btnSimModal")
         .addEventListener(
             "click",
             () => {
-
                 overlay.remove();
-
                 if (onSim) {
                     onSim();
                 }
             }
         );
 
-
     document
         .getElementById("btnNaoModal")
         .addEventListener(
             "click",
             () => {
-
                 overlay.remove();
             }
         );
@@ -1294,15 +1272,9 @@ function confirmarPersonalizado(
 // ======================================
 
 function abrirAtualizacaoDados() {
-
-    console.log(
-        "Atualizar dados acionado."
-    );
-
     alertPersonalizado(
         "Você será direcionado para um de nossos atendentes.",
         () => {
-
             window.open(
                 "https://unicatelecom.web.vmix.chat/",
                 "_blank"
@@ -1317,12 +1289,10 @@ function abrirAtualizacaoDados() {
 // ======================================
 
 function abrirModalSair() {
-
     const modal =
         document.getElementById("modalSair");
 
     if (modal) {
-
         modal.style.display = "flex";
     }
 }
@@ -1333,12 +1303,10 @@ function abrirModalSair() {
 // ======================================
 
 function fecharModalSair() {
-
     const modal =
         document.getElementById("modalSair");
 
     if (modal) {
-
         modal.style.display = "none";
     }
 }
@@ -1349,7 +1317,6 @@ function fecharModalSair() {
 // ======================================
 
 function confirmarSaida() {
-
     window.location.href =
         "login.html";
 }
@@ -1361,7 +1328,6 @@ function confirmarSaida() {
 
 window.fecharHistorico =
     function () {
-
         let modal =
             document.getElementById(
                 "modalHistorico"
@@ -1378,11 +1344,6 @@ window.fecharHistorico =
 
 
 function abrirHistoricoFaturas() {
-
-    console.log(
-        "Abrir histórico acionado."
-    );
-
     let modal =
         document.getElementById(
             "modalHistorico"
@@ -1391,9 +1352,7 @@ function abrirHistoricoFaturas() {
             ".modal"
         );
 
-
     if (modal) {
-
         modal.style.display =
             "flex";
 
@@ -1409,7 +1368,6 @@ function abrirHistoricoFaturas() {
         modal.style.backdropFilter =
             "blur(6px)";
 
-
         const conteudoModal =
             modal.querySelector(
                 ".modal-conteudo"
@@ -1418,9 +1376,7 @@ function abrirHistoricoFaturas() {
                 "div"
             );
 
-
         if (conteudoModal) {
-
             conteudoModal.style.cssText = `
                 background: linear-gradient(
                     135deg,
@@ -1446,31 +1402,26 @@ function abrirHistoricoFaturas() {
                 border-top: 5px solid #10b981;
             `;
 
-
             conteudoModal
                 .querySelectorAll(
                     "h2, .titulo-historico"
                 )
                 .forEach(el => {
-
                     if (
                         !el.closest(
                             ".modal-header-custom"
                         )
                     ) {
-
                         el.style.display =
                             "none";
                     }
                 });
-
 
             if (
                 !conteudoModal.querySelector(
                     ".modal-header-custom"
                 )
             ) {
-
                 const headerCustom =
                     document.createElement(
                         "div"
@@ -1488,10 +1439,8 @@ function abrirHistoricoFaturas() {
                     padding-bottom: 12px;
                 `;
 
-
                 headerCustom.innerHTML = `
                     <div>
-
                         <h2
                             style="
                                 margin: 0;
@@ -1513,7 +1462,6 @@ function abrirHistoricoFaturas() {
                         >
                             Consulte o seu registo de pagamentos.
                         </p>
-
                     </div>
 
                     <button
@@ -1547,11 +1495,9 @@ function abrirHistoricoFaturas() {
             }
         }
 
-
         modal
             .querySelectorAll("button")
             .forEach(btn => {
-
                 if (
                     btn.textContent
                         .toLowerCase()
@@ -1560,12 +1506,10 @@ function abrirHistoricoFaturas() {
                         ".modal-header-custom"
                     )
                 ) {
-
                     btn.style.display =
                         "none";
                 }
             });
-
 
         const corpoTabela =
             document.getElementById(
@@ -1578,18 +1522,14 @@ function abrirHistoricoFaturas() {
                 "tbody"
             );
 
-
         if (corpoTabela) {
-
             corpoTabela.innerHTML =
                 "";
-
 
             if (
                 !faturasCliente ||
                 faturasCliente.length === 0
             ) {
-
                 corpoTabela.innerHTML = `
                     <tr>
                         <td
@@ -1608,10 +1548,8 @@ function abrirHistoricoFaturas() {
                 return;
             }
 
-
             faturasCliente.forEach(
                 fatura => {
-
                     let dataVenc =
                         fatura.vencimento ||
                         "";
@@ -1619,9 +1557,7 @@ function abrirHistoricoFaturas() {
                     let vencimentoFmt =
                         "--/--/----";
 
-
                     if (dataVenc) {
-
                         let dataPura =
                             dataVenc.split("T")[0];
 
@@ -1631,24 +1567,20 @@ function abrirHistoricoFaturas() {
                         if (
                             partesData.length === 3
                         ) {
-
                             vencimentoFmt =
                                 `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
                         }
                     }
-
 
                     let valorBruto =
                         fatura.valor ??
                         fatura.valorcorrigido ??
                         0;
 
-
                     if (
                         typeof valorBruto ===
                         "string"
                     ) {
-
                         valorBruto =
                             valorBruto
                                 .replace(
@@ -1661,7 +1593,6 @@ function abrirHistoricoFaturas() {
                             valorBruto.includes(",") &&
                             !valorBruto.includes(".")
                         ) {
-
                             valorBruto =
                                 valorBruto.replace(
                                     ",",
@@ -1670,24 +1601,20 @@ function abrirHistoricoFaturas() {
                         }
                     }
 
-
                     let valorFmt =
                         Number(valorBruto)
                             .toFixed(2)
                             .replace(".", ",");
-
 
                     let dataPag =
                         fatura.data_pagamento ||
                         fatura.datapagamento ||
                         "";
 
-
                     let statusFat =
                         (fatura.status || "")
                             .trim()
                             .toUpperCase();
-
 
                     const hoje =
                         new Date();
@@ -1699,7 +1626,6 @@ function abrirHistoricoFaturas() {
                         0
                     );
 
-
                     const dataVencimento =
                         new Date(
                             (fatura.vencimento || "")
@@ -1707,15 +1633,12 @@ function abrirHistoricoFaturas() {
                             "T00:00:00"
                         );
 
-
                     const faturaEmAtraso =
                         statusFat === "GERADO" &&
                         dataVencimento < hoje;
 
-
                     let valorEStatusHTML =
                         "";
-
 
                     if (
                         dataPag ||
@@ -1723,7 +1646,6 @@ function abrirHistoricoFaturas() {
                         statusFat === "LIQUIDADO" ||
                         statusFat === "RECEBIDO"
                     ) {
-
                         valorEStatusHTML = `
                             <div
                                 style="
@@ -1732,7 +1654,6 @@ function abrirHistoricoFaturas() {
                                     align-items:flex-start;
                                 "
                             >
-
                                 <span
                                     style="
                                         color:#047857;
@@ -1759,12 +1680,9 @@ function abrirHistoricoFaturas() {
                                 >
                                     Pago
                                 </span>
-
                             </div>
                         `;
-
                     } else if (faturaEmAtraso) {
-
                         valorEStatusHTML = `
                             <div
                                 style="
@@ -1773,7 +1691,6 @@ function abrirHistoricoFaturas() {
                                     align-items:flex-start;
                                 "
                             >
-
                                 <span
                                     style="
                                         color:#991b1b;
@@ -1801,12 +1718,9 @@ function abrirHistoricoFaturas() {
                                 >
                                     Gerado (fatura em atraso)
                                 </span>
-
                             </div>
                         `;
-
                     } else {
-
                         valorEStatusHTML = `
                             <div
                                 style="
@@ -1815,7 +1729,6 @@ function abrirHistoricoFaturas() {
                                     align-items:flex-start;
                                 "
                             >
-
                                 <span
                                     style="
                                         color:#0f172a;
@@ -1842,18 +1755,14 @@ function abrirHistoricoFaturas() {
                                 >
                                     ${fatura.status || "Em aberto"}
                                 </span>
-
                             </div>
                         `;
                     }
 
-
                     let dataPagFmt =
                         "--/--/----";
 
-
                     if (dataPag) {
-
                         let dataPuraPag =
                             dataPag.split("T")[0];
 
@@ -1863,18 +1772,13 @@ function abrirHistoricoFaturas() {
                         if (
                             partesPag.length === 3
                         ) {
-
                             dataPagFmt =
                                 `${partesPag[2]}/${partesPag[1]}/${partesPag[0]}`;
-
                         } else {
-
                             dataPagFmt =
                                 dataPag;
                         }
-
                     } else {
-
                         dataPagFmt = `
                             <span
                                 style="
@@ -1887,10 +1791,8 @@ function abrirHistoricoFaturas() {
                         `;
                     }
 
-
                     let urlDocumento = "";
                     let textoBotao = "Baixar";
-
 
                     if (
                         dataPag ||
@@ -1898,7 +1800,6 @@ function abrirHistoricoFaturas() {
                         statusFat === "LIQUIDADO" ||
                         statusFat === "RECEBIDO"
                     ) {
-                        // USAR DIRETAMENTE A PROPRIEDADE RECIBO DA FATURA
                         urlDocumento =
                             fatura.recibo ||
                             fatura.link_completo ||
@@ -1906,9 +1807,7 @@ function abrirHistoricoFaturas() {
 
                         textoBotao =
                             "Recibo";
-
                     } else {
-
                         urlDocumento =
                             fatura.link_completo ||
                             fatura.link;
@@ -1917,22 +1816,18 @@ function abrirHistoricoFaturas() {
                             "Boleto";
                     }
 
-
                     let botaoBaixar = "";
-
 
                     if (
                         urlDocumento &&
                         urlDocumento !== "#"
                     ) {
-
                         let urlFinal =
                             urlDocumento.startsWith(
                                 "http"
                             )
                                 ? urlDocumento
                                 : `https://unicatelecom.sgplocal.com.br${urlDocumento}`;
-
 
                         botaoBaixar = `
                             <button
@@ -1964,9 +1859,7 @@ function abrirHistoricoFaturas() {
                                 ${textoBotao}
                             </button>
                         `;
-
                     } else {
-
                         botaoBaixar = `
                             <span
                                 style="
@@ -1984,15 +1877,12 @@ function abrirHistoricoFaturas() {
                         `;
                     }
 
-
                     const linha =
                         document.createElement(
                             "tr"
                         );
 
-
                     if (faturaEmAtraso) {
-
                         linha.style.backgroundColor =
                             "#fee2e2";
 
@@ -2005,27 +1895,21 @@ function abrirHistoricoFaturas() {
                         linha.style.boxShadow =
                             "0 0 0 1px rgba(239,68,68,0.15)";
 
-
                         linha.onmouseover =
                             () => {
-
                                 linha.style.backgroundColor =
                                     "#fecaca";
                             };
 
-
                         linha.onmouseout =
                             () => {
-
                                 linha.style.backgroundColor =
                                     "#fee2e2";
                             };
                     }
 
-
                     linha.style.transition =
                         "background-color 0.2s";
-
 
                     linha.innerHTML = `
                         <td
@@ -2075,44 +1959,35 @@ function abrirHistoricoFaturas() {
                         </td>
                     `;
 
-
                     corpoTabela.appendChild(
                         linha
                     );
                 }
             );
 
-
             const tabelaPai =
                 corpoTabela.closest(
                     "table"
                 );
 
-
             if (tabelaPai) {
-
                 tabelaPai.style.width =
                     "100%";
 
                 tabelaPai.style.borderCollapse =
                     "collapse";
 
-
                 const cabecalho =
                     tabelaPai.querySelector(
                         "thead"
                     );
 
-
                 if (cabecalho) {
-
                     cabecalho.style.display =
                         "table-header-group";
 
-
-                    cabecalho.innerHTML = `
+                    let cabecalhoHtml = `
                         <tr>
-
                             <th
                                 style="
                                     padding: 8px 12px;
@@ -2176,18 +2051,16 @@ function abrirHistoricoFaturas() {
                             >
                                 Recibo
                             </th>
-
                         </tr>
                     `;
+                    cabecalho.innerHTML = cabecalhoHtml;
                 }
-
 
                 if (
                     !tabelaPai.parentElement.classList.contains(
                         "tabela-scroll-wrapper"
                     )
                 ) {
-
                     const wrapper =
                         document.createElement(
                             "div"
@@ -2212,7 +2085,6 @@ function abrirHistoricoFaturas() {
         }
 
     } else {
-
         alertPersonalizado(
             "Modal de histórico não encontrada no HTML."
         );
@@ -2220,15 +2092,27 @@ function abrirHistoricoFaturas() {
 }
 
 
-// ======================================
-// SPEEDTEST
-// ======================================
+
+ // ======================================
+ // SPEEDTEST — ABRIR EM NOVA ABA
+ // ======================================
+
 
 function abrirSpeedtest() {
 
-    window.location.href =
-        "https://unicatelecom.speedtestcustom.com/";
+    alertPersonalizado(
+        "Você será direcionado para uma nova página.",
+        () => {
+            window.open(
+                "https://unicatelecom.speedtestcustom.com/",
+                "_blank",
+                "noopener,noreferrer"
+            );
+        }
+    );
+
 }
+
 
 
 // ======================================
@@ -2236,19 +2120,19 @@ function abrirSpeedtest() {
 // ======================================
 
 function toggleMenuUsuarioSidebar() {
-
     const sidebar =
         document.getElementById(
             "sidebar-usuario"
         );
 
     if (sidebar) {
-
         sidebar.classList.toggle(
             "ativo"
         );
     }
 }
+
+
 function aplicarEstadoFinanceiro(fatura, dataFormatada) {
     const cardFatura =
         document.getElementById("cardFaturaMobile") ||
@@ -2268,6 +2152,8 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
 
     const blocoVencimento =
         document.getElementById("blocoVencimentoMobile");
+
+    const botaoPix = cardFatura?.querySelector("button");
 
     if (!cardFatura || !blocoVencimento) return;
 
@@ -2304,10 +2190,6 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
         vencimento &&
         hoje > vencimento;
 
-    // ==========================================
-    // CALCULA DIAS DE ATRASO
-    // ==========================================
-
     let diasAtraso = 0;
 
     if (vencida) {
@@ -2320,22 +2202,21 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             );
     }
 
-    // ==========================================
-    // FATURA VENCIDA
-    // ==========================================
-
     if (vencida) {
+        // ADICIONA A PULSAÇÃO VERMELHA NO CARD E NO BOTÃO PIX QUANDO ESTIVER DEVENDO
+        cardFatura.classList.add("card-fatura-atrasada");
+        if (botaoPix) {
+            botaoPix.classList.add("em-debito");
+        }
 
-        // Título vermelho com quantidade de dias
         if (tituloFatura) {
-
             const textoAtraso =
                 diasAtraso === 1
                     ? "1 dia de atraso"
                     : `${diasAtraso} dias de atraso`;
 
             tituloFatura.innerText =
-                `Fatura Atual (${textoAtraso})`;
+                `Valor original até a data de vencimento (${textoAtraso})`;
 
             tituloFatura.style.setProperty(
                 "color",
@@ -2344,7 +2225,6 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             );
         }
 
-        // Valor continua preto
         if (valorFatura) {
             valorFatura.style.setProperty(
                 "color",
@@ -2353,7 +2233,6 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             );
         }
 
-        // Ícone vermelho
         if (iconeCarteira) {
             iconeCarteira.style.setProperty(
                 "background-color",
@@ -2376,7 +2255,6 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             );
         }
 
-        // Vencimento vermelho
         blocoVencimento.classList.add(
             "alerta-vencido"
         );
@@ -2418,15 +2296,15 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
         `;
 
     } else {
-
-        // ==========================================
-        // FATURA EM DIA
-        // ==========================================
+        // REMOVE A PULSAÇÃO QUANDO A FATURA ESTIVER EM DIA
+        cardFatura.classList.remove("card-fatura-atrasada");
+        if (botaoPix) {
+            botaoPix.classList.remove("em-debito");
+        }
 
         if (tituloFatura) {
-
             tituloFatura.innerText =
-                "Fatura Atual";
+                "Valor original até a data de vencimento";
 
             tituloFatura.style.setProperty(
                 "color",
@@ -2435,7 +2313,6 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             );
         }
 
-        // Valor normal
         if (valorFatura) {
             valorFatura.style.setProperty(
                 "color",
@@ -2444,9 +2321,7 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             );
         }
 
-        // Ícone verde
         if (iconeCarteira) {
-
             iconeCarteira.classList.remove(
                 "icone-reduzido"
             );
@@ -2472,7 +2347,6 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             );
         }
 
-        // Vencimento normal
         blocoVencimento.classList.remove(
             "alerta-vencido"
         );
@@ -2510,6 +2384,7 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
         `;
     }
 }
+
 
 // ======================================
 // FUNÇÃO PARA BAIXAR COMPROVANTE VIA BACKEND
@@ -2556,64 +2431,38 @@ async function baixarComprovante(url) {
         window.open(url, "_blank");
     }
 }
+
+
 function abrirConfirmacaoVolta() {
-
-    // ======================================
-    // PC: VOLTA DIRETO
-    // ======================================
-
     if (window.innerWidth > 768) {
-
         window.location.href = "servicos.html";
-
         return;
     }
-
-
-    // ======================================
-    // MOBILE: ABRE CONFIRMAÇÃO
-    // ======================================
 
     const modal =
         document.getElementById("modalVoltar");
 
     if (modal) {
-
         modal.style.display = "flex";
     }
 }
 
 
-// ======================================
-// CONFIRMAR VOLTA
-// ======================================
-
 window.confirmarVolta = function () {
-
     window.location.href =
         "servicos.html";
 };
 
 
-// ======================================
-// FECHAR CONFIRMAÇÃO
-// ======================================
-
 window.fecharConfirmacaoVolta = function () {
-
     const modal =
         document.getElementById("modalVoltar");
 
     if (modal) {
-
         modal.style.display = "none";
     }
 };
 
-
-// ======================================
-// DEIXA A FUNÇÃO DISPONÍVEL NO HTML
-// ======================================
 
 window.abrirConfirmacaoVolta =
     abrirConfirmacaoVolta;
