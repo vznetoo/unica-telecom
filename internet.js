@@ -264,7 +264,7 @@ function atualizarStatusConexao(online, reduzido = false) {
 
     if (reduzido) {
         cor = "#f97316";
-        texto = "Online — velocidade reduzida";
+        texto = "Online — Velocidade Reduzida";
 
     } else if (online) {
         cor = "#22c55e";
@@ -779,7 +779,7 @@ if (vencimentoPlanoMobile) {
         }
 
         if (statusPlanoMobile) {
-            statusPlanoMobile.innerText = "Velocidade reduzida";
+            statusPlanoMobile.innerText = "Velocidade Reduzida";
             statusPlanoMobile.style.setProperty("color", "#f97316", "important");
         }
 
@@ -2209,21 +2209,16 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             botaoPix.classList.add("em-debito");
         }
 
-        if (tituloFatura) {
-            const textoAtraso =
-                diasAtraso === 1
-                    ? "1 dia de atraso"
-                    : `${diasAtraso} dias de atraso`;
+if (tituloFatura) {
+    tituloFatura.innerText =
+        "Valor Até Vencimento:";
 
-            tituloFatura.innerText =
-                `Valor Até Vencimento (${textoAtraso})`;
-
-            tituloFatura.style.setProperty(
-                "color",
-                "#ef4444",
-                "important"
-            );
-        }
+    tituloFatura.style.setProperty(
+        "color",
+        "#ef4444",
+        "important"
+    );
+}
 
         if (valorFatura) {
             valorFatura.style.setProperty(
@@ -2276,24 +2271,32 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
             "none",
             "important"
         );
+const textoAtraso =
+    diasAtraso === 1
+        ? "1 dia de atraso"
+        : `${diasAtraso} dias de atraso`;
 
-        blocoVencimento.innerHTML = `
-            <i
-                class="fa-regular fa-clock"
-                style="color: #ef4444 !important;"
-            ></i>
+blocoVencimento.innerHTML = `
+    <i
+        class="fa-regular fa-clock"
+        style="color: #ef4444 !important;"
+    ></i>
 
-            <span style="color: #dc2626 !important; font-weight: 600;">
-                Vencida em:
-            </span>
+    <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    ">
+        <strong style="color: #dc2626 !important;">
+            Vencida em: ${dataFormatada}
+        </strong>
 
-            <strong
-                id="dataVencimentoMobile"
-                style="color: #dc2626 !important;"
-            >
-                ${dataFormatada}
-            </strong>
-        `;
+        <span style="color: #dc2626 !important;">
+            (${textoAtraso})
+        </span>
+    </div>
+`;
 
     } else {
         // REMOVE A PULSAÇÃO QUANDO A FATURA ESTIVER EM DIA
@@ -2304,7 +2307,7 @@ function aplicarEstadoFinanceiro(fatura, dataFormatada) {
 
         if (tituloFatura) {
             tituloFatura.innerText =
-                "Valor Até Vencimento";
+                "Valor Até Vencimento:";
 
             tituloFatura.style.setProperty(
                 "color",
