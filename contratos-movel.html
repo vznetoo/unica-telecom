@@ -214,152 +214,135 @@
 
 
         /* =========================================================
-           CARD DA LINHA
+           CARD DA LINHA (MODERNIZADO E DIVIDIDO)
         ========================================================= */
 
         .card-linha {
             width: 100%;
-
             background: #ffffff;
-
             border-radius: 20px;
-
-            padding: 22px 25px;
-
+            overflow: hidden;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 20px;
-
+            flex-direction: column;
+            box-shadow: 0 12px 35px rgba(0, 50, 20, 0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: 1.5px solid #d4f5e0;
             text-align: left;
-
-            box-shadow:
-                0 12px 35px rgba(0, 50, 20, 0.12);
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
         }
 
         .card-linha:hover {
             transform: translateY(-3px);
-
-            box-shadow:
-                0 16px 40px rgba(0, 50, 20, 0.18);
+            box-shadow: 0 16px 40px rgba(0, 50, 20, 0.18);
         }
 
+        /* CARTÃO DE PLANO VENCIDO */
+.card-linha.plano-vencido {
+    border: 1.5px solid #ef4444;
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
+}
 
-        .informacoes-linha {
+.card-linha.plano-vencido .card-linha-topo {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+}
+
+.card-linha.plano-vencido .btn-acessar {
+    background: #fee2e2;
+    color: #dc2626;
+}
+.card-linha.plano-vencido .status-badge {
+    background: #ffffff;
+    color: #dc2626;
+}
+
+        /* PARTE SUPERIOR (Fundo verde com gradiente) */
+        .card-linha-topo {
+            background: linear-gradient(135deg, #00c853 0%, #009639 100%);
+            padding: 16px 22px;
             display: flex;
             align-items: center;
-
-            gap: 16px;
-
-            min-width: 0;
+            justify-content: space-between;
+            color: #ffffff;
         }
 
-
-        .icone-linha {
-            width: 54px;
-            height: 54px;
-
-            flex-shrink: 0;
-
+        .info-plano-topo {
             display: flex;
             align-items: center;
-            justify-content: center;
-
-            background: #e9fff0;
-
-            border-radius: 15px;
-
-            color: #00a83a;
-
-            font-size: 23px;
-        }
-
-
-        .dados-linha {
-            min-width: 0;
-        }
-
-        .dados-linha h2 {
-            color: #222222;
-
-            font-size: 18px;
-
-            margin-bottom: 6px;
-
-            white-space: nowrap;
-        }
-
-        .dados-linha p {
-            color: #777777;
-
-            font-size: 13px;
-
-            margin-bottom: 4px;
-        }
-
-
-        .status-linha {
-            display: inline-flex;
-            align-items: center;
-
-            gap: 6px;
-
-            color: #00a83a;
-
-            font-size: 12px;
-
+            gap: 12px;
+            font-size: 16px;
             font-weight: 700;
         }
 
-        .status-linha::before {
-            content: "";
-
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: #00c853;
-        }
-
-
-        /* =========================================================
-           BOTÃO ACESSAR
-        ========================================================= */
-
-        .btn-acessar {
-            flex-shrink: 0;
-
-            width: 50px;
-            height: 50px;
-
-            border: none;
-
-            border-radius: 14px;
-
-            background: #00b83f;
-
-            color: #ffffff;
-
+        /* Ícone com fundo verde translúcido e desenho do celular branco */
+        .icone-celular-verde {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #ffffff;
+            font-size: 18px;
+        }
 
+        .status-badge {
+            background: rgba(255, 255, 255, 0.22);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        /* PARTE INFERIOR (Linha dividida com os dados do número) */
+        .card-linha-corpo {
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+        }
+
+        .dados-linha {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: left;
+        }
+
+        .label-numero {
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .dados-linha h2 {
+            color: #0f172a;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        /* Botão de avançar verde moderno */
+        .btn-acessar {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 14px;
+            background: #e9fff0;
+            color: #00a83a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-
-            font-size: 19px;
-
+            font-size: 18px;
             transition: all 0.2s ease;
         }
 
         .btn-acessar:hover {
-            background: #009f38;
-
+            background: #00c853;
+            color: #ffffff;
             transform: translateX(3px);
         }
 
@@ -370,184 +353,101 @@
 
         .tela-sem-servico {
             min-height: 100vh;
-
             width: 100%;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             padding: 50px 20px;
-
             text-align: center;
         }
-
 
         .conteudo-sem-servico {
             width: 100%;
             max-width: 760px;
-
             display: flex;
             flex-direction: column;
             align-items: center;
-
             text-align: center;
         }
-
-
-        /* =========================================================
-           LOGO / ÍCONE CENTRAL
-        ========================================================= */
 
         .icone-sem-servico {
             width: 180px;
             height: 180px;
-
             margin-bottom: 32px;
-
             border-radius: 50%;
-
             background: rgba(255, 255, 255, 0.16);
-
             display: flex;
             align-items: center;
             justify-content: center;
-
-            box-shadow:
-                0 12px 35px rgba(0, 50, 20, 0.10);
+            box-shadow: 0 12px 35px rgba(0, 50, 20, 0.10);
         }
 
         .icone-sem-servico img {
             width: 135px;
             height: 135px;
-
             object-fit: contain;
-
             background: #ffffff;
-
             border-radius: 50%;
-
             padding: 22px;
-
-            box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.10);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
         }
-
-
-        /* =========================================================
-           MENSAGEM
-        ========================================================= */
 
         .conteudo-sem-servico h1 {
             max-width: 700px;
-
             color: #ffffff;
-
             font-size: clamp(30px, 4vw, 44px);
-
             line-height: 1.18;
-
             font-weight: 700;
-
             margin: 0;
-
-            text-shadow:
-                0 2px 5px rgba(0, 0, 0, 0.14);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.14);
         }
-
-
-        /* =========================================================
-           LINHA VERDE
-        ========================================================= */
 
         .linha-decorativa {
             width: 100px;
             height: 7px;
-
             margin: 28px 0 30px;
-
             border-radius: 10px;
-
             background: #20e879;
         }
-
-
-        /* =========================================================
-           TEXTO DE CONTRATAÇÃO
-        ========================================================= */
 
         .mensagem-contratacao {
             display: flex;
             flex-direction: column;
-
             gap: 7px;
-
             margin-bottom: 32px;
-
             color: #ffffff;
-
             font-size: 19px;
-
             line-height: 1.5;
         }
 
         .mensagem-contratacao strong {
             font-size: 20px;
-
             font-weight: 700;
         }
-
-
-        /* =========================================================
-           BOTÃO FALE CONOSCO
-        ========================================================= */
 
         .btn-fale-conosco {
             width: 100%;
             max-width: 500px;
-
             min-height: 70px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             gap: 16px;
-
             padding: 16px 25px;
-
             border: 1px solid rgba(255, 255, 255, 0.45);
-
             border-radius: 20px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #16d96b,
-                    #00bb50
-                );
-
+            background: linear-gradient(135deg, #16d96b, #00bb50);
             color: #ffffff;
-
             text-decoration: none;
-
             font-size: 21px;
-
             font-weight: 700;
-
-            box-shadow:
-                0 12px 30px rgba(0, 60, 25, 0.20);
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
+            box-shadow: 0 12px 30px rgba(0, 60, 25, 0.20);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .btn-fale-conosco:hover {
             transform: translateY(-3px);
-
-            box-shadow:
-                0 16px 35px rgba(0, 60, 25, 0.28);
+            box-shadow: 0 16px 35px rgba(0, 60, 25, 0.28);
         }
 
         .btn-fale-conosco i {
@@ -556,18 +456,15 @@
 
 
         /* =========================================================
-           LOADING
+           LOADING E ERRO
         ========================================================= */
 
         .loading {
             min-height: 100vh;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             color: #ffffff;
-
             font-size: 18px;
             font-weight: 500;
         }
@@ -576,252 +473,43 @@
             margin-right: 10px;
         }
 
-
-        /* =========================================================
-           ERRO
-        ========================================================= */
-
         .erro-container {
             width: 100%;
             max-width: 520px;
-
             background: #ffffff;
-
             border-radius: 22px;
-
             padding: 30px;
-
             text-align: center;
-
-            box-shadow:
-                0 15px 40px rgba(0, 50, 20, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 50, 20, 0.15);
         }
 
         .erro-icone {
             width: 50px;
             height: 50px;
-
             margin: 0 auto 18px;
-
             border-radius: 50%;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             background: #ffeded;
-
             color: #e53935;
-
             font-size: 20px;
         }
 
         .erro-container p {
             color: #555555;
-
             font-size: 15px;
-
             margin-bottom: 20px;
         }
 
         .btn-tentar {
             border: none;
-
             padding: 11px 22px;
-
             border-radius: 12px;
-
             background: #00c853;
-
             color: #ffffff;
-
             font-weight: 700;
-
             cursor: pointer;
-        }
-
-
-        /* =========================================================
-           MODAL DE CONFIRMAÇÃO
-           SOMENTE UTILIZADO NO MOBILE
-        ========================================================= */
-
-        .modal-voltar {
-            position: fixed;
-            inset: 0;
-
-            display: none;
-
-            align-items: center;
-            justify-content: center;
-
-            padding: 20px;
-
-            background: rgba(0, 0, 0, 0.35);
-
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-
-            z-index: 9999;
-        }
-
-        .modal-voltar.ativo {
-            display: flex;
-        }
-
-
-        /* =========================================================
-           CARD DE CONFIRMAÇÃO
-        ========================================================= */
-
-        .card-confirmacao {
-            width: 100%;
-            max-width: 360px;
-
-            background: #ffffff;
-
-            border-radius: 24px;
-
-            padding: 30px 25px 25px;
-
-            text-align: center;
-
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.20);
-
-            animation: aparecerModal 0.25s ease;
-        }
-
-
-        /* =========================================================
-           ÍCONE DO MODAL
-        ========================================================= */
-
-        .icone-confirmacao {
-            width: 58px;
-            height: 58px;
-
-            margin: 0 auto 18px;
-
-            border-radius: 50%;
-
-            background: #eafff1;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .icone-confirmacao i {
-            color: #05c95c;
-
-            font-size: 23px;
-        }
-
-
-        /* =========================================================
-           TEXTOS DO MODAL
-        ========================================================= */
-
-        .card-confirmacao h2 {
-            margin: 0 0 10px;
-
-            color: #222222;
-
-            font-size: 20px;
-
-            font-weight: 700;
-        }
-
-        .card-confirmacao p {
-            margin: 0 auto 25px;
-
-            color: #6b7280;
-
-            font-size: 14px;
-
-            line-height: 1.5;
-        }
-
-
-        /* =========================================================
-           BOTÕES DO MODAL
-        ========================================================= */
-
-        .botoes-confirmacao {
-            display: flex;
-
-            gap: 10px;
-        }
-
-        .botoes-confirmacao button {
-            flex: 1;
-
-            height: 45px;
-
-            border-radius: 12px;
-
-            font-size: 14px;
-
-            font-weight: 600;
-
-            cursor: pointer;
-
-            transition: 0.2s ease;
-        }
-
-        .btn-cancelar {
-            background: #f3f4f6;
-
-            color: #555555;
-
-            border: 1px solid #e5e7eb;
-        }
-
-        .btn-cancelar:hover {
-            background: #e9eaec;
-        }
-
-        .btn-confirmar {
-            background: #05c95c;
-
-            color: #ffffff;
-
-            border: none;
-
-            box-shadow:
-                0 5px 15px rgba(5, 201, 92, 0.20);
-        }
-
-        .btn-confirmar:hover {
-            background: #04b451;
-
-            transform: translateY(-1px);
-        }
-
-
-        /* =========================================================
-           ANIMAÇÃO DO MODAL
-        ========================================================= */
-
-        @keyframes aparecerModal {
-
-            from {
-                opacity: 0;
-
-                transform:
-                    scale(0.94)
-                    translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    scale(1)
-                    translateY(0);
-            }
-
         }
 
 
@@ -830,14 +518,11 @@
         ========================================================= */
 
         @media (max-width: 700px) {
-
             .btn-voltar {
                 top: 20px;
                 left: 20px;
-
                 width: 45px;
                 height: 45px;
-
                 background: rgba(255, 255, 255, 0.25);
             }
 
@@ -845,139 +530,36 @@
                 font-size: 19px;
             }
 
-
             .pagina {
                 padding: 40px 18px;
             }
 
-
             .logo-topo {
                 width: 100px;
                 height: 100px;
-
                 padding: 15px;
             }
-
 
             .titulo-selecao {
                 font-size: 28px;
             }
 
-
             .subtitulo-selecao {
                 font-size: 14px;
             }
 
-
-            .card-linha {
+            .card-linha-corpo {
                 padding: 17px;
-
-                gap: 12px;
             }
-
-
-            .icone-linha {
-                width: 48px;
-                height: 48px;
-
-                font-size: 20px;
-            }
-
 
             .dados-linha h2 {
-                font-size: 16px;
+                font-size: 18px;
             }
-
-
-            .dados-linha p {
-                font-size: 12px;
-            }
-
 
             .btn-acessar {
-                width: 45px;
-                height: 45px;
+                width: 42px;
+                height: 42px;
             }
-
-
-            /* Tela sem serviço */
-
-            .tela-sem-servico {
-                padding: 35px 20px;
-            }
-
-
-            .icone-sem-servico {
-                width: 145px;
-                height: 145px;
-
-                margin-bottom: 25px;
-            }
-
-
-            .icone-sem-servico img {
-                width: 110px;
-                height: 110px;
-
-                padding: 18px;
-            }
-
-
-            .conteudo-sem-servico h1 {
-                font-size: 29px;
-
-                line-height: 1.2;
-            }
-
-
-            .linha-decorativa {
-                width: 85px;
-                height: 6px;
-
-                margin: 24px 0 27px;
-            }
-
-
-            .mensagem-contratacao {
-                font-size: 16px;
-
-                margin-bottom: 28px;
-            }
-
-
-            .mensagem-contratacao strong {
-                font-size: 17px;
-            }
-
-
-            .btn-fale-conosco {
-                max-width: 100%;
-
-                min-height: 62px;
-
-                font-size: 19px;
-
-                border-radius: 17px;
-            }
-
-
-            .btn-fale-conosco i {
-                font-size: 25px;
-            }
-
-        }
-
-
-        /* =========================================================
-           MODAL SOMENTE NO MOBILE
-        ========================================================= */
-
-        @media (min-width: 769px) {
-
-            .modal-voltar {
-                display: none !important;
-            }
-
         }
 
     </style>
@@ -987,876 +569,301 @@
 
 <body>
 
-
-
-
     <!-- =========================================================
          BOTÃO VOLTAR
     ========================================================== -->
-
- <button
-    class="btn-voltar"
-    onclick="window.location.href='servicos.html'"
-    title="Voltar para os serviços"
->
-    <i class="fa-solid fa-arrow-left"></i>
-</button>
+    <button
+        class="btn-voltar"
+        onclick="window.location.href='servicos.html'"
+        title="Voltar para os serviços"
+    >
+        <i class="fa-solid fa-arrow-left"></i>
+    </button>
 
 
     <!-- =========================================================
          CONTEÚDO
     ========================================================== -->
-
     <div id="app">
-
         <div class="loading">
-
             <div>
                 <i class="fa-solid fa-spinner fa-spin"></i>
-
                 Carregando suas linhas...
             </div>
-
         </div>
-
     </div>
 
 
     <script>
 
-        /* =========================================================
-           CONFIGURAÇÃO
-        ========================================================= */
-
-        
-const API_BASE_URL = "https://unica-telecom.onrender.com";
-
-
-
-        /* =========================================================
-           ELEMENTO PRINCIPAL
-        ========================================================= */
-
+        const API_BASE_URL = "https://unica-telecom.onrender.com";
         const app = document.getElementById("app");
 
-
-        /* =========================================================
-           MODAL DE CONFIRMAÇÃO
-        ========================================================= */
-
-        function abrirConfirmacaoVolta(event) {
-
-            if (window.innerWidth > 768) {
-
-                window.location.href = "servicos.html";
-
-                return;
-            }
-
-            if (event) {
-                event.preventDefault();
-            }
-
-            const modal =
-                document.getElementById("modalVoltar");
-
-            if (modal) {
-
-                modal.classList.add("ativo");
-
-            }
-
-        }
-
-
-        function fecharConfirmacaoVolta() {
-
-            const modal =
-                document.getElementById("modalVoltar");
-
-            if (modal) {
-
-                modal.classList.remove("ativo");
-
-            }
-
-        }
-
-
-        function confirmarVolta() {
-
-            window.location.href =
-                "servicos.html";
-
-        }
-
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (event.key === "Escape") {
-
-                    fecharConfirmacaoVolta();
-
-                }
-
-            }
-        );
-
-
-        /* =========================================================
-           BUSCAR CPF DO CLIENTE
-        ========================================================= */
-
         function obterCpfCliente() {
-
-            const dadosCliente =
-                localStorage.getItem("dadosCliente");
-
+            const dadosCliente = localStorage.getItem("dadosCliente");
             if (dadosCliente) {
-
                 try {
-
-                    const cliente =
-                        JSON.parse(dadosCliente);
-
-                    if (cliente.cpf) {
-                        return cliente.cpf;
-                    }
-
-                    if (cliente.CPF) {
-                        return cliente.CPF;
-                    }
-
+                    const cliente = JSON.parse(dadosCliente);
+                    if (cliente.cpf) return cliente.cpf;
+                    if (cliente.CPF) return cliente.CPF;
                 } catch (erro) {
-
-                    console.error(
-                        "Erro ao ler dadosCliente:",
-                        erro
-                    );
-
+                    console.error("Erro ao ler dadosCliente:", erro);
                 }
-
             }
-
-            const cpfSalvo =
-                localStorage.getItem("cpf") ||
-                localStorage.getItem("clienteCpf") ||
-                localStorage.getItem("cpfCliente");
-
-            return cpfSalvo;
-
+            return localStorage.getItem("cpf") ||
+                   localStorage.getItem("clienteCpf") ||
+                   localStorage.getItem("cpfCliente");
         }
-
-
-        /* =========================================================
-           REMOVER MÁSCARA DO CPF
-        ========================================================= */
 
         function limparCpf(cpf) {
-
-            return String(cpf || "")
-                .replace(/\D/g, "");
-
+            return String(cpf || "").replace(/\D/g, "");
         }
-
-
-        /* =========================================================
-           FORMATAR NÚMERO DA LINHA
-        ========================================================= */
 
         function formatarNumeroLinha(numero) {
-
-            let limpo =
-                String(numero || "")
-                    .replace(/\D/g, "");
-
-            /*
-             * Remove o código do Brasil.
-             * Exemplo:
-             * 5581920008594
-             * vira:
-             * 81920008594
-             */
-
+            let limpo = String(numero || "").replace(/\D/g, "");
             if (limpo.startsWith("55")) {
-
-                limpo =
-                    limpo.substring(2);
-
+                limpo = limpo.substring(2);
             }
-
-
-            /*
-             * Celular brasileiro:
-             *
-             * 81 92000 8594
-             *
-             * Resultado:
-             * (81) 92000-8594
-             */
 
             if (limpo.length === 11) {
-
-                const ddd =
-                    limpo.substring(0, 2);
-
-                const celular =
-                    limpo.substring(2);
-
+                const ddd = limpo.substring(0, 2);
+                const celular = limpo.substring(2);
                 return `(${ddd}) ${celular.substring(0, 5)}-${celular.substring(5)}`;
-
             }
-
-
-            /*
-             * Telefone de 10 dígitos.
-             */
 
             if (limpo.length === 10) {
-
-                const ddd =
-                    limpo.substring(0, 2);
-
-                const telefone =
-                    limpo.substring(2);
-
+                const ddd = limpo.substring(0, 2);
+                const telefone = limpo.substring(2);
                 return `(${ddd}) ${telefone.substring(0, 4)}-${telefone.substring(4)}`;
-
             }
 
-
-            /*
-             * Se não conseguir identificar,
-             * retorna o número original.
-             */
-
             return numero;
-
         }
 
-
-        /* =========================================================
-           FORMATAR STATUS
-        ========================================================= */
-
         function formatarStatus(status) {
-
-            const statusOriginal =
-                String(status || "")
-                    .trim()
-                    .toUpperCase();
-
+            const statusOriginal = String(status || "").trim().toUpperCase();
             switch (statusOriginal) {
-
                 case "ACTIVE":
                 case "ATIVO":
                 case "ATIVA":
                     return "Ativo";
-
                 case "INACTIVE":
                 case "INATIVO":
                 case "INATIVA":
                     return "Inativo";
-
                 case "SUSPENDED":
                 case "SUSPENSO":
                 case "SUSPENSA":
                     return "Suspenso";
-
                 case "BLOCKED":
                 case "BLOQUEADO":
                 case "BLOQUEADA":
                     return "Bloqueado";
-
                 case "CANCELED":
                 case "CANCELLED":
                 case "CANCELADO":
                 case "CANCELADA":
                     return "Cancelado";
-
                 case "PENDING":
                 case "PENDENTE":
                     return "Pendente";
-
                 default:
                     return status || "Ativo";
-
             }
-
         }
-
-
-        /* =========================================================
-           TELA DE CLIENTE SEM SERVIÇO
-        ========================================================= */
 
         function mostrarTelaSemServico() {
-
             app.innerHTML = `
-
                 <div class="tela-sem-servico">
-
                     <div class="conteudo-sem-servico">
-
                         <div class="icone-sem-servico">
-
-                            <img
-                                src="assets/Logoo.png"
-                                alt="Única Telecom"
-                            >
-
+                            <img src="assets/Logoo.png" alt="Única Telecom">
                         </div>
-
-
-                        <h1>
-
-                            Você ainda não possui
-
-                            <br>
-
-                            este serviço conosco.
-
-                        </h1>
-
-
+                        <h1>Você ainda não possui<br>este serviço conosco.</h1>
                         <div class="linha-decorativa"></div>
-
-
                         <p class="mensagem-contratacao">
-
-                            <span>
-                                Deseja contratar este serviço?
-                            </span>
-
-                            <strong>
-                                Entre em contato com nossa equipe.
-                            </strong>
-
+                            <span>Deseja contratar este serviço?</span>
+                            <strong>Entre em contato com nossa equipe.</strong>
                         </p>
-
-
-                        <a
-                            href="https://unicatelecom.web.vmix.chat/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn-fale-conosco"
-                        >
-
+                        <a href="https://unicatelecom.web.vmix.chat/" target="_blank" rel="noopener noreferrer" class="btn-fale-conosco">
                             <i class="fa-regular fa-comments"></i>
-
-                            <span>
-                                Fale conosco
-                            </span>
-
+                            <span>Fale conosco</span>
                         </a>
-
-
                     </div>
-
                 </div>
-
             `;
-
         }
-
-
-        /* =========================================================
-           TELA DE ERRO
-        ========================================================= */
 
         function mostrarErro(mensagem) {
-
             app.innerHTML = `
-
                 <div class="pagina">
-
                     <div class="erro-container">
-
                         <div class="erro-icone">
-
                             <i class="fa-solid fa-exclamation"></i>
-
                         </div>
-
-                        <p>
-                            ${mensagem}
-                        </p>
-
-                        <button
-                            class="btn-tentar"
-                            onclick="carregarLinhas()"
-                        >
-                            Tentar novamente
-                        </button>
-
+                        <p>${mensagem}</p>
+                        <button class="btn-tentar" onclick="carregarLinhas()">Tentar novamente</button>
                     </div>
-
                 </div>
-
             `;
-
         }
 
 
-        /* =========================================================
-           MOSTRAR LINHAS
-        ========================================================= */
-
-        function mostrarLinhas(cliente) {
-
-            const linhas =
-                Array.isArray(cliente?.lines)
-                    ? cliente.lines
-                    : [];
-
-
-            if (linhas.length === 0) {
-
-                mostrarTelaSemServico();
-
-                return;
-
-            }
-
-
-            /* =====================================================
-               HTML DOS CARDS
-            ===================================================== */
-
-            let cards = "";
-
-
-            linhas.forEach((linha, index) => {
-
-                /*
-                 * Número vindo da Braz Móvel.
-                 */
-
-                const numeroBruto =
-                    linha.msisdn ||
-                    linha.numero ||
-                    "Número não informado";
-
-
-                /*
-                 * Número formatado.
-                 *
-                 * Exemplo:
-                 * 5581920008594
-                 * ↓
-                 * (81) 92000-8594
-                 */
-
-                const numeroFormatado =
-                    formatarNumeroLinha(numeroBruto);
-
-
-                /*
-                 * Status formatado.
-                 *
-                 * ACTIVE
-                 * ↓
-                 * Ativo
-                 */
-
-                const status =
-                    formatarStatus(linha.status);
-
-
-                /*
-                 * Tipo da linha.
-                 *
-                 * Se a API retornar "SIM",
-                 * será exibido SIM.
-                 */
-const tipo =
-    String(
-        linha.type ||
-        linha.tipo ||
-        "Linha móvel"
-    ).toUpperCase() === "ESIM"
-        ? "E-SIM"
-        : (
-            linha.type ||
-            linha.tipo ||
-            "Linha móvel"
-        );
-
-
-                cards += `
-
-                    <div class="card-linha">
-
-
-                        <div class="informacoes-linha">
-
-
-                            <div class="icone-linha">
-
-                                <i class="fa-solid fa-mobile-screen-button"></i>
-
-                            </div>
-
-
-                            <div class="dados-linha">
-
-                                <h2>
-                                    ${numeroFormatado}
-                                </h2>
-
-                                <p>
-                                    ${tipo}
-                                </p>
-
-                                <span class="status-linha">
-                                    ${status}
-                                </span>
-
-                            </div>
-
-
-                        </div>
-
-
-                        <button
-                            class="btn-acessar"
-                            onclick="selecionarLinha(${index})"
-                            title="Acessar linha"
-                        >
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </button>
-
-
-                    </div>
-
-                `;
-
-            });
-
-
-            /* =====================================================
-               QUANTIDADE
-            ===================================================== */
-
-            const quantidadeTexto =
-                linhas.length === 1
-
-                    ? `
-                        Você possui
-                        <span class="quantidade-linhas">
-                            1
-                        </span>
-                        linha móvel vinculada ao seu cadastro.
-                    `
-
-                    : `
-                        Você possui
-                        <span class="quantidade-linhas">
-                            ${linhas.length}
-                        </span>
-                        linhas móveis vinculadas ao seu cadastro.
-                    `;
-
-
-            /* =====================================================
-               MONTAR PÁGINA
-            ===================================================== */
-
-            app.innerHTML = `
-
-                <div class="pagina">
-
-                    <div class="container-selecao">
-
-
-                        <div class="logo-topo">
-
-                            <img
-                                src="assets/Logoo.png"
-                                alt="Única Telecom"
-                            >
-
-                        </div>
-
-
-                        <h1 class="titulo-selecao">
-                            Selecione sua Linha
-                        </h1>
-
-
-                        <p class="subtitulo-selecao">
-                            ${quantidadeTexto}
-                        </p>
-
-
-                        <div id="listaLinhas">
-
-                            ${cards}
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            /*
-             * Guardar as linhas para seleção posterior.
-             */
-
-            window.linhasDisponiveis = linhas;
-
-        }
-
-
-        /* =========================================================
-           SELECIONAR LINHA
-        ========================================================= */
-
-        function selecionarLinha(index) {
-
-            const linhas =
-                window.linhasDisponiveis || [];
-
-
-            const linha =
-                linhas[index];
-
-
-            if (!linha) {
-
-                return;
-
-            }
-
-
-            /*
-             * Salvar informações da linha.
-             */
-
-            localStorage.setItem(
-                "linhaMovelSelecionadaId",
-                linha.id || ""
+async function mostrarLinhas(cliente) {
+    const linhas = Array.isArray(cliente?.lines) ? cliente.lines : [];
+
+    if (linhas.length === 0) {
+        mostrarTelaSemServico();
+        return;
+    }
+
+    let cards = "";
+
+    for (const [index, linha] of linhas.entries()) {
+        const numeroBruto = linha.msisdn || linha.numero || "Número não informado";
+        const numeroFormatado = formatarNumeroLinha(numeroBruto);
+        const status = formatarStatus(linha.status);
+
+        // Consultar a validade do plano da linha
+        let planoVencido = false;
+
+        try {
+            const planosResposta = await fetch(
+                `${API_BASE_URL}/api/movel/linha/${linha.id}/planos`
             );
 
+            if (planosResposta.ok) {
+                const dadosPlanosLinha = await planosResposta.json();
 
-            localStorage.setItem(
-                "linhaMovelSelecionadaNumero",
-                linha.msisdn || ""
-            );
+                const planoAtual = dadosPlanosLinha.items?.find(
+                    plano =>
+                        String(plano.status || "").toUpperCase() === "ACTIVE"
+                ) || dadosPlanosLinha.items?.[0];
 
+                if (planoAtual?.endDate) {
+                    const dataFim = new Date(planoAtual.endDate).getTime();
 
-            localStorage.setItem(
-                "linhaMovelSelecionada",
-                JSON.stringify(linha)
-            );
-
-
-            /*
-             * Compatibilidade com o restante do projeto.
-             */
-
-            localStorage.setItem(
-                "contratoMovelSelecionadoId",
-                linha.id || ""
-            );
-
-
-            /*
-             * Ir para o dashboard móvel.
-             */
-
-            window.location.href =
-                window.location.href = "dashboard.html";
-
-        }
-
-
-        /* =========================================================
-           CARREGAR LINHAS
-        ========================================================= */
-
-        async function carregarLinhas() {
-
-            try {
-
-                /*
-                 * Mostrar loading.
-                 */
-
-                app.innerHTML = `
-
-                    <div class="loading">
-
-                        <div>
-
-                            <i class="fa-solid fa-spinner fa-spin"></i>
-
-                            Carregando suas linhas...
-
-                        </div>
-
-                    </div>
-
-                `;
-
-
-                /*
-                 * Recuperar CPF.
-                 */
-
-                const cpfOriginal =
-                    obterCpfCliente();
-
-
-                const cpf =
-                    limparCpf(cpfOriginal);
-
-
-                console.log(
-                    "CPF utilizado na consulta móvel:",
-                    cpf
-                );
-
-
-                /*
-                 * Verificar CPF.
-                 */
-
-                if (!cpf || cpf.length !== 11) {
-
-                    mostrarErro(
-                        "Não foi possível identificar o CPF do cliente."
-                    );
-
-                    return;
-
+                    planoVencido = !isNaN(dataFim) && dataFim <= Date.now();
                 }
+            }
+        } catch (erro) {
+            console.error("Erro ao consultar validade da linha:", erro);
+        }
 
+        const tipo = String(
+            linha.type || linha.tipo || "Linha móvel"
+        ).toUpperCase() === "ESIM"
+            ? "E-SIM"
+            : (linha.type || linha.tipo || "Linha móvel");
 
-                /* =================================================
-                   CONSULTA AO BACKEND
-                ================================================= */
+        cards += `
+            <div class="card-linha ${planoVencido ? 'plano-vencido' : ''}" onclick="selecionarLinha(${index})">
 
-                const resposta = await fetch(
-                    `${API_BASE_URL}/api/movel/cliente/${encodeURIComponent(cpf)}`
-                );
+                <div class="card-linha-topo">
+                    <div class="info-plano-topo">
+                        <div class="icone-celular-verde">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <span>${tipo}</span>
+                    </div>
 
+                    <span class="status-badge">
+                        ${planoVencido ? 'Plano Vencido' : status}
+                    </span>
+                </div>
 
-                console.log(
-                    "Status da consulta Braz Móvel:",
-                    resposta.status
-                );
+                <div class="card-linha-corpo">
+                    <div class="dados-linha">
+                        <span class="label-numero">Número da Linha:</span>
+                        <h2>${numeroFormatado}</h2>
+                    </div>
 
+                    <button class="btn-acessar" title="Acessar linha"
+                        onclick="event.stopPropagation(); selecionarLinha(${index})">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
 
-                /* =================================================
-                   CLIENTE NÃO POSSUI SERVIÇO
-                ================================================= */
+            </div>
+        `;
+    }
 
+    const quantidadeTexto = linhas.length === 1
+        ? `Você possui <span class="quantidade-linhas">1</span> linha móvel vinculada ao seu cadastro.`
+        : `Você possui <span class="quantidade-linhas">${linhas.length}</span> linhas móveis vinculadas ao seu cadastro.`;
 
-if (resposta.status === 404) {
-    console.error(
-        "A API retornou 404. Verifique a URL e os logs do servidor."
-    );
+    app.innerHTML = `
+        <div class="pagina">
+            <div class="container-selecao">
+                <div class="logo-topo">
+                    <img src="assets/Logoo.png" alt="Única Telecom">
+                </div>
+                <h1 class="titulo-selecao">Selecione sua Linha</h1>
+                <p class="subtitulo-selecao">${quantidadeTexto}</p>
+                <div id="listaLinhas">${cards}</div>
+            </div>
+        </div>
+    `;
 
-    mostrarErro(
-        "Não foi possível localizar as linhas móveis. Tente novamente ou entre em contato com o suporte."
-    );
-
-    return;
+    window.linhasDisponiveis = linhas;
 }
 
 
+        function selecionarLinha(index) {
+            const linhas = window.linhasDisponiveis || [];
+            const linha = linhas[index];
 
-                /* =================================================
-                   OUTROS ERROS
-                ================================================= */
+            if (!linha) return;
 
-                if (!resposta.ok) {
+            localStorage.setItem("linhaMovelSelecionadaId", linha.id || "");
+            localStorage.setItem("linhaMovelSelecionadaNumero", linha.msisdn || "");
+            localStorage.setItem("linhaMovelSelecionada", JSON.stringify(linha));
+            localStorage.setItem("contratoMovelSelecionadoId", linha.id || "");
 
-                    let erroServidor = null;
-
-
-                    try {
-
-                        erroServidor =
-                            await resposta.json();
-
-                    } catch (erro) {
-
-                        // Resposta não era JSON.
-
-                    }
-
-
-                    console.error(
-                        "Erro retornado pelo backend:",
-                        erroServidor
-                    );
-
-
-                    mostrarErro(
-                        "Não foi possível carregar suas linhas no momento."
-                    );
-
-                    return;
-
-                }
-
-
-                /* =================================================
-                   RESPOSTA OK
-                ================================================= */
-
-                const dados =
-                    await resposta.json();
-
-
-                console.log(
-                    "Dados retornados pela Braz Móvel:",
-                    dados
-                );
-
-
-                /*
-                 * Mostrar linhas.
-                 */
-
-                mostrarLinhas(dados);
-
-
-            } catch (erro) {
-
-                console.error(
-                    "Erro ao carregar linhas:",
-                    erro
-                );
-
-
-                mostrarErro(
-                    "Não foi possível conectar ao servidor. Tente novamente."
-                );
-
-            }
-
+            window.location.href = "dashboard.html";
         }
 
+        async function carregarLinhas() {
+            try {
+                app.innerHTML = `
+                    <div class="loading">
+                        <div>
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+                            Carregando suas linhas...
+                        </div>
+                    </div>
+                `;
 
-        /* =========================================================
-           INICIAR
-        ========================================================= */
+                const cpfOriginal = obterCpfCliente();
+                const cpf = limparCpf(cpfOriginal);
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            carregarLinhas
-        );
+                if (!cpf || cpf.length !== 11) {
+                    mostrarErro("Não foi possível identificar o CPF do cliente.");
+                    return;
+                }
+
+                const resposta = await fetch(`${API_BASE_URL}/api/movel/cliente/${encodeURIComponent(cpf)}`);
+
+                if (resposta.status === 404) {
+                    mostrarTelaSemServico();
+                    return;
+                }
+
+                if (!resposta.ok) {
+                    mostrarErro("Não foi possível carregar suas linhas no momento.");
+                    return;
+                }
+
+                const dados = await resposta.json();
+                mostrarLinhas(dados);
+
+            } catch (erro) {
+                console.error("Erro ao carregar linhas:", erro);
+                mostrarErro("Não foi possível conectar ao servidor. Tente novamente.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", carregarLinhas);
 
     </script>
 
