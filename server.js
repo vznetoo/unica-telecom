@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 9766fa8 (Atualiza server.js e corrigir login SGP)
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
