@@ -234,41 +234,46 @@ app.post("/login", async (req, res) => {
 
         // VALIDAR CONFIGURAÇÃO SGP
 
-        if (!process.env.SGP_TOKEN || !process.env.SGP_APP) {
-            console.error("Credenciais do SGP não configuradas.");
+if (!process.env.SGP_TOKEN || !process.env.SGP_APP) {
+    console.error("Credenciais do SGP não configuradas.");
 
-            return res.status(500).json({
-                erro: "A autenticação do SGP não está configurada."
-            });
-        }
+    return res.status(500).json({
+        erro: "A autenticação do SGP não está configurada."
+    });
+}
 
-        // PREPARAR LOGIN SGP
+console.log("[SGP] TOKEN configurado:", !!process.env.SGP_TOKEN);
+console.log("[SGP] APP configurado:", !!process.env.SGP_APP);
+console.log("[SGP] TOKEN tamanho:", process.env.SGP_TOKEN.trim().length);
+console.log("[SGP] APP tamanho:", process.env.SGP_APP.trim().length);
 
-        const loginSGP = String(login).trim();
+// PREPARAR LOGIN SGP
 
-        const form = new FormData();
+const loginSGP = String(login).trim();
 
-        form.append("token", process.env.SGP_TOKEN.trim());
-        form.append("app", process.env.SGP_APP.trim());
-        form.append("cpfcnpj", loginSGP);
-        form.append("usuario", loginSGP);
-        form.append("senha", senha);
+const form = new FormData();
 
-        console.log("[LOGIN] Enviando dados ao SGP.");
+form.append("token", process.env.SGP_TOKEN.trim());
+form.append("app", process.env.SGP_APP.trim());
+form.append("cpfcnpj", loginSGP);
+form.append("usuario", loginSGP);
+form.append("senha", senha);
 
-        const inicioSGP = Date.now();
+console.log("[LOGIN] Enviando dados ao SGP.");
 
-        const resposta = await axios.post(
-            "https://sistema.unicatelecom.com.br/api/central/contratos",
-            form,
-            {
-                headers: {
-                    ...form.getHeaders(),
-                    Accept: "application/json"
-                },
-                timeout: 15000
-            }
-        );
+const inicioSGP = Date.now();
+
+const resposta = await axios.post(
+    "https://sistema.unicatelecom.com.br/api/central/contratos",
+    form,
+    {
+        headers: {
+            ...form.getHeaders(),
+            Accept: "application/json"
+        },
+        timeout: 15000
+    }
+);
 
         console.log(
             `[TEMPO] SGP login: ${Date.now() - inicioSGP} ms`
