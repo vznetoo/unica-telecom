@@ -247,16 +247,14 @@ console.log("[SGP] APP configurado:", !!process.env.SGP_APP);
 console.log("[SGP] TOKEN tamanho:", process.env.SGP_TOKEN.trim().length);
 console.log("[SGP] APP tamanho:", process.env.SGP_APP.trim().length);
 
+
 // PREPARAR LOGIN SGP
 
-const loginSGP = String(login).trim();
+const loginSGP = String(login).replace(/\D/g, "");
 
 const form = new FormData();
 
-form.append("token", process.env.SGP_TOKEN.trim());
-form.append("app", process.env.SGP_APP.trim());
 form.append("cpfcnpj", loginSGP);
-form.append("usuario", loginSGP);
 form.append("senha", senha);
 
 console.log("[LOGIN] Enviando dados ao SGP.");
@@ -274,6 +272,7 @@ const resposta = await axios.post(
         timeout: 15000
     }
 );
+
 
         console.log(
             `[TEMPO] SGP login: ${Date.now() - inicioSGP} ms`
