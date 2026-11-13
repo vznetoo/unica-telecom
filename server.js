@@ -314,24 +314,40 @@ app.post("/login", async (req, res) => {
         }
 
         // Dados conforme documentação do SGP
+
+        // AUTENTICAÇÃO SGP - FORM-DATA
+
+        const token = String(process.env.SGP_TOKEN || "").trim();
+        const appSGP = String(process.env.SGP_APP || "").trim();
         const loginSGP = String(login).replace(/\D/g, "");
 
-const dadosSGP = new URLSearchParams();
+        if (!token || !appSGP) {
+            throw new Error("Token ou App do SGP não configurado.");
+        }
 
-dadosSGP.append("cpfcnpj", loginSGP);
-dadosSGP.append("senha", String(senha));
+        const dadosSGP = new FormData();
 
-const resposta = await axios.post(
-    "https://sistema.unicatelecom.com.br/api/central/contratos",
-    dadosSGP.toString(),
-    {
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json"
-        },
-        timeout: 15000
-    }
-);
+        dadosSGP.append("token", token);
+        dadosSGP.append("app", appSGP);
+        dadosSGP.append("cpfcnpj", loginSGP);
+        dadosSGP.append("senha", String(senha));
+
+        console.log("[LOGIN] Enviando Form-data ao SGP.");
+
+        const inicioSGP = Date.now();
+
+        const resposta = await axios.post(
+            "https://sistema.unicatelecom.com.br/api/central/contratos",
+            dadosSGP,
+            {
+                headers: {
+                    ...dadosSGP.getHeaders(),
+                    "Accept": "application/json"
+                },
+                timeout: 15000
+            }
+        );
+
 
         console.log(
             `[TEMPO] SGP login: ${Date.now() - inicioSGP} ms`
