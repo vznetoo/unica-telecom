@@ -319,18 +319,31 @@ app.post("/login", async (req, res) => {
 
         const token = String(process.env.SGP_TOKEN || "").trim();
         const appSGP = String(process.env.SGP_APP || "").trim();
-        const loginSGP = String(login).trim();
 
-        if (!token || !appSGP) {
-            throw new Error("Token ou App do SGP não configurado.");
-        }
+const loginSGP = String(login).trim();
+const loginNumerico = loginSGP.replace(/\D/g, "");
 
-        const dadosSGP = new FormData();
+if (!token || !appSGP) {
+    throw new Error("Token ou App do SGP não configurado.");
+}
 
-        dadosSGP.append("token", token);
-        dadosSGP.append("app", appSGP);
-        dadosSGP.append("cpfcnpj", loginSGP);
-        dadosSGP.append("senha", String(senha));
+const dadosSGP = new FormData();
+
+dadosSGP.append("token", token);
+dadosSGP.append("app", appSGP);
+
+const ehCpfCnpj =
+    /^\d{11}$/.test(loginNumerico) ||
+    /^\d{14}$/.test(loginNumerico);
+
+if (ehCpfCnpj) {
+    dadosSGP.append("cpfcnpj", loginNumerico);
+} else {
+    dadosSGP.append("usuario", loginSGP);
+}
+
+dadosSGP.append("senha", String(senha));
+
 
         console.log("[LOGIN] Enviando Form-data ao SGP.");
 
