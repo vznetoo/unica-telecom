@@ -411,15 +411,29 @@ app.get("/contrato/:contratoId", async (req, res) => {
         const form =
             new FormData();
 
-        const resposta = await axios.post(
-            "https://sistema.unicatelecom.com.br/api/centralapp/contrato/print/contrato/",
-            form,
-            {
-                headers: form.getHeaders(),
-                responseType: "arraybuffer",
-                timeout: 15000
-            }
-        );
+const tamanhoFormData = await new Promise((resolve, reject) => {
+    dadosSGP.getLength((erro, tamanho) => {
+        if (erro) {
+            reject(erro);
+        } else {
+            resolve(tamanho);
+        }
+    });
+});
+
+const resposta = await axios.post(
+    "https://sistema.unicatelecom.com.br/api/central/contratos",
+    dadosSGP,
+    {
+        headers: {
+            ...dadosSGP.getHeaders(),
+            "Content-Length": tamanhoFormData,
+            "Accept": "application/json"
+        },
+        maxBodyLength: Infinity,
+        timeout: 15000
+    }
+);
 
         res.setHeader(
             "Content-Type",
