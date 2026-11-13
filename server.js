@@ -316,25 +316,22 @@ app.post("/login", async (req, res) => {
         // Dados conforme documentação do SGP
         const loginSGP = String(login).replace(/\D/g, "");
 
-        const form = new FormData();
-        form.append("cpfcnpj", loginSGP);
-        form.append("senha", String(senha));
+const dadosSGP = new URLSearchParams();
 
-        console.log("[LOGIN] Enviando CPF/CNPJ e senha ao SGP.");
+dadosSGP.append("cpfcnpj", loginSGP);
+dadosSGP.append("senha", String(senha));
 
-        const inicioSGP = Date.now();
-
-        const resposta = await axios.post(
-            "https://sistema.unicatelecom.com.br/api/central/contratos",
-            form,
-            {
-                headers: {
-                    ...form.getHeaders(),
-                    Accept: "application/json"
-                },
-                timeout: 15000
-            }
-        );
+const resposta = await axios.post(
+    "https://sistema.unicatelecom.com.br/api/central/contratos",
+    dadosSGP.toString(),
+    {
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json"
+        },
+        timeout: 15000
+    }
+);
 
         console.log(
             `[TEMPO] SGP login: ${Date.now() - inicioSGP} ms`
