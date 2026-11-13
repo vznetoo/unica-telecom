@@ -319,7 +319,7 @@ app.post("/login", async (req, res) => {
 
         const token = String(process.env.SGP_TOKEN || "").trim();
         const appSGP = String(process.env.SGP_APP || "").trim();
-        const loginSGP = String(login).replace(/\D/g, "");
+        const loginSGP = String(login).trim();
 
         if (!token || !appSGP) {
             throw new Error("Token ou App do SGP não configurado.");
